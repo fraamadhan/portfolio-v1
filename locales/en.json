@@ -1,0 +1,19 @@
+{
+  "navbar": {
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "dashboard": "Dashboard"
+  },
+  "landing_page_description": "I specialize in building user-centered web and mobile applications, occasionally designing when needed, and handling DevOps to ensure smooth delivery.",
+  "landing_page_motto": "Turning Ideas Into Production Systems",
+  "current_professional_status": "Current Professional Status",
+  "view_projects": "View Projects",
+  "contact_me": "Contact Me",
+  "work_based_in": "Based in",
+  "status": "Status",
+  "current_role": "Current Role"
+}
