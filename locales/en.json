@@ -10,6 +10,24 @@
   },
   "landing_page_description": "I specialize in building user-centered web and mobile applications, occasionally designing when needed, and handling DevOps to ensure smooth delivery.",
   "landing_page_motto": "Turning Ideas Into Production Systems",
+  "about_section": {
+    "title": "About Me",
+    "intro": {
+      "before_highlight": "Hi, I'm Fakhri - a developer who loves turning ideas into real products. I'm passionate about building ",
+      "highlight_one": "user-friendly, scalable,",
+      "middle": " and ",
+      "highlight_two": "efficient",
+      "after_highlight": " web and mobile applications. While my day-to-day work centers on Back-End development, I'm comfortable working across the full stack when needed and I'm currently expanding my skills in DevOps."
+    },
+    "stack": "I mainly work with JavaScript, TypeScript, Golang, and modern backend frameworks, along with various SQL and NoSQL databases.",
+    "hobbies": "Outside of coding, I enjoy staying active through sports such as football, futsal, volleyball, running, and going to the gym. I also love watching movies or series, listening to music, and reading books.",
+    "closing": "View and download my resume.",
+    "buttons": {
+      "view_resume": "View Resume",
+      "download_resume": "Download Resume",
+      "favorites": "My Favorites"
+    }
+  },
   "current_professional_status": "Current Professional Status",
   "view_projects": "View Projects",
   "contact_me": "Contact Me",

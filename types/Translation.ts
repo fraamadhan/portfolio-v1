@@ -11,6 +11,24 @@ export type Translation = {
 
   landing_page_description: string;
   landing_page_motto: string;
+  about_section: {
+    title: string;
+    intro: {
+      before_highlight: string;
+      highlight_one: string;
+      middle: string;
+      highlight_two: string;
+      after_highlight: string;
+    };
+    stack: string;
+    hobbies: string;
+    closing: string;
+    buttons: {
+      view_resume: string;
+      download_resume: string;
+      favorites: string;
+    };
+  };
   current_professional_status: string;
   view_projects: string;
   contact_me: string;

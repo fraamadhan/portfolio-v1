@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 
 type Language = "id" | "en";
 
@@ -11,27 +11,32 @@ type LanguageContextType = {
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
+const subscribe = () => () => {};
+
+function getStoredLanguage(): Language {
+    if (typeof window === "undefined") {
+        return "id";
+    }
+
+    const saved = localStorage.getItem("lang");
+    return saved === "id" || saved === "en" ? saved : "id";
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-    const [lang, setLang] = useState<Language>("id");
-    const [ready, setReady] = useState(false);
+    const isClient = useSyncExternalStore(subscribe, () => true, () => false);
+    const [lang, setLang] = useState<Language>(getStoredLanguage);
 
     useEffect(() => {
-        const saved = localStorage.getItem("lang") as Language | null;
-        if (saved === "id" || saved === "en") {
-            setLang(saved);
-        }
-        setReady(true);
-    }, []);
-
-    useEffect(() => {
-        if (!ready) return;
+        if (!isClient) return;
         localStorage.setItem("lang", lang);
-    }, [lang, ready]);
+    }, [isClient, lang]);
 
-    if (!ready) return null;
+    const value = useMemo(() => ({ lang, setLang }), [lang]);
+
+    if (!isClient) return null;
 
     return (
-        <LanguageContext.Provider value={{ lang, setLang }}>
+        <LanguageContext.Provider value={value}>
             {children}
         </LanguageContext.Provider>
     );

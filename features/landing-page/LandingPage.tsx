@@ -8,14 +8,18 @@ import { currentWorkRoleFormatted } from "@/lib";
 const LandingPage = () => {
     const { t } = useTranslation();
     return (
-        <main className="w-full min-h-[calc(100vh-5.5rem)] flex items-start justify-center pt-20">
+        <section
+            id="home"
+            aria-labelledby="home-heading"
+            className="w-full min-h-[calc(85svh-5rem)] sm:min-h-[calc(90svh-5rem)] flex items-start justify-center py-20 sm:pt-20 md:pb-10 bg-background"
+        >
             <div className="flex w-full max-w-3xl flex-col items-center gap-12 sm:px-8">
-                <section className="flex flex-col gap-4 text-center">
+                <header className="flex flex-col gap-4 text-center">
                     <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground font-texas-crust">
                         {t("landing_page_motto")}
                     </p>
 
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight font-rubik-dirt">
+                    <h1 id="home-heading" className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
                         Fakhri Fajar Ramadhan
                     </h1>
 
@@ -26,18 +30,18 @@ const LandingPage = () => {
                     <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed md:text-base font-inter">
                         {t("landing_page_description")}
                     </p>
-                </section>
+                </header>
 
-                <section className="flex flex-col items-center gap-4 text-center">
-                    <p className="text-sm sm:text-lg font-oswald text-foreground">
+                <section aria-labelledby="professional-status-heading" className="flex flex-col items-center gap-4 text-center">
+                    <h2 id="professional-status-heading" className="text-sm sm:text-lg font-oswald text-foreground">
                         {t("current_professional_status")}
-                    </p>
+                    </h2>
 
-                    <div className="flex flex-col gap-4 md:flex-row">
+                    <dl className="flex flex-col gap-4 md:flex-row">
                         <InfoItem label={t("current_role")} value="Back-End Developer" />
                         <InfoItem label={t("work_based_in")} value="Indonesia" />
                         <InfoItem label={t("status")} value="Internship" />
-                    </div>
+                    </dl>
                 </section>
 
                 <section className="flex flex-col md:flex-row gap-4">
@@ -53,7 +57,7 @@ const LandingPage = () => {
                     </Button>
                 </section>
             </div>
-        </main>
+        </section>
     )
 }
 

@@ -56,6 +56,17 @@
   --color-primary-300: var(--primary-300);
   --color-primary-400: var(--primary-400);
   --color-primary-500: var(--primary-500);
+
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-1000: var(--neutral-1000);
 }
 
 :root {
@@ -97,6 +108,17 @@
   --primary-300: oklch(0.4966 0.052 248.91);
   --primary-400: oklch(0.3693 0.0431 252.76);
   --primary-500: oklch(0.2805 0.0308 252.71);
+
+  --neutral-100: oklch(0.92 0.01 95);
+  --neutral-200: oklch(0.9 0.01 95);
+  --neutral-300: oklch(0.83 0.01 95);
+  --neutral-400: oklch(0.72 0.015 95);
+  --neutral-500: oklch(0.38 0.02 255);
+  --neutral-600: oklch(0.3 0.02 255);
+  --neutral-700: oklch(0.24 0.02 255);
+  --neutral-800: oklch(0.19 0.015 255);
+  --neutral-900: oklch(0.15 0.015 255);
+  --neutral-1000: oklch(0.27 0.01 95);
 }
 
 .dark {
@@ -137,6 +159,17 @@
   --primary-300: oklch(0.4966 0.052 248.91);
   --primary-400: oklch(0.3693 0.0431 252.76);
   --primary-500: oklch(0.2805 0.0308 252.71);
+
+  --neutral-100: oklch(0.92 0.01 95);
+  --neutral-200: oklch(0.9 0.01 95);
+  --neutral-300: oklch(0.83 0.01 95);
+  --neutral-400: oklch(0.72 0.015 95);
+  --neutral-500: oklch(0.38 0.02 255);
+  --neutral-600: oklch(0.3 0.02 255);
+  --neutral-700: oklch(0.24 0.02 255);
+  --neutral-800: oklch(0.19 0.015 255);
+  --neutral-900: oklch(0.15 0.015 255);
+  --neutral-1000: oklch(0.27 0.01 95);
 }
 
 @layer base {
@@ -148,5 +181,16 @@
   }
   html {
     @apply font-inter;
+  }
+}
+
+@layer utilities {
+  .text-gradient-primary {
+    background: linear-gradient(180deg, var(--primary-200) 4%, var(--neutral-100) 77%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    display: inline-block;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
   }
 }

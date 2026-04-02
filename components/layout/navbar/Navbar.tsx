@@ -2,9 +2,10 @@ import NavItems from "./NavItems";
 
 const Navbar = () => {
     return (
-        <nav className="fixed top-0 w-full z-99 backdrop-blur-sm px-7">
+        <header className="fixed top-0 w-full z-99 backdrop-blur-sm px-7">
             <div className="flex justify-center py-5">
-                <div
+                <nav
+                    aria-label="Primary"
                     className="
                     w-full lg:max-w-[84rem] h-[5rem]
                     border border-foreground
@@ -16,9 +17,9 @@ const Navbar = () => {
                 "
                 >
                     <NavItems />
-                </div>
+                </nav>
             </div>
-        </nav>
+        </header>
     );
 };
 

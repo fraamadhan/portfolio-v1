@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { bebasNeue, inter, oswald, texasCrust } from "@/lib/fonts/font";
+import { bebasNeue, inter, oswald, rubikDirt, texasCrust } from "@/lib/fonts/font";
 import Navbar from "@/components/layout/navbar/Navbar";
 import { Providers } from "./providers";
 
@@ -21,6 +21,7 @@ export default function RootLayout({
           ${inter.variable} 
           ${oswald.variable} 
           ${bebasNeue.variable} 
+          ${rubikDirt.variable}
           ${texasCrust.variable}
           antialiased`}
       >

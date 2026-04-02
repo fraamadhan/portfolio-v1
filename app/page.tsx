@@ -1,9 +1,11 @@
-import LandingPage from "@/components/landingPage/LandingPage";
+import AboutSection from "@/features/about-me/AboutSection";
+import LandingPage from "@/features/landing-page/LandingPage";
 
 export default function Home() {
   return (
-    <div className="flex px-6 pt-28">
+    <div className="flex flex-col pt-28">
       <LandingPage />
+      <AboutSection />
     </div>
   );
 }

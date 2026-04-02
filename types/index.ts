@@ -1,4 +1,4 @@
-type InfoItemProps = {
-    label: string;
-    value: string;
-}
+export type InfoItemProps = {
+  label: string | undefined;
+  value: string;
+};
