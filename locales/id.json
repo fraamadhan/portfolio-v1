@@ -10,6 +10,24 @@
   },
   "landing_page_description": "Saya berfokus pada pengembangan aplikasi web dan mobile yang berorientasi pada pengguna, sesekali terlibat dalam proses desain, serta menangani DevOps untuk memastikan proses deployment berjalan lancar.",
   "landing_page_motto": "Dari Ide Menjadi Sistem Siap Produksi",
+  "about_section": {
+    "title": "Tentang Saya",
+    "intro": {
+      "before_highlight": "Halo, saya Fakhri - seorang developer yang suka mengubah ide menjadi produk nyata. Saya bersemangat membangun aplikasi web dan mobile yang ",
+      "highlight_one": "ramah pengguna, scalable,",
+      "middle": " dan ",
+      "highlight_two": "efisien",
+      "after_highlight": ". Meskipun pekerjaan saya sehari-hari berfokus pada Back-End development, saya tetap nyaman bekerja di seluruh stack saat dibutuhkan dan saat ini saya juga sedang memperdalam skill di bidang DevOps."
+    },
+    "stack": "Saya terutama bekerja dengan JavaScript, TypeScript, Golang, dan framework backend modern, serta berbagai database SQL dan NoSQL.",
+    "hobbies": "Di luar coding, saya senang tetap aktif lewat olahraga seperti sepak bola, futsal, voli, lari, dan pergi ke gym. Saya juga suka menonton film atau series, mendengarkan musik, dan membaca buku.",
+    "closing": "Lihat resume saya dan jelajahi beberapa hal favorit saya di bawah ini.",
+    "buttons": {
+      "view_resume": "Lihat Resume",
+      "download_resume": "Unduh Resume",
+      "favorites": "Favorit Saya"
+    }
+  },
   "current_professional_status": "Status Professinal Saat Ini",
   "view_projects": "Lihat Proyek",
   "contact_me": "Kontak Saya",

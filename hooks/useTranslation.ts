@@ -14,7 +14,13 @@ export function useTranslation() {
   const dict = dictionaries[lang];
 
   function t(path: string) {
-    return path.split(".").reduce((obj: any, key) => obj?.[key], dict);
+    return path.split(".").reduce<unknown>((value, key) => {
+      if (typeof value !== "object" || value === null || !(key in value)) {
+        return undefined;
+      }
+
+      return (value as Record<string, unknown>)[key];
+    }, dict) as string | undefined;
   }
 
   return { t };

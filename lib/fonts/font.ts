@@ -20,6 +20,13 @@ export const bebasNeue = Bebas_Neue({
   display: "swap",
 });
 
+export const rubikDirt = Rubik_Dirt({
+  subsets: ["latin"],
+  variable: "--font-rubik-dirt",
+  weight: "400",
+  display: "swap",
+});
+
 export const texasCrust = localFont({
   src: "./Texas-Crust.ttf",
   variable: "--font-texas-crust",
