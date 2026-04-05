@@ -6,7 +6,8 @@
     "projects": "Projects",
     "testimonials": "Testimonials",
     "contact": "Contact",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "more": "More"
   },
   "landing_page_description": "I specialize in building user-centered web and mobile applications, occasionally designing when needed, and handling DevOps to ensure smooth delivery.",
   "landing_page_motto": "Turning Ideas Into Production Systems",
@@ -33,5 +34,23 @@
   "contact_me": "Contact Me",
   "work_based_in": "Based in",
   "status": "Status",
-  "current_role": "Current Role"
+  "current_role": "Current Role",
+  "skills_section": {
+    "expertise_tech_stack": "Expertise & Tech Stack",
+    "description": "A collection of tools and technologies I use to build scalable and production-ready applications"
+  },
+  "skills_cards": {
+    "backend": {
+      "title": "Backend Development",
+      "description": "Building APIs, managing databases, implementing authentication, and designing scalable system architecture."
+    },
+    "frontend": {
+      "title": "Frontend Development",
+      "description": "Crafting responsive interfaces, managing application state, and delivering fast, user-friendly experiences."
+    },
+    "devops": {
+      "title": "DevOps & Infrastructure",
+      "description": "Streamlining deployment, automating CI/CD pipelines, managing containers, and monitoring production systems."
+    }
+  }
 }
