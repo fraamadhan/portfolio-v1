@@ -6,7 +6,8 @@
     "projects": "Proyek",
     "testimonials": "Testimoni",
     "contact": "Kontak",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "more": "Lainnya"
   },
   "landing_page_description": "Saya berfokus pada pengembangan aplikasi web dan mobile yang berorientasi pada pengguna, sesekali terlibat dalam proses desain, serta menangani DevOps untuk memastikan proses deployment berjalan lancar.",
   "landing_page_motto": "Dari Ide Menjadi Sistem Siap Produksi",
@@ -33,5 +34,23 @@
   "contact_me": "Kontak Saya",
   "work_based_in": "Berlokasi di",
   "status": "Status",
-  "current_role": "Peran Saat Ini"
+  "current_role": "Peran Saat Ini",
+  "skills_section": {
+    "expertise_tech_stack": "Keahlian & Tech Stack",
+    "description": "Kumpulan teknologi yang saya gunakan untuk membangun aplikasi yang siap produksi"
+  },
+  "skills_cards": {
+    "backend": {
+      "title": "Pengembangan Backend",
+      "description": "Membangun API, mengelola database, menerapkan autentikasi, dan merancang arsitektur sistem yang skalabel."
+    },
+    "frontend": {
+      "title": "Pengembangan Frontend",
+      "description": "Membangun antarmuka yang responsif, mengelola state aplikasi, dan menghadirkan pengalaman pengguna yang cepat dan nyaman."
+    },
+    "devops": {
+      "title": "DevOps & Infrastruktur",
+      "description": "Menyederhanakan deployment, mengotomatiskan pipeline CI/CD, mengelola container, dan memantau sistem produksi."
+    }
+  }
 }

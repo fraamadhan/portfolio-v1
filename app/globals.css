@@ -193,4 +193,13 @@
     color: transparent;
     -webkit-text-fill-color: transparent;
   }
+
+  .text-gradient-skills {
+    background: linear-gradient(0deg, var(--primary-200) 0%, var(--foreground) 64%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    display: inline-block;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
 }

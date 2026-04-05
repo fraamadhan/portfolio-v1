@@ -35,4 +35,22 @@ export type Translation = {
   work_based_in: string;
   status: string;
   current_role: string;
+  skills_section: {
+    expertise_tech_stack: string;
+    description: string;
+  };
+  skills_cards: {
+    backend: {
+      title: string;
+      description: string;
+    };
+    frontend: {
+      title: string;
+      description: string;
+    };
+    devops: {
+      title: string;
+      description: string;
+    };
+  };
 };

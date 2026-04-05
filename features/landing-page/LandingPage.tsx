@@ -9,7 +9,6 @@ const LandingPage = () => {
     const { t } = useTranslation();
     return (
         <section
-            id="home"
             aria-labelledby="home-heading"
             className="w-full min-h-[calc(85svh-5rem)] sm:min-h-[calc(90svh-5rem)] flex items-start justify-center py-20 sm:pt-20 md:pb-10 bg-background"
         >
