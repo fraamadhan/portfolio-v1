@@ -2,28 +2,17 @@
 
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import LanguageSwitch from "./LanguageSwitch";
 import { useTranslation } from "@/hooks/useTranslation";
+import { NAV_ITEMS, PRIMARY_ITEMS } from "./navConfig";
 
-const NAV_ITEMS = [
-    { href: "/#about", labelKey: "navbar.about" },
-    { href: "/#skills", labelKey: "navbar.skills" },
-    { href: "/#experience", labelKey: "navbar.experience" },
-    { href: "/#testimonials", labelKey: "navbar.testimonials" },
-    { href: "/#projects", labelKey: "navbar.projects" },
-    { href: "/#contact", labelKey: "navbar.contact" },
-    { href: "/#dashboard", labelKey: "navbar.dashboard" },
-] as const;
+type Props = {
+    activeSection: string;
+    handleNavClick: (href: string) => MouseEventHandler<HTMLAnchorElement>;
+};
 
-const PRIMARY_ITEMS = [
-    { href: "/#about", labelKey: "navbar.about" },
-    { href: "/#skills", labelKey: "navbar.skills" },
-    { href: "/#experience", labelKey: "navbar.experience" },
-    { href: "/#testimonials", labelKey: "navbar.testimonials" },
-] as const;
-
-export default function DesktopNav() {
+export default function DesktopNav({ activeSection, handleNavClick }: Props) {
     const { t } = useTranslation();
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const moreMenuRef = useRef<HTMLDivElement | null>(null);
@@ -61,22 +50,48 @@ export default function DesktopNav() {
             <ul className="flex items-center gap-5 lg:gap-15">
                 {PRIMARY_ITEMS.map((item) => (
                     <li key={item.labelKey}>
-                        <Link href={item.href}>
+                        <Link
+                            href={item.href}
+                            onClick={handleNavClick(item.href)}
+                            className={activeSection === item.href ? "text-white font-semibold" : "text-white/80"}
+                            aria-current={activeSection === item.href ? "page" : undefined}
+                        >
                             {t(item.labelKey)}
                         </Link>
                     </li>
                 ))}
 
                 <li className="hidden xl:block">
-                    <Link href="/#projects">{t("navbar.projects")}</Link>
+                    <Link
+                        href="/#projects"
+                        onClick={handleNavClick("/#projects")}
+                        className={activeSection === "/#projects" ? "text-white font-semibold" : "text-white/80"}
+                        aria-current={activeSection === "/#projects" ? "page" : undefined}
+                    >
+                        {t("navbar.projects")}
+                    </Link>
                 </li>
 
                 <li className="hidden xl:block">
-                    <Link href="/#contact">{t("navbar.contact")}</Link>
+                    <Link
+                        href="/#contact"
+                        onClick={handleNavClick("/#contact")}
+                        className={activeSection === "/#contact" ? "text-white font-semibold" : "text-white/80"}
+                        aria-current={activeSection === "/#contact" ? "page" : undefined}
+                    >
+                        {t("navbar.contact")}
+                    </Link>
                 </li>
 
                 <li className="hidden xl:block">
-                    <Link href="/#dashboard">{t("navbar.dashboard")}</Link>
+                    <Link
+                        href="/#dashboard"
+                        onClick={handleNavClick("/#dashboard")}
+                        className={activeSection === "/#dashboard" ? "text-white font-semibold" : "text-white/80"}
+                        aria-current={activeSection === "/#dashboard" ? "page" : undefined}
+                    >
+                        {t("navbar.dashboard")}
+                    </Link>
                 </li>
 
                 <li className="relative xl:hidden" ref={moreMenuRef}>
@@ -107,7 +122,12 @@ export default function DesktopNav() {
                                         <Link
                                             href={item.href}
                                             role="menuitem"
-                                            onClick={() => setIsMoreOpen(false)}
+                                            onClick={(event) => {
+                                                handleNavClick(item.href)(event);
+                                                setIsMoreOpen(false);
+                                            }}
+                                            className={activeSection === item.href ? "text-white font-semibold" : "text-white/80"}
+                                            aria-current={activeSection === item.href ? "page" : undefined}
                                         >
                                             {t(item.labelKey)}
                                         </Link>
