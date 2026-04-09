@@ -4,17 +4,28 @@ import Link from "next/link";
 import { useState } from "react";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
+import { useSectionNavigation } from "@/hooks/useSectionNavigation";
+import { HOME_HREF } from "./navConfig";
 
 export default function NavItems() {
     const [isOpen, setIsOpen] = useState(false);
+    const { activeSection, handleNavClick } = useSectionNavigation();
 
     return (
         <>
-            <Link href="/#home" className="text-3xl font-bold tracking-wide text-white">
+            <Link
+                href={HOME_HREF}
+                onClick={handleNavClick(HOME_HREF)}
+                className={`text-3xl font-bold tracking-wide ${activeSection === HOME_HREF ? "text-white" : "text-white/90"}`}
+                aria-current={activeSection === HOME_HREF ? "page" : undefined}
+            >
                 FAKHRI
             </Link>
 
-            <DesktopNav />
+            <DesktopNav
+                activeSection={activeSection}
+                handleNavClick={handleNavClick}
+            />
 
             <button
                 type="button"
@@ -32,6 +43,8 @@ export default function NavItems() {
             <MobileNav
                 isOpen={isOpen}
                 closeMenu={() => setIsOpen(false)}
+                activeSection={activeSection}
+                handleNavClick={handleNavClick}
             />
         </>
     );

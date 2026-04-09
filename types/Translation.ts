@@ -7,6 +7,7 @@ export type Translation = {
     testimonials: string;
     contact: string;
     dashboard: string;
+    more: string;
   };
 
   landing_page_description: string;
@@ -53,4 +54,21 @@ export type Translation = {
       description: string;
     };
   };
+  experience_section: {
+    experience_journey: string;
+    description: string;
+    timeline_eyebrow: string;
+    see_more: string;
+    current: string;
+    internship: string;
+    keypoints: string;
+    tech_stack: string;
+    cards: {
+      telkom_backend: {
+        title: string;
+        company: string;
+        location: string;
+      };
+    };
+  }
 };

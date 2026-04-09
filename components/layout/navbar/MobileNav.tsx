@@ -1,27 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { MouseEventHandler, useEffect } from "react";
 import { createPortal } from "react-dom";
 import LanguageSwitch from "./LanguageSwitch";
 import { useTranslation } from "@/hooks/useTranslation";
+import { NAV_ITEMS } from "./navConfig";
 
 type Props = {
     isOpen: boolean;
     closeMenu: () => void;
+    activeSection: string;
+    handleNavClick: (href: string) => MouseEventHandler<HTMLAnchorElement>;
 };
 
-const NAV_ITEMS = [
-    { href: "/#about", labelKey: "navbar.about" },
-    { href: "/#skills", labelKey: "navbar.skills" },
-    { href: "/#experience", labelKey: "navbar.experience" },
-    { href: "/#projects", labelKey: "navbar.projects" },
-    { href: "/#testimonials", labelKey: "navbar.testimonials" },
-    { href: "/#contact", labelKey: "navbar.contact" },
-    { href: "/#dashboard", labelKey: "navbar.dashboard" },
-] as const;
-
-export default function MobileNav({ isOpen, closeMenu }: Props) {
+export default function MobileNav({ isOpen, closeMenu, activeSection, handleNavClick }: Props) {
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -86,7 +79,15 @@ export default function MobileNav({ isOpen, closeMenu }: Props) {
                 <ul className="flex flex-col items-center gap-8">
                     {NAV_ITEMS.map((item) => (
                         <li key={item.labelKey}>
-                            <Link href={item.href} onClick={closeMenu}>
+                            <Link
+                                href={item.href}
+                                onClick={(event) => {
+                                    handleNavClick(item.href)(event);
+                                    closeMenu();
+                                }}
+                                className={activeSection === item.href ? "text-white font-semibold" : "text-white/80"}
+                                aria-current={activeSection === item.href ? "page" : undefined}
+                            >
                                 {t(item.labelKey)}
                             </Link>
                         </li>

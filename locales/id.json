@@ -52,5 +52,22 @@
       "title": "DevOps & Infrastruktur",
       "description": "Menyederhanakan deployment, mengotomatiskan pipeline CI/CD, mengelola container, dan memantau sistem produksi."
     }
+  },
+  "experience_section": {
+    "experience_journey": "Perjalanan Karier",
+    "description": "Gambaran singkat tentang perkembangan profesional dan jalur karier saya",
+    "timeline_eyebrow": "Lintasan Karier",
+    "see_more": "Lihat selengkapnya",
+    "current": "Saat ini",
+    "internship": "Magang",
+    "keypoints": "Poin utama",
+    "tech_stack": "Tech stack",
+    "cards": {
+      "telkom_backend": {
+        "title": "Backend Developer",
+        "company": "PT Telkom Indonesia",
+        "location": "Bandung, Indonesia"
+      }
+    }
   }
 }

@@ -11,10 +11,9 @@ const CardItem = (
     return (
         <div className="flex h-full flex-col items-center gap-y-5">
             <h4
-                className="text-center font-sub-heading text-2xl font-semibold uppercase tracking-wide text-transparent"
+                className="text-center font-sub-heading text-2xl font-semibold uppercase tracking-wide"
                 style={{
-                    WebkitTextStroke: "1.5px rgba(238, 244, 252, 0.92)",
-                    textShadow: "0 4px 18px rgba(8, 12, 20, 0.35)",
+                    textShadow: "0 4px 18px rgba(0, 77, 230, 0.35)",
                 }}
             >
                 {title}
