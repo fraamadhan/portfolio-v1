@@ -69,5 +69,22 @@
         "location": "Bandung, Indonesia"
       }
     }
+  },
+  "project_section": {
+    "my_project": "My Projects"
+  },
+  "project_detail": {
+    "back": "Back",
+    "as_a": "as a",
+    "show_screenshot": "Show screenshot",
+    "project_overview": "Project Overview",
+    "key_highlights": "Key Highlights",
+    "technology_stack": "Technology Stack",
+    "repo_labels": {
+      "frontend": "Frontend Repo",
+      "backend": "Backend Repo",
+      "cms": "CMS Repo",
+      "source_code": "Source Code"
+    }
   }
 }
