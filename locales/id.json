@@ -69,5 +69,22 @@
         "location": "Bandung, Indonesia"
       }
     }
+  },
+  "project_section": {
+    "my_project": "Proyek Saya"
+  },
+  "project_detail": {
+    "back": "Kembali",
+    "as_a": "sebagai",
+    "show_screenshot": "Tampilkan tangkapan layar",
+    "project_overview": "Ringkasan Proyek",
+    "key_highlights": "Sorotan Utama",
+    "technology_stack": "Teknologi yang Digunakan",
+    "repo_labels": {
+      "frontend": "Repo Frontend",
+      "backend": "Repo Backend",
+      "cms": "Repo CMS",
+      "source_code": "Kode Sumber"
+    }
   }
 }

@@ -70,5 +70,22 @@ export type Translation = {
         location: string;
       };
     };
-  }
+  };
+  project_section: {
+    my_project: string;
+  };
+  project_detail: {
+    back: string;
+    as_a: string;
+    show_screenshot: string;
+    project_overview: string;
+    key_highlights: string;
+    technology_stack: string;
+    repo_labels: {
+      frontend: string;
+      backend: string;
+      cms: string;
+      source_code: string;
+    };
+  };
 };

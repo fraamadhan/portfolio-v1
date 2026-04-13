@@ -63,12 +63,12 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
 
                 <li className="hidden xl:block">
                     <Link
-                        href="/#projects"
-                        onClick={handleNavClick("/#projects")}
-                        className={activeSection === "/#projects" ? "text-white font-semibold" : "text-white/80"}
-                        aria-current={activeSection === "/#projects" ? "page" : undefined}
+                        href="/#testimonials"
+                        onClick={handleNavClick("/#testimonials")}
+                        className={activeSection === "/#testimonials" ? "text-white font-semibold" : "text-white/80"}
+                        aria-current={activeSection === "/#testimonials" ? "page" : undefined}
                     >
-                        {t("navbar.projects")}
+                        {t("navbar.testimonials")}
                     </Link>
                 </li>
 

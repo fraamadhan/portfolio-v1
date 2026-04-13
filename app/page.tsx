@@ -1,6 +1,7 @@
 import AboutSection from "@/features/about-me/AboutSection";
 import ExperienceSection from "@/features/experience/ExperienceSection";
 import LandingPage from "@/features/landing-page/LandingPage";
+import ProjectSection from "@/features/project/ProjectSection";
 import SkillSection from "@/features/skills/SkillSection";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <AboutSection />
       <SkillSection />
       <ExperienceSection />
+      <ProjectSection />
     </div>
   );
 }
