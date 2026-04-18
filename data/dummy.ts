@@ -1,3 +1,5 @@
+import type { TestimonialItemProps } from "@/types";
+
 export const currentWorkRole = ["Full-Stack Developer", "DevOps Engineer"];
 
 export const backendItems = {
@@ -363,5 +365,72 @@ export const project = [
         logo: "",
       },
     ],
+  },
+];
+
+export const testimonials: TestimonialItemProps[] = [
+  {
+    id: "1",
+    author: "Nadia Pratama",
+    role: "Product Designer",
+    institution: "Studio Product Team",
+    quote: "Fakhri turns messy product ideas into interfaces that feel sharp, useful, and production-ready fast.",
+    tag: "Design sync",
+  },
+  {
+    id: "2",
+    author: "Rizky Mahendra",
+    role: "Frontend Engineer",
+    institution: "Frontend Guild",
+    quote: "He cares about the tiny interaction details, but he never loses the bigger product goal in the process.",
+    tag: "UI polish",
+  },
+  {
+    id: "3",
+    author: "Aulia Rahman",
+    role: "Engineering Manager",
+    institution: "Product Engineering",
+    quote: "Reliable under pressure, clear in discussion, and unusually good at turning vague asks into clean delivery.",
+    tag: "Execution",
+  },
+  {
+    id: "4",
+    author: "Salsa Putri",
+    role: "QA Engineer",
+    institution: "Quality Assurance Team",
+    quote: "The handoff quality is excellent. Edge cases are usually already considered before testing even starts.",
+    tag: "Craft",
+  },
+  {
+    id: "5",
+    author: "Dimas Nugroho",
+    role: "Backend Engineer",
+    institution: "Platform Team",
+    quote: "Working with him feels easy because the frontend decisions stay aligned with system realities and API constraints.",
+    tag: "Team flow",
+  },
+  {
+    id: "6",
+    author: "Kevin Alvaro",
+    role: "Founder",
+    institution: "Startup Office",
+    quote: "He adds taste to the product without slowing momentum. That balance is harder to find than people think.",
+    tag: "Product sense",
+  },
+  {
+    id: "7",
+    author: "Intan Lestari",
+    role: "Scrum Master",
+    institution: "Delivery Team",
+    quote: "He communicates blockers early, manages scope well, and still keeps the end result feeling premium.",
+    tag: "Ownership",
+  },
+  {
+    id: "8",
+    author: "Farel Aditya",
+    role: "Mobile Engineer",
+    institution: "Mobile Team",
+    quote: "Cross-functional discussions with Fakhri are always grounded. He listens first, then proposes practical solutions.",
+    tag: "Collaboration",
   },
 ];

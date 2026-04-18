@@ -29,3 +29,12 @@ export type ProjectDetailItemProps = {
   images: string[];
   tools: { name: string; logo: string }[];
 };
+
+export type TestimonialItemProps = {
+  id: string;
+  author: string;
+  role: string;
+  institution: string;
+  quote: string;
+  tag: string;
+};

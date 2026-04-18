@@ -5,7 +5,7 @@ export const NAV_ITEMS = [
     { href: "/#projects", labelKey: "navbar.projects" },
     { href: "/#testimonials", labelKey: "navbar.testimonials" },
     { href: "/#contact", labelKey: "navbar.contact" },
-    { href: "/#dashboard", labelKey: "navbar.dashboard" },
+    { href: "/dashboard", labelKey: "navbar.dashboard" },
 ] as const;
 
 export const PRIMARY_ITEMS = [

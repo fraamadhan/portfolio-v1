@@ -74,6 +74,67 @@ export type Translation = {
   project_section: {
     my_project: string;
   };
+  testimonial_section: {
+    eyebrow: string;
+    description: string;
+    list_eyebrow: string;
+    list_title: string;
+    notes_archived: string;
+    toggle_open: string;
+    toggle_close: string;
+    composer: {
+      eyebrow: string;
+      title: string;
+      open_button: string;
+      name_label: string;
+      name_placeholder: string;
+      role_label: string;
+      role_placeholder: string;
+      institution_label: string;
+      institution_placeholder: string;
+      tag_label: string;
+      tag_description: string;
+      tag_placeholder: string;
+      quote_label: string;
+      quote_placeholder: string;
+      close_button: string;
+      submit_button: string;
+      submitting_button: string;
+      submit_success: string;
+      submit_error: string;
+      footer_note: string;
+    };
+    pagination: {
+      page: string;
+      of: string;
+      previous_aria: string;
+      next_aria: string;
+    };
+  };
+  footer: {
+    general: {
+      title: string;
+      home: string;
+    };
+    collection: {
+      title: string;
+      book: string;
+      manwha: string;
+      manga: string;
+      music: string;
+    };
+    resources: {
+      title: string;
+      gmail: string;
+      github: string;
+      linkedin: string;
+    };
+    copyright: string;
+  };
+  under_construction: {
+    title: string;
+    description: string;
+  };
   project_detail: {
     back: string;
     as_a: string;

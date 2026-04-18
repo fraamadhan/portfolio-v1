@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { bebasNeue, inter, oswald, rubikDirt, texasCrust } from "@/lib/fonts/font";
 import Navbar from "@/components/layout/navbar/Navbar";
+import Footer from "@/components/layout/footer/Footer";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           <main>{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>

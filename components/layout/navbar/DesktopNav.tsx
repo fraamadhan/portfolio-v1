@@ -85,10 +85,10 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
 
                 <li className="hidden xl:block">
                     <Link
-                        href="/#dashboard"
-                        onClick={handleNavClick("/#dashboard")}
-                        className={activeSection === "/#dashboard" ? "text-white font-semibold" : "text-white/80"}
-                        aria-current={activeSection === "/#dashboard" ? "page" : undefined}
+                        href="/dashboard"
+                        onClick={handleNavClick("/dashboard")}
+                        className={activeSection === "/dashboard" ? "text-white font-semibold" : "text-white/80"}
+                        aria-current={activeSection === "/dashboard" ? "page" : undefined}
                     >
                         {t("navbar.dashboard")}
                     </Link>
