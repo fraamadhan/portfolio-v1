@@ -73,6 +73,67 @@
   "project_section": {
     "my_project": "My Projects"
   },
+  "testimonial_section": {
+    "eyebrow": "Paper trail",
+    "description": "A single wall of notes, quick reads, and real impressions.",
+    "list_eyebrow": "Curated voices",
+    "list_title": "One page, many pinned perspectives",
+    "notes_archived": "notes archived",
+    "toggle_open": "Add a testimonial",
+    "toggle_close": "Hide note form",
+    "composer": {
+      "eyebrow": "Add your note",
+      "title": "Pin a fresh testimonial",
+      "open_button": "Open note form",
+      "name_label": "Name",
+      "name_placeholder": "Anonymous but iconic",
+      "role_label": "Role or context",
+      "role_placeholder": "Teammate, client, PM...",
+      "institution_label": "Institution",
+      "institution_placeholder": "Company, campus, community...",
+      "tag_label": "Tag",
+      "tag_description": "A short word or phrase that describes this person.",
+      "tag_placeholder": "Reliable, sharp, calm...",
+      "quote_label": "Testimonial",
+      "quote_placeholder": "Write something short, specific, and honest.",
+      "close_button": "Fold note away",
+      "submit_button": "Pin to wall",
+      "submitting_button": "Saving...",
+      "submit_success": "Testimonial saved.",
+      "submit_error": "Could not save testimonial. Please try again.",
+      "footer_note": "New notes land on page one"
+    },
+    "pagination": {
+      "page": "Page",
+      "of": "of",
+      "previous_aria": "Previous testimonial page",
+      "next_aria": "Next testimonial page"
+    }
+  },
+  "footer": {
+    "general": {
+      "title": "General",
+      "home": "Home"
+    },
+    "collection": {
+      "title": "Collection",
+      "book": "Book",
+      "manwha": "Manwha",
+      "manga": "Manga",
+      "music": "Music"
+    },
+    "resources": {
+      "title": "Resources",
+      "gmail": "Gmail",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    },
+    "copyright": "© 2026 Fakhri Fajar R."
+  },
+  "under_construction": {
+    "title": "Under Construction",
+    "description": "This page is still being built. Please check back soon."
+  },
   "project_detail": {
     "back": "Back",
     "as_a": "as a",

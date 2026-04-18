@@ -30,7 +30,7 @@ const AboutSection = () => {
 
                     <div className="relative mx-auto h-[400px] md:h-[480px] w-[300px] shrink-0 md:mx-0">
                         <Image
-                            src='/img/sanji.jpeg'
+                            src='/img/me.jpeg'
                             fill
                             alt="Photo of Fakhri"
                             className="object-cover border-4 border-white rounded-lg shadow-[0_18px_40px_rgba(212,226,245,0.24)]"

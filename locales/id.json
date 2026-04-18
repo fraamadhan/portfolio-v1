@@ -73,6 +73,67 @@
   "project_section": {
     "my_project": "Proyek Saya"
   },
+  "testimonial_section": {
+    "eyebrow": "Jejak catatan",
+    "description": "Satu dinding berisi catatan, bacaan singkat, dan kesan yang nyata.",
+    "list_eyebrow": "Suara pilihan",
+    "list_title": "Satu halaman, banyak perspektif yang tertempel",
+    "notes_archived": "catatan tersimpan",
+    "toggle_open": "Tambah testimoni",
+    "toggle_close": "Sembunyikan form",
+    "composer": {
+      "eyebrow": "Tambah catatan",
+      "title": "Tempel testimoni baru",
+      "open_button": "Buka form catatan",
+      "name_label": "Nama",
+      "name_placeholder": "Anonim tapi ikonik",
+      "role_label": "Peran atau konteks",
+      "role_placeholder": "Rekan kerja, klien, PM...",
+      "institution_label": "Institusi",
+      "institution_placeholder": "Perusahaan, kampus, komunitas...",
+      "tag_label": "Tag",
+      "tag_description": "Kata atau frasa singkat yang menggambarkan orang ini.",
+      "tag_placeholder": "Andal, tajam, tenang...",
+      "quote_label": "Testimoni",
+      "quote_placeholder": "Tulis sesuatu yang singkat, spesifik, dan jujur.",
+      "close_button": "Simpan dulu",
+      "submit_button": "Tempel ke dinding",
+      "submitting_button": "Menyimpan...",
+      "submit_success": "Testimoni berhasil disimpan.",
+      "submit_error": "Testimoni gagal disimpan. Coba lagi.",
+      "footer_note": "Catatan baru muncul di halaman pertama"
+    },
+    "pagination": {
+      "page": "Halaman",
+      "of": "dari",
+      "previous_aria": "Halaman testimoni sebelumnya",
+      "next_aria": "Halaman testimoni berikutnya"
+    }
+  },
+  "footer": {
+    "general": {
+      "title": "Umum",
+      "home": "Beranda"
+    },
+    "collection": {
+      "title": "Koleksi",
+      "book": "Buku",
+      "manwha": "Manwha",
+      "manga": "Manga",
+      "music": "Musik"
+    },
+    "resources": {
+      "title": "Resources",
+      "gmail": "Gmail",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    },
+    "copyright": "© 2026 Fakhri Fajar R."
+  },
+  "under_construction": {
+    "title": "Proses Pengembangan",
+    "description": "Halaman ini masih dalam proses pengerjaan. Silakan cek lagi nanti."
+  },
   "project_detail": {
     "back": "Kembali",
     "as_a": "sebagai",
