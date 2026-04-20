@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "./globals.css"
 import { bebasNeue, inter, oswald, rubikDirt, texasCrust } from "@/lib/fonts/font";
 import Navbar from "@/components/layout/navbar/Navbar";
 import Footer from "@/components/layout/footer/Footer";
 import { Providers } from "./providers";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "My Portfolio",
@@ -31,6 +32,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
