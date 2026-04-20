@@ -2,18 +2,13 @@
 
 import Image from "next/image"
 import { useTranslation } from "@/hooks/useTranslation"
-import { Card } from "./components/Card";
-import Link from "next/link";
-
-const experienceCards = [
-    { id: "telkom-backend-1" },
-    { id: "telkom-backend-2" },
-    { id: "telkom-backend-3" },
-    { id: "telkom-backend-4" },
-]
+import { experiences } from "@/data/dummy"
+import { Card } from "./components/Card"
+import Link from "next/link"
 
 const ExperienceSection = () => {
-    const { t } = useTranslation();
+    const { t } = useTranslation()
+
     return (
         <section
             id="experience"
@@ -34,8 +29,8 @@ const ExperienceSection = () => {
             </p>
 
             <div className="grid w-full max-w-6xl grid-cols-1 items-start gap-4 md:grid-cols-2">
-                {experienceCards.map((card) => (
-                    <Card key={card.id} cardId={card.id} />
+                {experiences.slice(0, 4).map((experience) => (
+                    <Card key={experience.id} experience={experience} />
                 ))}
             </div>
 

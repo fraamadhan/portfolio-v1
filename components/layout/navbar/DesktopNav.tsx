@@ -47,7 +47,7 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
 
     return (
         <div className="hidden md:flex items-center gap-5 lg:gap-15 text-xl">
-            <ul className="flex items-center gap-5 lg:gap-15">
+            <ul className="flex items-center gap-5 lg:gap-20">
                 {PRIMARY_ITEMS.map((item) => (
                     <li key={item.labelKey}>
                         <Link
@@ -69,17 +69,6 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
                         aria-current={activeSection === "/#testimonials" ? "page" : undefined}
                     >
                         {t("navbar.testimonials")}
-                    </Link>
-                </li>
-
-                <li className="hidden xl:block">
-                    <Link
-                        href="/#contact"
-                        onClick={handleNavClick("/#contact")}
-                        className={activeSection === "/#contact" ? "text-white font-semibold" : "text-white/80"}
-                        aria-current={activeSection === "/#contact" ? "page" : undefined}
-                    >
-                        {t("navbar.contact")}
                     </Link>
                 </li>
 

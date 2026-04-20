@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Railway</title>
+  <rect width="64" height="64" rx="14" fill="#11111a"/>
+  <path d="M17 20h12c10.493 0 19 8.507 19 19v5H37v-5c0-4.418-3.582-8-8-8H17z" fill="#fff"/>
+  <path d="M31 20h16v11H31z" fill="#b18cff"/>
+  <circle cx="23" cy="45" r="4" fill="#fff"/>
+  <circle cx="41" cy="45" r="4" fill="#fff"/>
+</svg>

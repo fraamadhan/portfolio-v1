@@ -1,9 +1,12 @@
 import Image from "next/image"
 import { useLanguage } from "@/context/LanguageContext"
 import { useTranslation } from "@/hooks/useTranslation"
+import type { ExperienceItemProps } from "@/types"
+import { cn } from "@/lib/utils"
 import { KeypointList } from "./KeypointList"
 
 type CardItemProps = {
+    experience: ExperienceItemProps
     isKeypointsOpen: boolean
     onToggleKeypoints: () => void
     keypointsContentId: string
@@ -11,6 +14,7 @@ type CardItemProps = {
 }
 
 export const CardItem = ({
+    experience,
     isKeypointsOpen,
     onToggleKeypoints,
     keypointsContentId,
@@ -18,33 +22,45 @@ export const CardItem = ({
 }: CardItemProps) => {
     const { t } = useTranslation()
     const { lang } = useLanguage()
-    const isCurrent = true;
-    const startDate = new Date("2025-11-01T00:00:00")
-    const endDate = new Date("2026-05-01T00:00:00")
     const formatter = new Intl.DateTimeFormat(lang === "id" ? "id-ID" : "en-US", {
         month: "long",
         year: "numeric",
+        timeZone: "UTC",
     })
-    const dateRange = `${formatter.format(startDate)} - ${formatter.format(endDate)}`
+    const formatDate = (value: string) => {
+        const [year, month] = value.split("-").map(Number)
+        return formatter.format(new Date(Date.UTC(year, month - 1, 1)))
+    }
+    const dateRange = `${formatDate(experience.startDate)} - ${formatDate(experience.endDate)}`
 
     return (
         <div className="flex max-w-xl flex-col gap-4">
             <div className="flex items-start justify-between gap-3">
-                <h4 className="font-sub-heading text-2xl tracking-wide
-                    text-gradient-skills font-bold w-fit">{t("experience_section.cards.telkom_backend.title")}</h4>
+                <h4 className="font-sub-heading text-2xl font-bold tracking-wide text-gradient-skills">
+                    {experience.role}
+                </h4>
                 <div className="flex flex-wrap justify-end gap-2 text-xs font-medium tracking-[0.18em] uppercase">
-                    <p className={`${isCurrent ? "block" : "hidden"} rounded-full border border-white/12 bg-white/10 px-3 py-1.5 text-neutral-100`}>{t("experience_section.current")}</p>
-                    <p className="rounded-full border border-primary-200/40 bg-primary-400/20 px-3 py-1.5 text-primary-100">{t("experience_section.internship")}</p>
+                    {experience.isCurrent ? (
+                        <p className="rounded-full border border-white/12 bg-white/10 px-3 py-1.5 text-neutral-100">{t("experience_section.current")}</p>
+                    ) : null}
+                    <p className={cn(
+                        "rounded-full px-3 py-1.5",
+                        experience.category === "Freelance"
+                            ? "border border-[#f0a68f]/40 bg-[#f0a68f]/15 text-[#ffd0c0]"
+                            : "border border-primary-200/40 bg-primary-400/20 text-primary-100"
+                    )}>
+                        {experience.category}
+                    </p>
                 </div>
             </div>
             <div className="flex flex-col gap-2 text-sm tracking-wide text-neutral-200 sm:text-base">
                 <p className="flex items-center gap-2 leading-none">
                     <Image src="/logo/ic_company.svg" alt="" width={18} height={18} className="h-[18px] w-[18px] shrink-0" />
-                    <span>{t("experience_section.cards.telkom_backend.company")}</span>
+                    <span>{experience.company}</span>
                 </p>
                 <p className="flex items-center gap-2 leading-none">
                     <Image src="/logo/ic_location.svg" alt="" width={18} height={18} className="h-[18px] w-[18px] shrink-0" />
-                    <span>{t("experience_section.cards.telkom_backend.location")}</span>
+                    <span>{experience.location}</span>
                 </p>
                 <p className="flex items-center gap-2 leading-none">
                     <Image src="/logo/ic_date.svg" alt="" width={18} height={18} className="h-[18px] w-[18px] shrink-0" />
@@ -52,6 +68,8 @@ export const CardItem = ({
                 </p>
             </div>
             <KeypointList
+                keypoints={experience.keypoints}
+                techStack={experience.techStack}
                 isOpen={isKeypointsOpen}
                 onToggle={onToggleKeypoints}
                 contentId={keypointsContentId}

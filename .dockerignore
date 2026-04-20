@@ -1,0 +1,14 @@
+# .dockerignore
+node_modules
+bun.lockb
+bun.lock
+npm-debug.log
+dist
+.next
+out
+.env
+.env.*
+.git
+.gitignore
+Dockerfile
+docker-compose.yml

@@ -1,4 +1,4 @@
-import type { TestimonialItemProps } from "@/types";
+import type { ExperienceItemProps, TestimonialItemProps } from "@/types";
 
 export const currentWorkRole = ["Full-Stack Developer", "DevOps Engineer"];
 
@@ -49,6 +49,101 @@ export const devOpsItems = {
   ],
 };
 
+export const experiences: ExperienceItemProps[] = [
+  {
+    id: "telkom-test-house-backend",
+    role: "Backend Developer",
+    category: "Internship",
+    company: "PT Telkom Indonesia",
+    location: "Bandung, Indonesia",
+    startDate: "2025-11-01",
+    endDate: "2026-05-01",
+    keypoints: [
+      "Built backend APIs for analytics and Service Level Guarantee (SLG) features on the Telkom Test House platform.",
+      "Maintained and enhanced existing services to improve stability, response consistency, and day-to-day reliability.",
+      "Delivered re-verification endpoints for sample verification workflows to support operational follow-up cases.",
+      "Implemented additional payment re-verification subflows to complete the end-to-end verification process.",
+    ],
+    techStack: [
+      { name: "TypeScript", src: "/logo/skills/typescript.svg" },
+      { name: "GitLab", src: "/logo/skills/gitlab.svg" },
+      { name: "AdonisJS", src: "/logo/skills/adonisjs.svg" },
+      { name: "MySQL", src: "/logo/skills/mysql.svg" },
+      { name: "Redis", src: "/logo/skills/redis.svg" },
+      { name: "Docker", src: "/logo/skills/docker.svg" },
+    ],
+    isCurrent: true,
+  },
+  {
+    id: "telkom-padi-backend",
+    role: "Backend Developer",
+    category: "Internship",
+    company: "PT Telkom Indonesia",
+    location: "Bandung, Indonesia",
+    startDate: "2024-10-01",
+    endDate: "2025-01-01",
+    keypoints: [
+      "Maintained APIs and core backend services for the PaDi UMKM platform across ongoing product updates.",
+      "Improved search-result performance while adding prohibited-keyword detection backed by Redis caching.",
+      "Created scheduled jobs for daily endpoint calls and service automation through Rancher-managed workloads.",
+      "Added 12 unit tests for the service recommendation module to strengthen regression coverage.",
+    ],
+    techStack: [
+      { name: "TypeScript", src: "/logo/skills/typescript.svg" },
+      { name: "NestJS", src: "/logo/skills/nestjs.svg" },
+      { name: "GitLab", src: "/logo/skills/gitlab.svg" },
+      { name: "MongoDB", src: "/logo/skills/mongodb.svg" },
+      { name: "Redis", src: "/logo/skills/redis.svg" },
+      { name: "Docker", src: "/logo/skills/docker.svg" },
+      { name: "Rancher", src: "/logo/skills/rancher.svg" },
+    ],
+    isCurrent: false,
+  },
+  {
+    id: "telkom-padi-qa",
+    role: "QA Engineer",
+    category: "Internship",
+    company: "PT Telkom Indonesia",
+    location: "Bandung, Indonesia",
+    startDate: "2024-08-01",
+    endDate: "2024-10-01",
+    keypoints: [
+      "Executed end-to-end testing for PaDi UMKM features before release to help maintain production readiness.",
+      "Documented test evidence and review findings for stakeholder reporting and follow-up validation.",
+      "Prepared structured test cases in Google Sheets to cover business flows, negative scenarios, and edge cases.",
+      "Ran daily exploratory and regression testing to surface defects early and keep feature quality stable.",
+    ],
+    techStack: [
+      { name: "Postman", src: "/logo/skills/postman.svg" },
+      { name: "Google Sheets", src: "/logo/skills/google-sheets.svg" },
+      { name: "Jira", src: "/logo/skills/jira.svg" },
+    ],
+    isCurrent: false,
+  },
+  {
+    id: "unpad-backend-freelance",
+    role: "Backend Developer",
+    category: "Freelance",
+    company: "Padjadjaran University",
+    location: "Jatinangor, Indonesia",
+    startDate: "2024-02-01",
+    endDate: "2024-06-01",
+    keypoints: [
+      "Built an internal admin dashboard with Filament to streamline day-to-day content and data management.",
+      "Implemented queue-based certificate generation in Laravel so hundreds of documents could be processed reliably.",
+      "Designed the application data model and relational database structure for maintainable feature delivery.",
+      "Delivered backend flows that reduced manual operational work for certificate issuance and admin review.",
+    ],
+    techStack: [
+      { name: "Laravel", src: "/logo/skills/laravel.svg" },
+      { name: "PHP", src: "/logo/skills/php.svg" },
+      { name: "MySQL", src: "/logo/skills/mysql.svg" },
+      { name: "Filament", src: "/logo/skills/filament.svg" },
+    ],
+    isCurrent: false,
+  },
+];
+
 export const projects = [
   {
     id: 1,
@@ -76,232 +171,232 @@ export const projects = [
       },
       {
         name: "Mongoose",
-        logo: "",
+        logo: "/logo/skills/mongoose.svg",
       },
       {
         name: "Supabase",
-        logo: "",
+        logo: "/logo/skills/supabase.svg",
       },
       {
         name: "Railway",
-        logo: "",
+        logo: "/logo/skills/railway.svg",
       },
       {
         name: "Midtrans",
-        logo: "",
+        logo: "/logo/skills/midtrans.svg",
       },
     ],
   },
-  {
-    id: 2,
-    imageSrc: "https://kgvzbxnpitajdvbjxahp.supabase.co/storage/v1/object/public/portfolio/image/project/banner/service_page.png",
-    title: "Addo Salon Booking Platform",
-    category: "Web App",
-    description:
-      "A comprehensive web application built to digitalize Addo Salon's daily operations. I developed an automated reservation system, integrated a secure payment gateway for seamless online transactions, and built a custom analytics dashboard to track core business metrics.",
-    tools: [
-      {
-        name: "TypeScript",
-        logo: "/logo/skills/typescript.svg",
-      },
-      {
-        name: "NestJS",
-        logo: "/logo/skills/nestjs.svg",
-      },
-      {
-        name: "Next.js",
-        logo: "/logo/skills/next.svg",
-      },
-      {
-        name: "MongoDB",
-        logo: "/logo/skills/mongodb.svg",
-      },
-      {
-        name: "Mongoose",
-        logo: "",
-      },
-      {
-        name: "Supabase",
-        logo: "",
-      },
-      {
-        name: "Railway",
-        logo: "",
-      },
-      {
-        name: "Midtrans",
-        logo: "",
-      },
-    ],
-  },
-  {
-    id: 3,
-    imageSrc: "https://kgvzbxnpitajdvbjxahp.supabase.co/storage/v1/object/public/portfolio/image/project/banner/service_page.png",
-    title: "Addo Salon Booking Platform",
-    category: "Web App",
-    description:
-      "A comprehensive web application built to digitalize Addo Salon's daily operations. I developed an automated reservation system, integrated a secure payment gateway for seamless online transactions, and built a custom analytics dashboard to track core business metrics.",
-    tools: [
-      {
-        name: "TypeScript",
-        logo: "/logo/skills/typescript.svg",
-      },
-      {
-        name: "NestJS",
-        logo: "/logo/skills/nestjs.svg",
-      },
-      {
-        name: "Next.js",
-        logo: "/logo/skills/next.svg",
-      },
-      {
-        name: "MongoDB",
-        logo: "/logo/skills/mongodb.svg",
-      },
-      {
-        name: "Mongoose",
-        logo: "",
-      },
-      {
-        name: "Supabase",
-        logo: "",
-      },
-      {
-        name: "Railway",
-        logo: "",
-      },
-      {
-        name: "Midtrans",
-        logo: "",
-      },
-    ],
-  },
-  {
-    id: 4,
-    imageSrc: "https://kgvzbxnpitajdvbjxahp.supabase.co/storage/v1/object/public/portfolio/image/project/banner/service_page.png",
-    title: "Addo Salon Booking Platform",
-    category: "Web App",
-    description:
-      "A comprehensive web application built to digitalize Addo Salon's daily operations. I developed an automated reservation system, integrated a secure payment gateway for seamless online transactions, and built a custom analytics dashboard to track core business metrics.",
-    tools: [
-      {
-        name: "TypeScript",
-        logo: "/logo/skills/typescript.svg",
-      },
-      {
-        name: "NestJS",
-        logo: "/logo/skills/nestjs.svg",
-      },
-      {
-        name: "Next.js",
-        logo: "/logo/skills/next.svg",
-      },
-      {
-        name: "MongoDB",
-        logo: "/logo/skills/mongodb.svg",
-      },
-      {
-        name: "Mongoose",
-        logo: "",
-      },
-      {
-        name: "Supabase",
-        logo: "",
-      },
-      {
-        name: "Railway",
-        logo: "",
-      },
-      {
-        name: "Midtrans",
-        logo: "",
-      },
-    ],
-  },
-  {
-    id: 5,
-    imageSrc: "https://kgvzbxnpitajdvbjxahp.supabase.co/storage/v1/object/public/portfolio/image/project/banner/service_page.png",
-    title: "Addo Salon Booking Platform",
-    category: "Web App",
-    description:
-      "A comprehensive web application built to digitalize Addo Salon's daily operations. I developed an automated reservation system, integrated a secure payment gateway for seamless online transactions, and built a custom analytics dashboard to track core business metrics.",
-    tools: [
-      {
-        name: "TypeScript",
-        logo: "/logo/skills/typescript.svg",
-      },
-      {
-        name: "NestJS",
-        logo: "/logo/skills/nestjs.svg",
-      },
-      {
-        name: "Next.js",
-        logo: "/logo/skills/next.svg",
-      },
-      {
-        name: "MongoDB",
-        logo: "/logo/skills/mongodb.svg",
-      },
-      {
-        name: "Mongoose",
-        logo: "",
-      },
-      {
-        name: "Supabase",
-        logo: "",
-      },
-      {
-        name: "Railway",
-        logo: "",
-      },
-      {
-        name: "Midtrans",
-        logo: "",
-      },
-    ],
-  },
-  {
-    id: 6,
-    imageSrc: "https://kgvzbxnpitajdvbjxahp.supabase.co/storage/v1/object/public/portfolio/image/project/banner/service_page.png",
-    title: "Addo Salon Booking Platform",
-    category: "Web App",
-    description:
-      "A comprehensive web application built to digitalize Addo Salon's daily operations. I developed an automated reservation system, integrated a secure payment gateway for seamless online transactions, and built a custom analytics dashboard to track core business metrics.",
-    tools: [
-      {
-        name: "TypeScript",
-        logo: "/logo/skills/typescript.svg",
-      },
-      {
-        name: "NestJS",
-        logo: "/logo/skills/nestjs.svg",
-      },
-      {
-        name: "Next.js",
-        logo: "/logo/skills/next.svg",
-      },
-      {
-        name: "MongoDB",
-        logo: "/logo/skills/mongodb.svg",
-      },
-      {
-        name: "Mongoose",
-        logo: "",
-      },
-      {
-        name: "Supabase",
-        logo: "",
-      },
-      {
-        name: "Railway",
-        logo: "",
-      },
-      {
-        name: "Midtrans",
-        logo: "",
-      },
-    ],
-  },
+  // {
+  //   id: 2,
+  //   imageSrc: "https://kgvzbxnpitajdvbjxahp.supabase.co/storage/v1/object/public/portfolio/image/project/banner/service_page.png",
+  //   title: "Addo Salon Booking Platform",
+  //   category: "Web App",
+  //   description:
+  //     "A comprehensive web application built to digitalize Addo Salon's daily operations. I developed an automated reservation system, integrated a secure payment gateway for seamless online transactions, and built a custom analytics dashboard to track core business metrics.",
+  //   tools: [
+  //     {
+  //       name: "TypeScript",
+  //       logo: "/logo/skills/typescript.svg",
+  //     },
+  //     {
+  //       name: "NestJS",
+  //       logo: "/logo/skills/nestjs.svg",
+  //     },
+  //     {
+  //       name: "Next.js",
+  //       logo: "/logo/skills/next.svg",
+  //     },
+  //     {
+  //       name: "MongoDB",
+  //       logo: "/logo/skills/mongodb.svg",
+  //     },
+  //     {
+  //       name: "Mongoose",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Supabase",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Railway",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Midtrans",
+  //       logo: "",
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 3,
+  //   imageSrc: "https://kgvzbxnpitajdvbjxahp.supabase.co/storage/v1/object/public/portfolio/image/project/banner/service_page.png",
+  //   title: "Addo Salon Booking Platform",
+  //   category: "Web App",
+  //   description:
+  //     "A comprehensive web application built to digitalize Addo Salon's daily operations. I developed an automated reservation system, integrated a secure payment gateway for seamless online transactions, and built a custom analytics dashboard to track core business metrics.",
+  //   tools: [
+  //     {
+  //       name: "TypeScript",
+  //       logo: "/logo/skills/typescript.svg",
+  //     },
+  //     {
+  //       name: "NestJS",
+  //       logo: "/logo/skills/nestjs.svg",
+  //     },
+  //     {
+  //       name: "Next.js",
+  //       logo: "/logo/skills/next.svg",
+  //     },
+  //     {
+  //       name: "MongoDB",
+  //       logo: "/logo/skills/mongodb.svg",
+  //     },
+  //     {
+  //       name: "Mongoose",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Supabase",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Railway",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Midtrans",
+  //       logo: "",
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 4,
+  //   imageSrc: "https://kgvzbxnpitajdvbjxahp.supabase.co/storage/v1/object/public/portfolio/image/project/banner/service_page.png",
+  //   title: "Addo Salon Booking Platform",
+  //   category: "Web App",
+  //   description:
+  //     "A comprehensive web application built to digitalize Addo Salon's daily operations. I developed an automated reservation system, integrated a secure payment gateway for seamless online transactions, and built a custom analytics dashboard to track core business metrics.",
+  //   tools: [
+  //     {
+  //       name: "TypeScript",
+  //       logo: "/logo/skills/typescript.svg",
+  //     },
+  //     {
+  //       name: "NestJS",
+  //       logo: "/logo/skills/nestjs.svg",
+  //     },
+  //     {
+  //       name: "Next.js",
+  //       logo: "/logo/skills/next.svg",
+  //     },
+  //     {
+  //       name: "MongoDB",
+  //       logo: "/logo/skills/mongodb.svg",
+  //     },
+  //     {
+  //       name: "Mongoose",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Supabase",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Railway",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Midtrans",
+  //       logo: "",
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 5,
+  //   imageSrc: "https://kgvzbxnpitajdvbjxahp.supabase.co/storage/v1/object/public/portfolio/image/project/banner/service_page.png",
+  //   title: "Addo Salon Booking Platform",
+  //   category: "Web App",
+  //   description:
+  //     "A comprehensive web application built to digitalize Addo Salon's daily operations. I developed an automated reservation system, integrated a secure payment gateway for seamless online transactions, and built a custom analytics dashboard to track core business metrics.",
+  //   tools: [
+  //     {
+  //       name: "TypeScript",
+  //       logo: "/logo/skills/typescript.svg",
+  //     },
+  //     {
+  //       name: "NestJS",
+  //       logo: "/logo/skills/nestjs.svg",
+  //     },
+  //     {
+  //       name: "Next.js",
+  //       logo: "/logo/skills/next.svg",
+  //     },
+  //     {
+  //       name: "MongoDB",
+  //       logo: "/logo/skills/mongodb.svg",
+  //     },
+  //     {
+  //       name: "Mongoose",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Supabase",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Railway",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Midtrans",
+  //       logo: "",
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 6,
+  //   imageSrc: "https://kgvzbxnpitajdvbjxahp.supabase.co/storage/v1/object/public/portfolio/image/project/banner/service_page.png",
+  //   title: "Addo Salon Booking Platform",
+  //   category: "Web App",
+  //   description:
+  //     "A comprehensive web application built to digitalize Addo Salon's daily operations. I developed an automated reservation system, integrated a secure payment gateway for seamless online transactions, and built a custom analytics dashboard to track core business metrics.",
+  //   tools: [
+  //     {
+  //       name: "TypeScript",
+  //       logo: "/logo/skills/typescript.svg",
+  //     },
+  //     {
+  //       name: "NestJS",
+  //       logo: "/logo/skills/nestjs.svg",
+  //     },
+  //     {
+  //       name: "Next.js",
+  //       logo: "/logo/skills/next.svg",
+  //     },
+  //     {
+  //       name: "MongoDB",
+  //       logo: "/logo/skills/mongodb.svg",
+  //     },
+  //     {
+  //       name: "Mongoose",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Supabase",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Railway",
+  //       logo: "",
+  //     },
+  //     {
+  //       name: "Midtrans",
+  //       logo: "",
+  //     },
+  //   ],
+  // },
 ];
 
 export const project = [
@@ -350,19 +445,19 @@ export const project = [
       },
       {
         name: "Mongoose",
-        logo: "",
+        logo: "/logo/skills/mongoose.svg",
       },
       {
         name: "Supabase",
-        logo: "",
+        logo: "/logo/skills/supabase.svg",
       },
       {
         name: "Railway",
-        logo: "",
+        logo: "/logo/skills/railway.svg",
       },
       {
         name: "Midtrans",
-        logo: "",
+        logo: "/logo/skills/midtrans.svg",
       },
     ],
   },

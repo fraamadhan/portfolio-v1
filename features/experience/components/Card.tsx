@@ -1,24 +1,25 @@
 "use client"
 
 import { useState } from "react"
+import type { ExperienceItemProps } from "@/types"
 import { cn } from "@/lib/utils"
 import { CardItem } from "./CardItem"
 
 type CardProps = {
-    cardId: string
+    experience: ExperienceItemProps
     className?: string
     defaultKeypointsOpen?: boolean
     collapsibleKeypoints?: boolean
 }
 
 export const Card = ({
-    cardId,
+    experience,
     className,
     defaultKeypointsOpen = false,
     collapsibleKeypoints = true,
 }: CardProps) => {
     const [isKeypointsOpen, setIsKeypointsOpen] = useState(defaultKeypointsOpen)
-    const keypointsContentId = `experience-keypoints-${cardId}`
+    const keypointsContentId = `experience-keypoints-${experience.id}`
 
     return (
         <article className={cn(
@@ -26,6 +27,7 @@ export const Card = ({
             className
         )}>
             <CardItem
+                experience={experience}
                 isKeypointsOpen={isKeypointsOpen}
                 onToggleKeypoints={() => setIsKeypointsOpen((prev) => !prev)}
                 keypointsContentId={keypointsContentId}

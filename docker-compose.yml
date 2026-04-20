@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  portfolio-dev:
+    build:
+      context: .
+      target: run
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+    command: ["bun", "run", "dev"]
+
+  portfolio-prod:
+    build:
+      context: .
+      target: deploy
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    command: ["bun", "run", "start"]
+
+  portfolio-build:
+    build:
+      context: .
+      target: build
+    command: ["bun", "run", "build"]
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development

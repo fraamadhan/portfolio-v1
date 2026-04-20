@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>GitLab</title>
+  <defs>
+    <linearGradient id="gitlab-a" x1="18" x2="46" y1="12" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fc6d26"/>
+      <stop offset="1" stop-color="#e24329"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#1f1f25"/>
+  <path d="M17 26 24 12l8 24z" fill="#e24329"/>
+  <path d="M47 26 40 12l-8 24z" fill="#e24329"/>
+  <path d="M17 26h30L32 52z" fill="url(#gitlab-a)"/>
+  <path d="M24 12h16l-8 24z" fill="#fca326"/>
+</svg>

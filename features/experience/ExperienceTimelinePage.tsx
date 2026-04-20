@@ -3,18 +3,12 @@
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import { experiences } from "@/data/dummy"
 import { useTranslation } from "@/hooks/useTranslation"
 import { Card } from "./components/Card"
 import { TimelineConnector } from "./components/TimelineConnector"
 import { TimelinePlane } from "./components/TimelinePlane"
 import { cn } from "@/lib/utils"
-
-const timelineCards = [
-    { id: "timeline-card-1", side: "left" as const },
-    { id: "timeline-card-2", side: "right" as const },
-    { id: "timeline-card-3", side: "left" as const },
-    { id: "timeline-card-4", side: "right" as const },
-]
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value))
 
@@ -85,35 +79,39 @@ export default function ExperienceTimelinePage() {
                     <TimelinePlane progress={scrollProgress} />
 
                     <div className="flex flex-col gap-14 sm:gap-[4.5rem] md:gap-24">
-                        {timelineCards.map((card) => (
-                            <div
-                                key={card.id}
-                                className="relative md:grid md:grid-cols-[minmax(0,1fr)_7rem_minmax(0,1fr)] md:items-start"
-                            >
-                                <div className="absolute left-6 top-16 h-px w-10 bg-[linear-gradient(90deg,rgba(127,166,206,0.85),rgba(255,255,255,0.14))] md:hidden" />
-                                <div className="absolute left-6 top-[4.05rem] h-3 w-3 -translate-x-1/2 rounded-full border border-primary-100/55 bg-[radial-gradient(circle,var(--color-primary-100)_0%,rgba(127,166,206,0.55)_45%,rgba(30,42,56,0.9)_100%)] shadow-[0_0_22px_rgba(127,166,206,0.45)] md:hidden" />
+                        {experiences.map((experience, index) => {
+                            const side = index % 2 === 0 ? "left" : "right"
 
+                            return (
                                 <div
-                                    className={cn(
-                                        "pl-16 md:pl-0",
-                                        card.side === "left"
-                                            ? "md:col-start-1 md:justify-self-end md:pr-8"
-                                            : "md:col-start-3 md:pl-8"
-                                    )}
+                                    key={experience.id}
+                                    className="relative md:grid md:grid-cols-[minmax(0,1fr)_7rem_minmax(0,1fr)] md:items-start"
                                 >
-                                    <Card
-                                        cardId={card.id}
-                                        defaultKeypointsOpen
-                                        collapsibleKeypoints={false}
-                                        className="w-full max-w-xl border-white/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.1),rgba(255,255,255,0.04))] shadow-[0_24px_60px_rgba(4,10,18,0.22)]"
-                                    />
-                                </div>
+                                    <div className="absolute left-6 top-16 h-px w-10 bg-[linear-gradient(90deg,rgba(127,166,206,0.85),rgba(255,255,255,0.14))] md:hidden" />
+                                    <div className="absolute left-6 top-[4.05rem] h-3 w-3 -translate-x-1/2 rounded-full border border-primary-100/55 bg-[radial-gradient(circle,var(--color-primary-100)_0%,rgba(127,166,206,0.55)_45%,rgba(30,42,56,0.9)_100%)] shadow-[0_0_22px_rgba(127,166,206,0.45)] md:hidden" />
 
-                                <div className="md:col-start-2 md:row-start-1">
-                                    <TimelineConnector side={card.side} />
+                                    <div
+                                        className={cn(
+                                            "pl-16 md:pl-0",
+                                            side === "left"
+                                                ? "md:col-start-1 md:justify-self-end md:pr-8"
+                                                : "md:col-start-3 md:pl-8"
+                                        )}
+                                    >
+                                        <Card
+                                            experience={experience}
+                                            defaultKeypointsOpen
+                                            collapsibleKeypoints={false}
+                                            className="w-full max-w-xl border-white/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.1),rgba(255,255,255,0.04))] shadow-[0_24px_60px_rgba(4,10,18,0.22)]"
+                                        />
+                                    </div>
+
+                                    <div className="md:col-start-2 md:row-start-1">
+                                        <TimelineConnector side={side} />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            )
+                        })}
                     </div>
                 </div>
             </div>
