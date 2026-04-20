@@ -4,9 +4,32 @@ import { Button } from "@/components/ui/button";
 import InfoItem from "@/components/ui/InfoItem";
 import { useTranslation } from "@/hooks/useTranslation";
 import { currentWorkRoleFormatted } from "@/lib";
+import Link from "next/link";
+import { MouseEvent } from "react";
+import { usePathname } from "next/navigation";
 
 const LandingPage = () => {
     const { t } = useTranslation();
+    const pathname = usePathname();
+
+    const handleProjectsClick = (event: MouseEvent<HTMLAnchorElement>) => {
+        if (pathname !== "/") return;
+
+        const target = document.getElementById("projects");
+        if (!target) return;
+
+        const header = document.querySelector("header");
+        const headerOffset = header instanceof HTMLElement ? header.offsetHeight + 16 : 96;
+        const top = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+        event.preventDefault();
+        window.history.replaceState(null, "", "/#projects");
+        window.scrollTo({
+            top: Math.max(top, 0),
+            behavior: "smooth",
+        });
+    };
+
     return (
         <section
             id="home"
@@ -45,16 +68,18 @@ const LandingPage = () => {
                 </section>
 
                 <section className="flex flex-col md:flex-row gap-4">
-                    <Button className="px-6 h-10 text-sm sm:text-base bg-gradient-to-r from-[#4B657F] to-[#678EBC] font-inter">
-                        {t("view_projects")}
-                    </Button>
+                    <Link href="/#projects" scroll={true} onClick={handleProjectsClick}>
+                        <Button className="px-6 h-10 text-sm sm:text-base bg-gradient-to-r from-[#4B657F] to-[#678EBC] font-inter">
+                            {t("view_projects")}
+                        </Button>
+                    </Link>
 
-                    <Button
+                    {/* <Button
                         variant="outline"
                         className="px-6 h-10 text-sm sm:text-base hover:text-background font-inter"
                     >
                         {t("contact_me")}
-                    </Button>
+                    </Button> */}
                 </section>
             </div>
         </section>
