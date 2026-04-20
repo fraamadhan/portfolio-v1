@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Jira</title>
+  <rect width="64" height="64" rx="14" fill="#10213d"/>
+  <path d="m22 20 10-10 10 10-10 10z" fill="#4c9aff"/>
+  <path d="m12 32 10-10 10 10-10 10z" fill="#2684ff"/>
+  <path d="m32 32 10-10 10 10-10 10z" fill="#82b8ff"/>
+</svg>

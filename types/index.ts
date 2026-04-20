@@ -9,6 +9,24 @@ export type SkillItemProps = {
   name: string;
 };
 
+export type ExperienceTechStackItemProps = {
+  name: string;
+  src: string;
+};
+
+export type ExperienceItemProps = {
+  id: string;
+  role: string;
+  category: string;
+  company: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  keypoints: string[];
+  techStack: ExperienceTechStackItemProps[];
+  isCurrent: boolean;
+};
+
 export type ProjectItemProps = {
   id: number;
   imageSrc: string;

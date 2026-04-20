@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Rancher</title>
+  <rect width="64" height="64" rx="14" fill="#0b1f4f"/>
+  <path d="M18 14h16c8.837 0 16 7.163 16 16s-7.163 16-16 16h-6v8H18z" fill="#1f74ff"/>
+  <path d="M29 24h5.5c3.59 0 6.5 2.91 6.5 6.5S38.09 37 34.5 37H29z" fill="#fff"/>
+  <path d="m37 35 9 15H35l-6-10z" fill="#8eb8ff"/>
+</svg>

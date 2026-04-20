@@ -1,16 +1,13 @@
 import Image from "next/image"
 import { useTranslation } from "@/hooks/useTranslation"
+import type { ExperienceTechStackItemProps } from "@/types"
 
-const telkomTechStack = [
-    { name: "TypeScript", src: "/logo/skills/typescript.svg" },
-    { name: "AdonisJS", src: "/logo/skills/adonisjs.svg" },
-    { name: "MySQL", src: "/logo/skills/mysql.svg" },
-    { name: "Redis", src: "/logo/skills/redis.svg" },
-    { name: "Docker", src: "/logo/skills/docker.svg" },
-] as const
-
-export const ExperienceTechStack = () => {
+export const ExperienceTechStack = ({ items }: { items: ExperienceTechStackItemProps[] }) => {
     const { t } = useTranslation()
+
+    if (items.length === 0) {
+        return null
+    }
 
     return (
         <div className="mt-4 flex flex-col gap-3">
@@ -18,7 +15,7 @@ export const ExperienceTechStack = () => {
                 {t("experience_section.tech_stack")}
             </p>
             <div className="flex flex-wrap gap-2">
-                {telkomTechStack.map((item) => (
+                {items.map((item) => (
                     <div
                         key={item.name}
                         className="flex items-center gap-2 rounded-full border border-white/12 bg-white/7 px-3 py-2 text-sm text-neutral-100 shadow-[0_10px_18px_rgba(4,10,18,0.16)]"
