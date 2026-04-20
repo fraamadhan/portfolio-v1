@@ -15,7 +15,7 @@ type Props = {
 export default function DesktopNav({ activeSection, handleNavClick }: Props) {
     const { t } = useTranslation();
     const [isMoreOpen, setIsMoreOpen] = useState(false);
-    const moreMenuRef = useRef<HTMLDivElement | null>(null);
+    const moreMenuRef = useRef<HTMLLIElement | null>(null);
 
     const dropdownItems = NAV_ITEMS.filter(
         (item) => !PRIMARY_ITEMS.some((primary) => primary.labelKey === item.labelKey)

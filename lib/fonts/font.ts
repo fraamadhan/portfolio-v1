@@ -1,31 +1,14 @@
-import { Bebas_Neue, Inter, Oswald, Rubik_Dirt } from "next/font/google";
 import localFont from "next/font/local";
 
-export const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
+const fallbackFont = { variable: "" } as const;
 
-export const oswald = Oswald({
-  subsets: ["latin"],
-  variable: "--font-oswald",
-  display: "swap",
-});
+export const inter = fallbackFont;
 
-export const bebasNeue = Bebas_Neue({
-  subsets: ["latin"],
-  variable: "--font-bebas-neue",
-  weight: "400",
-  display: "swap",
-});
+export const oswald = fallbackFont;
 
-export const rubikDirt = Rubik_Dirt({
-  subsets: ["latin"],
-  variable: "--font-rubik-dirt",
-  weight: "400",
-  display: "swap",
-});
+export const bebasNeue = fallbackFont;
+
+export const rubikDirt = fallbackFont;
 
 export const texasCrust = localFont({
   src: "./Texas-Crust.ttf",

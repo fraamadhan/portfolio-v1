@@ -70,6 +70,10 @@
 }
 
 :root {
+  --font-inter: "Inter", "Segoe UI", Arial, sans-serif;
+  --font-oswald: "Oswald", "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+  --font-bebas-neue: "Bebas Neue", "Arial Narrow", Impact, sans-serif;
+  --font-rubik-dirt: "Rubik Dirt", "Trebuchet MS", fantasy;
   --background: oklch(0.2579 0.0174 255.68);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.3693 0.0431 252.76);
