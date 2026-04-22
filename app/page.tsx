@@ -10,7 +10,7 @@ export default async function Home() {
   const testimonialPage = await getTestimonialsPage();
 
   return (
-    <div className="flex flex-col pt-28">
+    <div className="flex flex-col bg-[linear-gradient(180deg,rgba(250,252,255,1),rgba(236,242,249,1))] pt-28 dark:bg-[linear-gradient(180deg,#2f3f50_0%,#263544_100%)]">
       <LandingPage />
       <AboutSection />
       <SkillSection />

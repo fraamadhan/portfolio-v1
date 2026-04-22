@@ -184,7 +184,7 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
         <section
             id="testimonials"
             aria-labelledby="testimonials-heading"
-            className="relative flex w-full justify-center overflow-hidden bg-[radial-gradient(circle_at_top,rgba(134,172,214,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(236,205,132,0.12),transparent_26%),linear-gradient(180deg,var(--color-neutral-700),var(--color-neutral-600))] px-4 py-20 sm:min-h-[calc(90svh-5rem)] sm:pt-20 md:px-6 md:pb-12"
+            className="relative flex w-full justify-center overflow-hidden bg-[radial-gradient(circle_at_top,rgba(134,172,214,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(236,205,132,0.12),transparent_26%),linear-gradient(180deg,var(--color-neutral-700),var(--color-neutral-600))] px-4 py-20 sm:min-h-[calc(90svh-5rem)] sm:pt-20 md:px-6 md:pb-12 dark:bg-[radial-gradient(circle_at_top,rgba(134,172,214,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(236,205,132,0.12),transparent_26%),linear-gradient(180deg,var(--color-neutral-700),var(--color-neutral-600))]"
         >
             <div className="pointer-events-none absolute inset-0 opacity-60">
                 <div className="absolute left-[-8%] top-24 h-56 w-56 rounded-full bg-primary-200/8 blur-3xl" />
@@ -202,7 +202,7 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                     >
                         {translate("navbar.testimonials")}
                     </h2>
-                    <p className="max-w-3xl mt-2 rounded-2xl border border-white/12 bg-white/6 px-6 py-4 text-center text-sm leading-7 text-neutral-200 shadow-[0_18px_45px_rgba(4,10,18,0.22)] backdrop-blur-sm sm:text-base">
+                    <p className="mt-2 max-w-3xl rounded-2xl border border-slate-300/60 bg-white/72 px-6 py-4 text-center text-sm leading-7 text-neutral-200 shadow-[0_18px_45px_rgba(148,163,184,0.16)] backdrop-blur-sm sm:text-base dark:border-white/12 dark:bg-white/6 dark:shadow-[0_18px_45px_rgba(4,10,18,0.22)]">
                         {translate("testimonial_section.description")}
                     </p>
                 </div>
@@ -241,8 +241,8 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                         onFieldChange={handleFieldChange}
                     />
 
-                    <div className="order-2 rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(50,66,87,0.92),rgba(29,38,50,0.96))] p-5 shadow-[0_28px_65px_rgba(4,10,18,0.28)] sm:p-7 xl:order-1">
-                        <div className="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
+                    <div className="order-2 rounded-[30px] border border-slate-300/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(233,241,249,0.98))] p-5 shadow-[0_28px_65px_rgba(148,163,184,0.16)] sm:p-7 xl:order-1 dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(50,66,87,0.92),rgba(29,38,50,0.96))] dark:shadow-[0_28px_65px_rgba(4,10,18,0.28)]">
+                        <div className="flex flex-col gap-4 border-b border-slate-300/70 pb-5 sm:flex-row sm:items-end sm:justify-between dark:border-white/10">
                             <div>
                                 <p className="text-xs uppercase tracking-[0.35em] text-primary-100/65">
                                     {translate("testimonial_section.list_eyebrow")}
@@ -253,13 +253,13 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                             </div>
 
                             <div className="flex flex-wrap items-center gap-3">
-                                <div className="rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm text-neutral-200">
+                                <div className="rounded-full border border-slate-300/70 bg-white/80 px-4 py-2 text-sm text-neutral-200 dark:border-white/12 dark:bg-white/5">
                                     {totalCount} {translate("testimonial_section.notes_archived")}
                                 </div>
                                 <button
                                     type="button"
                                     onClick={() => setIsComposerOpen((current) => !current)}
-                                    className="inline-flex items-center gap-2 rounded-full border border-primary-100/35 bg-[linear-gradient(180deg,rgba(128,161,201,0.28),rgba(61,83,110,0.34))] px-4 py-2 text-sm font-medium text-neutral-100 transition hover:-translate-y-0.5 hover:border-primary-100/55"
+                                    className="inline-flex items-center gap-2 rounded-full border border-primary-100/35 bg-[linear-gradient(180deg,rgba(128,161,201,0.22),rgba(208,225,246,0.64))] px-4 py-2 text-sm font-medium text-neutral-100 transition hover:-translate-y-0.5 hover:border-primary-100/55 dark:bg-[linear-gradient(180deg,rgba(128,161,201,0.28),rgba(61,83,110,0.34))]"
                                 >
                                     <Plus className="h-4 w-4" />
                                     {isComposerOpen

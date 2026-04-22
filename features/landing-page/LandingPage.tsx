@@ -28,7 +28,7 @@ const LandingPage = () => {
         <section
             id="home"
             aria-labelledby="home-heading"
-            className="w-full min-h-[calc(85svh-5rem)] sm:min-h-[calc(90svh-5rem)] flex items-start justify-center py-20 sm:pt-20 md:pb-10 bg-background"
+            className="flex min-h-[calc(85svh-5rem)] w-full items-start justify-center bg-[radial-gradient(circle_at_top,rgba(146,187,235,0.24),transparent_34%),linear-gradient(180deg,rgba(250,252,255,1),rgba(236,242,249,1))] py-20 sm:min-h-[calc(90svh-5rem)] sm:pt-20 md:pb-10 dark:bg-[radial-gradient(circle_at_top,rgba(120,157,194,0.24),transparent_34%),linear-gradient(180deg,#253342_0%,#1f2a37_44%,#161f2b_100%)]"
         >
             <div className="flex w-full max-w-3xl flex-col items-center gap-12 sm:px-8">
                 <header className="flex flex-col gap-4 text-center">
@@ -44,7 +44,7 @@ const LandingPage = () => {
                         {currentWorkRoleFormatted()}
                     </p>
 
-                    <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed md:text-base font-inter">
+                    <p className="mx-auto max-w-xl leading-relaxed text-muted-foreground md:text-base font-inter">
                         {t("landing_page_description")}
                     </p>
                 </header>
@@ -88,7 +88,7 @@ const LandingPage = () => {
                     >
                         <Button
                             variant="outline"
-                            className="px-6 h-10 text-sm sm:text-base border-white/15 bg-white/5 text-foreground hover:bg-white/10 hover:text-foreground font-inter"
+                            className="h-10 border-slate-300/80 bg-white/75 px-6 text-sm text-foreground shadow-[0_10px_24px_rgba(148,163,184,0.16)] hover:bg-slate-100 hover:text-foreground sm:text-base font-inter dark:border-white/15 dark:bg-white/5 dark:shadow-none dark:hover:bg-white/10"
                         >
                             {t("collaborate_cta")}
                         </Button>

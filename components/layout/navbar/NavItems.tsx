@@ -16,7 +16,7 @@ export default function NavItems() {
             <Link
                 href={HOME_HREF}
                 onClick={handleNavClick(HOME_HREF)}
-                className={`text-3xl font-bold tracking-wide ${activeSection === HOME_HREF ? "text-white" : "text-white/90"}`}
+                className={`text-3xl font-bold tracking-wide ${activeSection === HOME_HREF ? "text-slate-900 dark:text-white" : "text-slate-800/90 dark:text-white/90"}`}
                 aria-current={activeSection === HOME_HREF ? "page" : undefined}
             >
                 FAKHRI
@@ -35,9 +35,9 @@ export default function NavItems() {
                 aria-expanded={isOpen}
                 aria-controls="mobile-navigation"
             >
-                <span className="w-6 h-[2px] bg-white"></span>
-                <span className="w-6 h-[2px] bg-white"></span>
-                <span className="w-6 h-[2px] bg-white"></span>
+                <span className="h-[2px] w-6 bg-slate-800 dark:bg-white"></span>
+                <span className="h-[2px] w-6 bg-slate-800 dark:bg-white"></span>
+                <span className="h-[2px] w-6 bg-slate-800 dark:bg-white"></span>
             </button>
 
             <MobileNav

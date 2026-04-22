@@ -102,8 +102,8 @@ export default function DashboardPageClient({
   }, []);
 
   return (
-    <section className="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-[radial-gradient(circle_at_top,rgba(120,157,194,0.24),transparent_30%),linear-gradient(180deg,#324252_0%,#263544_42%,#1A2330_100%)] px-4 pb-24 pt-32 sm:px-6">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:120px_120px] opacity-20" />
+    <section className="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-[radial-gradient(circle_at_top,rgba(120,157,194,0.24),transparent_30%),linear-gradient(180deg,#f7fbff_0%,#e8f0f8_42%,#dce6f0_100%)] px-4 pb-24 pt-32 sm:px-6 dark:bg-[radial-gradient(circle_at_top,rgba(120,157,194,0.24),transparent_30%),linear-gradient(180deg,#324252_0%,#263544_42%,#1A2330_100%)]">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(71,85,105,0.05)_1px,transparent_1px),linear-gradient(180deg,rgba(71,85,105,0.04)_1px,transparent_1px)] bg-[size:120px_120px] opacity-20 dark:bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(circle_at_center,rgba(127,166,206,0.28),transparent_62%)]" />
 
       <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-8">
