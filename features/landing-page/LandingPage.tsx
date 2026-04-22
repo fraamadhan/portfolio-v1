@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import InfoItem from "@/components/ui/InfoItem";
 import { useTranslation } from "@/hooks/useTranslation";
 import { currentWorkRoleFormatted } from "@/lib";
+import { scrollToElementWithOffset } from "@/lib/utils";
 import Link from "next/link";
 import { MouseEvent } from "react";
 import { usePathname } from "next/navigation";
@@ -18,16 +19,9 @@ const LandingPage = () => {
         const target = document.getElementById("projects");
         if (!target) return;
 
-        const header = document.querySelector("header");
-        const headerOffset = header instanceof HTMLElement ? header.offsetHeight + 16 : 96;
-        const top = target.getBoundingClientRect().top + window.scrollY - headerOffset;
-
         event.preventDefault();
         window.history.replaceState(null, "", "/#projects");
-        window.scrollTo({
-            top: Math.max(top, 0),
-            behavior: "smooth",
-        });
+        scrollToElementWithOffset(target);
     };
 
     return (
@@ -74,7 +68,24 @@ const LandingPage = () => {
                         </Button>
                     </Link>
 
-                    <Link href="/dashboard#contact" scroll={true}>
+                    <Link
+                        href="/dashboard#contact"
+                        scroll={false}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            // Try to scroll if already on dashboard page
+                            if (window.location.pathname === "/dashboard") {
+                                const contactSection = document.getElementById("contact");
+                                if (contactSection) {
+                                    scrollToElementWithOffset(contactSection);
+                                    window.history.replaceState(null, "", "/dashboard#contact");
+                                    return;
+                                }
+                            }
+                            // Otherwise, navigate normally
+                            window.location.href = "/dashboard#contact";
+                        }}
+                    >
                         <Button
                             variant="outline"
                             className="px-6 h-10 text-sm sm:text-base border-white/15 bg-white/5 text-foreground hover:bg-white/10 hover:text-foreground font-inter"
