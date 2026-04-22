@@ -56,6 +56,7 @@ type CounterApiResponse = {
   data?: {
     count?: number;
     name?: string;
+    value?: number;
   };
   count?: number;
   value?: number;
@@ -182,16 +183,17 @@ function buildWeeksFromDays(days: ContributionDay[]) {
   const firstWeekStart = addDays(startDate, -startDate.getDay());
   const lastWeekEnd = addDays(endDate, 6 - endDate.getDay());
   const totalDays = Math.round((lastWeekEnd.getTime() - firstWeekStart.getTime()) / MS_PER_DAY) + 1;
+  
   const paddedDays = Array.from({ length: totalDays }, (_, index) => {
     const date = addDays(firstWeekStart, index);
     const dateKey = date.toISOString().slice(0, 10);
 
     return (
-      dayMap.get(dateKey) ?? {
+      dayMap.get(dateKey) ?? ({
         count: 0,
         date: dateKey,
         level: 0,
-      }
+      } as ContributionDay) // <-- Add "as ContributionDay" here
     );
   });
 

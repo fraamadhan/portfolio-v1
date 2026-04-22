@@ -146,7 +146,7 @@
     "cards": {
       "live": "Live",
       "website_visitors": "Pengunjung Website",
-      "website_visitors_description": "Dihitung satu kali per sesi browser dan disinkronkan dengan counter utama.",
+      "website_visitors_description": "Total pengunjung.",
       "projects_worked_on": "Proyek yang Dikerjakan",
       "projects_worked_on_description": "Proyek unggulan dan keterlibatan produk yang tercatat di portofolio.",
       "work_experience": "Pengalaman Kerja",

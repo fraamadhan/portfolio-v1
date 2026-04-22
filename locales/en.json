@@ -146,7 +146,7 @@
     "cards": {
       "live": "Live",
       "website_visitors": "Website Visitors",
-      "website_visitors_description": "Tracked once per browser session and synced with the live counter.",
+      "website_visitors_description": "Live count of unique visitors.",
       "projects_worked_on": "Projects Worked On",
       "projects_worked_on_description": "Featured builds and product engagements tracked in the portfolio.",
       "work_experience": "Work Experience",
