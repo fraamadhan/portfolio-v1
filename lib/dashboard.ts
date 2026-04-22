@@ -1,17 +1,11 @@
 import { unstable_noStore as noStore } from "next/cache";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
+// Removed local file-based visitor count logic
 
 export const GITHUB_USERNAME = "fraamadhan";
 
 const GITHUB_GRAPHQL_ENDPOINT = "https://api.github.com/graphql";
 const GITHUB_PROFILE_CONTRIBUTIONS_ENDPOINT = `https://github.com/users/${GITHUB_USERNAME}/contributions`;
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
-const LOCAL_VISITOR_COUNTER_FILE = path.join(
-  process.cwd(),
-  ".cache",
-  "dashboard-visitors.json",
-);
 
 export type ContributionDay = {
   count: number;
@@ -26,12 +20,7 @@ export type ContributionCalendar = {
 
 type GitHubGraphQLContributionDay = {
   contributionCount: number;
-  contributionLevel:
-    | "NONE"
-    | "FIRST_QUARTILE"
-    | "SECOND_QUARTILE"
-    | "THIRD_QUARTILE"
-    | "FOURTH_QUARTILE";
+  contributionLevel: "NONE" | "FIRST_QUARTILE" | "SECOND_QUARTILE" | "THIRD_QUARTILE" | "FOURTH_QUARTILE";
   date: string;
   weekday: number;
 };
@@ -92,45 +81,6 @@ function parseGitHubLevel(level: string | null | undefined): ContributionDay["le
   return 0;
 }
 
-async function ensureLocalVisitorCounterFile() {
-  await mkdir(path.dirname(LOCAL_VISITOR_COUNTER_FILE), { recursive: true });
-
-  try {
-    await readFile(LOCAL_VISITOR_COUNTER_FILE, "utf8");
-  } catch {
-    await writeFile(
-      LOCAL_VISITOR_COUNTER_FILE,
-      JSON.stringify({ count: 0 }, null, 2),
-      "utf8",
-    );
-  }
-}
-
-async function readLocalVisitorCount() {
-  await ensureLocalVisitorCounterFile();
-
-  try {
-    const rawContent = await readFile(LOCAL_VISITOR_COUNTER_FILE, "utf8");
-    const payload = JSON.parse(rawContent) as { count?: number };
-
-    return typeof payload.count === "number" && Number.isFinite(payload.count)
-      ? payload.count
-      : 0;
-  } catch (error) {
-    console.error("Failed to read local visitor count:", error);
-    return 0;
-  }
-}
-
-async function writeLocalVisitorCount(count: number) {
-  await ensureLocalVisitorCounterFile();
-  await writeFile(
-    LOCAL_VISITOR_COUNTER_FILE,
-    JSON.stringify({ count }, null, 2),
-    "utf8",
-  );
-}
-
 function getCounterApiConfig() {
   const endpoint = process.env.COUNTER_API_ENDPOINT;
   const token = process.env.COUNTER_API_TOKEN;
@@ -183,13 +133,14 @@ function buildWeeksFromDays(days: ContributionDay[]) {
   const firstWeekStart = addDays(startDate, -startDate.getDay());
   const lastWeekEnd = addDays(endDate, 6 - endDate.getDay());
   const totalDays = Math.round((lastWeekEnd.getTime() - firstWeekStart.getTime()) / MS_PER_DAY) + 1;
-  
+
   const paddedDays = Array.from({ length: totalDays }, (_, index) => {
     const date = addDays(firstWeekStart, index);
     const dateKey = date.toISOString().slice(0, 10);
 
     return (
-      dayMap.get(dateKey) ?? ({
+      dayMap.get(dateKey) ??
+      ({
         count: 0,
         date: dateKey,
         level: 0,
@@ -197,9 +148,7 @@ function buildWeeksFromDays(days: ContributionDay[]) {
     );
   });
 
-  return Array.from({ length: Math.ceil(paddedDays.length / 7) }, (_, weekIndex) =>
-    paddedDays.slice(weekIndex * 7, weekIndex * 7 + 7),
-  );
+  return Array.from({ length: Math.ceil(paddedDays.length / 7) }, (_, weekIndex) => paddedDays.slice(weekIndex * 7, weekIndex * 7 + 7));
 }
 
 async function fetchGitHubContributionsFromGraphQL(): Promise<ContributionCalendar | null> {
@@ -338,13 +287,11 @@ export async function getGitHubContributionCalendar(): Promise<ContributionCalen
 
 export async function getVisitorCount() {
   noStore();
-
   try {
     const config = getCounterApiConfig();
     if (config) {
       const payload = await fetchCounterApi();
       const count = parseCounterApiCount(payload);
-
       if (count !== null) {
         return count;
       }
@@ -353,22 +300,18 @@ export async function getVisitorCount() {
     if (error instanceof CounterApiHttpError && error.status === 404) {
       return 0;
     }
-
     console.error("Failed to fetch CounterAPI visitor count:", error);
   }
-
-  return readLocalVisitorCount();
+  return 0;
 }
 
 export async function incrementVisitorCount() {
   noStore();
-
   try {
     const config = getCounterApiConfig();
     if (config) {
       const payload = await fetchCounterApi("/up");
       const count = parseCounterApiCount(payload);
-
       if (count !== null) {
         return count;
       }
@@ -376,15 +319,5 @@ export async function incrementVisitorCount() {
   } catch (error) {
     console.error("Failed to increment CounterAPI visitor count:", error);
   }
-
-  try {
-    const currentCount = await readLocalVisitorCount();
-    const nextCount = currentCount + 1;
-    await writeLocalVisitorCount(nextCount);
-
-    return nextCount;
-  } catch (error) {
-    console.error("Failed to increment visitor count:", error);
-    return getVisitorCount();
-  }
+  return 0;
 }
