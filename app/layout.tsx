@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/navbar/Navbar";
 import Footer from "@/components/layout/footer/Footer";
 import { Providers } from "./providers";
 import { Analytics } from "@vercel/analytics/next"
+import VisitorTracker from "@/components/analytics/VisitorTracker";
 
 export const metadata: Metadata = {
   title: "My Portfolio",
@@ -28,6 +29,7 @@ export default function RootLayout({
           antialiased`}
       >
         <Providers>
+          <VisitorTracker />
           <Navbar />
           <main>{children}</main>
           <Footer />
