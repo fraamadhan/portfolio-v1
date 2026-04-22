@@ -31,7 +31,7 @@ export default function DashboardHeroCard() {
   };
 
   return (
-    <article className="overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,255,255,0.04))] p-6 shadow-[0_28px_70px_rgba(4,10,18,0.22)] backdrop-blur-md sm:p-8">
+    <article className="overflow-hidden rounded-[2rem] border border-slate-300/70 bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(234,242,251,0.9))] p-6 shadow-[0_28px_70px_rgba(148,163,184,0.18)] backdrop-blur-md sm:p-8 dark:border-white/12 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,255,255,0.04))] dark:shadow-[0_28px_70px_rgba(4,10,18,0.22)]">
       <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
         <div className="relative h-24 w-24 overflow-hidden rounded-full border-2 border-white/20 shadow-[0_14px_32px_rgba(4,10,18,0.24)] sm:h-28 sm:w-28">
           <Image
@@ -61,11 +61,11 @@ export default function DashboardHeroCard() {
           </p>
 
           <div className="flex flex-wrap gap-3 text-sm text-primary-100/82">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.07] px-4 py-2">
+            <span className="inline-flex items-center gap-2 rounded-full border border-slate-300/70 bg-white/75 px-4 py-2 dark:border-white/12 dark:bg-white/[0.07]">
               <MapPin className="h-4 w-4" />
               {t("dashboard.location_badge")}
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.07] px-4 py-2">
+            <span className="inline-flex items-center gap-2 rounded-full border border-slate-300/70 bg-white/75 px-4 py-2 dark:border-white/12 dark:bg-white/[0.07]">
               <Activity className="h-4 w-4" />
               {t("dashboard.live_data_badge")}
             </span>
@@ -76,7 +76,7 @@ export default function DashboardHeroCard() {
               href="/dashboard#contact"
               scroll={false}
               onClick={handleContactScroll}
-              className="inline-flex items-center gap-2 rounded-full border border-[#90B9F1]/25 bg-[linear-gradient(135deg,rgba(127,166,206,0.24),rgba(83,135,210,0.16))] px-4 py-2 text-sm text-white transition-transform duration-300 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-full border border-[#90B9F1]/25 bg-[linear-gradient(135deg,rgba(127,166,206,0.24),rgba(83,135,210,0.16))] px-4 py-2 text-sm text-neutral-100 transition-transform duration-300 hover:-translate-y-0.5 dark:text-white"
             >
               {t("dashboard.collaborate_button")}
               <ArrowUpRight className="h-4 w-4" />
@@ -85,7 +85,7 @@ export default function DashboardHeroCard() {
               href={GITHUB_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[#90B9F1]/25 bg-[#6F9ED6]/12 px-4 py-2 text-sm text-white transition-transform duration-300 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-full border border-[#90B9F1]/25 bg-[#6F9ED6]/12 px-4 py-2 text-sm text-neutral-100 transition-transform duration-300 hover:-translate-y-0.5 dark:text-white"
             >
               {t("dashboard.github_button")}
               <ArrowUpRight className="h-4 w-4" />
@@ -94,7 +94,7 @@ export default function DashboardHeroCard() {
               href={LINKEDIN_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.07] px-4 py-2 text-sm text-primary-100 transition-transform duration-300 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-300/70 bg-white/80 px-4 py-2 text-sm text-primary-100 transition-transform duration-300 hover:-translate-y-0.5 dark:border-white/12 dark:bg-white/[0.07]"
             >
               {t("dashboard.linkedin_button")}
               <ArrowUpRight className="h-4 w-4" />

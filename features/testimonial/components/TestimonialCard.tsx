@@ -12,7 +12,7 @@ const TestimonialCard = ({ testimonial, rotationClassName }: TestimonialCardProp
   return (
     <article
       className={cn(
-        "group relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-[24px] border border-white/7 bg-[linear-gradient(180deg,rgba(28,42,60,0.96),rgba(19,28,39,0.98))] p-5 shadow-[0_18px_40px_rgba(4,10,18,0.28)] transition duration-300 hover:-translate-y-1 hover:rotate-0 hover:border-primary-100/30 hover:shadow-[0_22px_48px_rgba(4,10,18,0.38)]",
+        "group relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-[24px] border border-slate-300/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(236,243,251,0.98))] p-5 shadow-[0_18px_40px_rgba(148,163,184,0.16)] transition duration-300 hover:-translate-y-1 hover:rotate-0 hover:border-primary-100/30 hover:shadow-[0_22px_48px_rgba(148,163,184,0.2)] dark:border-white/7 dark:bg-[linear-gradient(180deg,rgba(28,42,60,0.96),rgba(19,28,39,0.98))] dark:shadow-[0_18px_40px_rgba(4,10,18,0.28)] dark:hover:shadow-[0_22px_48px_rgba(4,10,18,0.38)]",
         rotationClassName
       )}
     >

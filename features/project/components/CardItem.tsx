@@ -9,7 +9,7 @@ const CardItem = ({ project }: { project: ProjectItemProps }) => {
 
     return (
         <div className="flex h-full flex-col">
-            <div className="relative aspect-[1.9/1] w-full overflow-hidden rounded-t-[inherit] border-b border-primary-200/30 bg-neutral-800">
+            <div className="relative aspect-[1.9/1] w-full overflow-hidden rounded-t-[inherit] border-b border-primary-200/30 bg-neutral-200 dark:bg-neutral-800">
                 <Image
                     src={project.imageSrc}
                     alt={`${project.title} preview`}
@@ -22,7 +22,7 @@ const CardItem = ({ project }: { project: ProjectItemProps }) => {
 
             <div className="flex flex-1 flex-col gap-4 px-4 py-4 sm:px-5 sm:py-5">
                 <div className="flex items-start justify-between gap-3">
-                    <h3 className="line-clamp-2 font-sub-heading text-3xl leading-none tracking-wide text-neutral-100">
+                    <h3 className="line-clamp-2 font-sub-heading text-3xl leading-none tracking-wide text-neutral-100 dark:text-neutral-100">
                         {project.title}
                     </h3>
                     <span className="shrink-0 rounded-md bg-[#1188bc] px-3 py-1 text-xs font-semibold tracking-wide text-white">
@@ -30,7 +30,7 @@ const CardItem = ({ project }: { project: ProjectItemProps }) => {
                     </span>
                 </div>
 
-                <p className="line-clamp-4 text-sm leading-7 text-neutral-200 sm:text-base">
+                <p className="line-clamp-4 text-sm leading-7 text-neutral-200 sm:text-base dark:text-neutral-200">
                     {project.description}
                 </p>
 
@@ -38,7 +38,7 @@ const CardItem = ({ project }: { project: ProjectItemProps }) => {
                     {project.tools.map((tool) => (
                         <span
                             key={`${project.id}-${tool.name}`}
-                            className="inline-flex items-center gap-1.5 rounded-md border border-primary-200/20 bg-primary-400/85 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-neutral-100"
+                            className="inline-flex items-center gap-1.5 rounded-md border border-primary-200/20 bg-primary-400/85 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-neutral-100 dark:text-neutral-100"
                         >
                             {tool.logo ? (
                                 <Image
@@ -56,7 +56,7 @@ const CardItem = ({ project }: { project: ProjectItemProps }) => {
 
                 <Link
                     href={`/project/${project.id}`}
-                    className="mt-auto inline-flex w-fit items-center gap-1.5 pt-1 text-sm font-medium text-neutral-100/90 transition-colors hover:text-neutral-100"
+                    className="mt-auto inline-flex w-fit items-center gap-1.5 pt-1 text-sm font-medium text-neutral-200 transition-colors hover:text-neutral-100 dark:text-neutral-100/90 dark:hover:text-neutral-100"
                 >
                     <span>{t("view_projects")}</span>
                     <ExternalLink className="size-4" strokeWidth={2.2} />

@@ -42,7 +42,7 @@ const ProjectSection = () => {
         <section
             id="projects"
             aria-labelledby="projects-heading"
-            className="flex w-full min-h-[calc(85svh-5rem)] flex-col items-center justify-start gap-y-10 bg-[radial-gradient(circle_at_top,rgba(120,157,194,0.18),transparent_38%),linear-gradient(180deg,var(--color-neutral-700),var(--color-neutral-600))] px-4 py-20 sm:min-h-[calc(90svh-5rem)] sm:pt-20 md:px-6 md:pb-12"
+            className="flex min-h-[calc(85svh-5rem)] w-full flex-col items-center justify-start gap-y-10 bg-[radial-gradient(circle_at_top,rgba(120,157,194,0.18),transparent_38%),linear-gradient(180deg,var(--color-neutral-700),var(--color-neutral-600))] px-4 py-20 sm:min-h-[calc(90svh-5rem)] sm:pt-20 md:px-6 md:pb-12 dark:bg-[radial-gradient(circle_at_top,rgba(120,157,194,0.18),transparent_38%),linear-gradient(180deg,var(--color-neutral-700),var(--color-neutral-600))]"
         >
             <h2
                 id="projects-heading"
@@ -63,7 +63,7 @@ const ProjectSection = () => {
                     <button
                         onClick={handlePrev}
                         disabled={page === 1}
-                        className="w-9 h-9 flex items-center justify-center rounded-full border border-white text-white text-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed bg-transparent hover:bg-white/10"
+                        className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-white/80 text-lg font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white/10"
                         aria-label="Previous page"
                     >
                         {'<'}
@@ -71,13 +71,13 @@ const ProjectSection = () => {
                     {getPaginationItems().map((item, idx) =>
                         item === '...'
                             ? (
-                                <span key={"ellipsis-" + idx} className="w-9 h-9 flex items-center justify-center text-white text-lg">…</span>
+                                <span key={"ellipsis-" + idx} className="flex h-9 w-9 items-center justify-center text-lg text-slate-700 dark:text-white">…</span>
                             )
                             : (
                                 <button
                                     key={item}
                                     onClick={() => setPage(Number(item))}
-                                    className={`w-9 h-9 flex items-center justify-center rounded-full border border-white text-lg font-semibold transition ${page === item ? 'bg-blue-800 text-white border-blue-400' : 'bg-transparent text-white hover:bg-white/10'}`}
+                                    className={`flex h-9 w-9 items-center justify-center rounded-full border text-lg font-semibold transition ${page === item ? 'border-blue-400 bg-blue-700 text-white dark:bg-blue-800' : 'border-slate-300 bg-white/80 text-slate-700 hover:bg-slate-100 dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white/10'}`}
                                     aria-current={page === item ? 'page' : undefined}
                                 >
                                     {item}
@@ -87,7 +87,7 @@ const ProjectSection = () => {
                     <button
                         onClick={handleNext}
                         disabled={page === totalPages}
-                        className="w-9 h-9 flex items-center justify-center rounded-full border border-white text-white text-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed bg-transparent hover:bg-white/10"
+                        className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-white/80 text-lg font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white/10"
                         aria-label="Next page"
                     >
                         {'>'}

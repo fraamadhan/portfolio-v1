@@ -4,6 +4,8 @@ import Link from "next/link";
 import { MouseEventHandler, useEffect } from "react";
 import { createPortal } from "react-dom";
 import LanguageSwitch from "./LanguageSwitch";
+import ThemeSwitch from "./ThemeSwitch";
+import { useTheme } from "@/context/ThemeContext";
 import { useTranslation } from "@/hooks/useTranslation";
 import { NAV_ITEMS } from "./navConfig";
 
@@ -16,6 +18,8 @@ type Props = {
 
 export default function MobileNav({ isOpen, closeMenu, activeSection, handleNavClick }: Props) {
     const { t } = useTranslation();
+    const { theme } = useTheme();
+    const isDark = theme === "dark";
 
     useEffect(() => {
         if (!isOpen) return;
@@ -63,19 +67,24 @@ export default function MobileNav({ isOpen, closeMenu, activeSection, handleNavC
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            className="lg:hidden fixed inset-0 bg-[#1E2A38] z-100 flex flex-col items-center justify-center gap-8 text-white text-2xl"
+            className={`fixed inset-0 z-100 flex flex-col items-center justify-center gap-8 text-2xl lg:hidden ${
+                isDark
+                    ? "bg-[radial-gradient(circle_at_top,rgba(127,166,206,0.18),transparent_32%),linear-gradient(180deg,rgba(30,42,56,0.98),rgba(17,24,39,0.99))] text-white"
+                    : "bg-[linear-gradient(180deg,rgba(245,249,255,0.98),rgba(228,237,249,0.98))] text-slate-900"
+            }`}
         >
+            <div className={`pointer-events-none absolute inset-0 ${isDark ? "bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:120px_120px] opacity-25" : ""}`} />
 
             <button
                 type="button"
                 onClick={closeMenu}
                 aria-label="Close mobile menu"
-                className="absolute top-8 right-8 text-4xl z-[201]"
+                className={`absolute top-8 right-8 z-[201] text-4xl ${isDark ? "text-white" : "text-slate-800"}`}
             >
                 X
             </button>
 
-            <nav aria-label="Mobile primary">
+            <nav aria-label="Mobile primary" className="relative z-10">
                 <ul className="flex flex-col items-center gap-8">
                     {NAV_ITEMS.map((item) => (
                         <li key={item.labelKey}>
@@ -85,7 +94,15 @@ export default function MobileNav({ isOpen, closeMenu, activeSection, handleNavC
                                     handleNavClick(item.href)(event);
                                     closeMenu();
                                 }}
-                                className={activeSection === item.href ? "text-white font-semibold" : "text-white/80"}
+                                className={
+                                    activeSection === item.href
+                                        ? isDark
+                                            ? "font-semibold text-white"
+                                            : "font-semibold text-slate-900"
+                                        : isDark
+                                            ? "text-white/82"
+                                            : "text-slate-700/85"
+                                }
                                 aria-current={activeSection === item.href ? "page" : undefined}
                             >
                                 {t(item.labelKey)}
@@ -95,7 +112,10 @@ export default function MobileNav({ isOpen, closeMenu, activeSection, handleNavC
                 </ul>
             </nav>
 
-            <LanguageSwitch />
+            <div className="relative z-10 flex items-center gap-3">
+                <ThemeSwitch />
+                <LanguageSwitch />
+            </div>
         </div>,
         document.body
     );

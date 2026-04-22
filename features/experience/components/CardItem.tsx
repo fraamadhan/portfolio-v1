@@ -1,4 +1,4 @@
-import Image from "next/image"
+import { Building2, CalendarDays, MapPin } from "lucide-react"
 import { useLanguage } from "@/context/LanguageContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import type { ExperienceItemProps } from "@/types"
@@ -55,15 +55,15 @@ export const CardItem = ({
             </div>
             <div className="flex flex-col gap-2 text-sm tracking-wide text-neutral-200 sm:text-base">
                 <p className="flex items-center gap-2 leading-none">
-                    <Image src="/logo/ic_company.svg" alt="" width={18} height={18} className="h-[18px] w-[18px] shrink-0" />
+                    <Building2 className="h-[18px] w-[18px] shrink-0 text-primary-100" />
                     <span>{experience.company}</span>
                 </p>
                 <p className="flex items-center gap-2 leading-none">
-                    <Image src="/logo/ic_location.svg" alt="" width={18} height={18} className="h-[18px] w-[18px] shrink-0" />
+                    <MapPin className="h-[18px] w-[18px] shrink-0 text-primary-100" />
                     <span>{experience.location}</span>
                 </p>
                 <p className="flex items-center gap-2 leading-none">
-                    <Image src="/logo/ic_date.svg" alt="" width={18} height={18} className="h-[18px] w-[18px] shrink-0" />
+                    <CalendarDays className="h-[18px] w-[18px] shrink-0 text-primary-100" />
                     <span>{dateRange}</span>
                 </p>
             </div>

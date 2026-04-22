@@ -17,7 +17,7 @@ export default function DashboardContactSection() {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-32 overflow-hidden rounded-[2rem] border border-white/12 bg-[radial-gradient(circle_at_top,rgba(127,166,206,0.2),transparent_38%),linear-gradient(135deg,rgba(9,18,31,0.98),rgba(15,28,44,0.92))] px-6 py-12 shadow-[0_28px_70px_rgba(4,10,18,0.24)] sm:px-8 sm:py-14"
+      className="relative scroll-mt-32 overflow-hidden rounded-[2rem] border border-slate-300/70 bg-[radial-gradient(circle_at_top,rgba(127,166,206,0.18),transparent_38%),linear-gradient(135deg,rgba(255,255,255,0.98),rgba(234,242,251,0.92))] px-6 py-12 shadow-[0_28px_70px_rgba(148,163,184,0.18)] sm:px-8 sm:py-14 dark:border-white/12 dark:bg-[radial-gradient(circle_at_top,rgba(127,166,206,0.2),transparent_38%),linear-gradient(135deg,rgba(9,18,31,0.98),rgba(15,28,44,0.92))] dark:shadow-[0_28px_70px_rgba(4,10,18,0.24)]"
     >
       <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_center,rgba(83,135,210,0.18),transparent_58%)]" />
 
@@ -35,13 +35,13 @@ export default function DashboardContactSection() {
           </p>
         </div>
 
-        <div className="w-full max-w-2xl rounded-[1.5rem] border border-white/12 bg-white/[0.05] p-3 shadow-[0_20px_45px_rgba(4,10,18,0.18)] backdrop-blur-sm">
+        <div className="w-full max-w-2xl rounded-[1.5rem] border border-slate-300/70 bg-white/78 p-3 shadow-[0_20px_45px_rgba(148,163,184,0.16)] backdrop-blur-sm dark:border-white/12 dark:bg-white/[0.05] dark:shadow-[0_20px_45px_rgba(4,10,18,0.18)]">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="text-left">
               <p className="text-xs uppercase tracking-[0.26em] text-primary-100/56">
                 {t("dashboard.contact.email_label")}
               </p>
-              <p className="mt-2 text-lg font-medium text-white sm:text-xl">
+              <p className="mt-2 text-lg font-medium text-neutral-100 sm:text-xl">
                 {EMAIL_ADDRESS}
               </p>
             </div>
@@ -59,7 +59,7 @@ export default function DashboardContactSection() {
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Link
             href={EMAIL_MAILTO_URL}
-            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2.5 text-sm text-primary-100 transition-transform duration-300 hover:-translate-y-0.5 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300/70 bg-white/80 px-4 py-2.5 text-sm text-primary-100 transition-transform duration-300 hover:-translate-y-0.5 hover:text-slate-900 dark:border-white/12 dark:bg-white/[0.04] dark:hover:text-white"
           >
             <Mail className="h-4 w-4" />
             {t("dashboard.contact.direct_mail")}
@@ -69,7 +69,7 @@ export default function DashboardContactSection() {
             href={GITHUB_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2.5 text-sm text-primary-100 transition-transform duration-300 hover:-translate-y-0.5 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300/70 bg-white/80 px-4 py-2.5 text-sm text-primary-100 transition-transform duration-300 hover:-translate-y-0.5 hover:text-slate-900 dark:border-white/12 dark:bg-white/[0.04] dark:hover:text-white"
           >
             {t("dashboard.contact.github_action")}
             <ArrowUpRight className="h-4 w-4" />
@@ -78,7 +78,7 @@ export default function DashboardContactSection() {
             href={LINKEDIN_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2.5 text-sm text-primary-100 transition-transform duration-300 hover:-translate-y-0.5 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300/70 bg-white/80 px-4 py-2.5 text-sm text-primary-100 transition-transform duration-300 hover:-translate-y-0.5 hover:text-slate-900 dark:border-white/12 dark:bg-white/[0.04] dark:hover:text-white"
           >
             {t("dashboard.contact.linkedin_action")}
             <ArrowUpRight className="h-4 w-4" />

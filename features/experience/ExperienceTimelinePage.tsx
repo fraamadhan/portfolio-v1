@@ -50,14 +50,14 @@ export default function ExperienceTimelinePage() {
     }, [])
 
     return (
-        <section className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,rgba(120,157,194,0.2),transparent_28%),linear-gradient(180deg,#334155_0%,#263240_42%,#1c2431_100%)] px-4 pb-24 pt-32 sm:px-6">
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:120px_120px] opacity-25" />
+        <section className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,rgba(120,157,194,0.2),transparent_28%),linear-gradient(180deg,#f7fbff_0%,#eaf1f8_42%,#e0e8f1_100%)] px-4 pb-24 pt-32 sm:px-6 dark:bg-[radial-gradient(circle_at_top,rgba(120,157,194,0.2),transparent_28%),linear-gradient(180deg,#334155_0%,#263240_42%,#1c2431_100%)]">
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(71,85,105,0.05)_1px,transparent_1px)] bg-[size:120px_120px] opacity-25 dark:bg-[linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" />
             <div className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(circle_at_center,rgba(127,166,206,0.28),transparent_62%)]" />
 
             <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-10">
                 <Link
                     href="/#experience"
-                    className="flex w-fit items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-sm tracking-wide text-neutral-100 transition-transform duration-300 hover:-translate-y-0.5 hover:border-white/20"
+                    className="flex w-fit items-center gap-2 rounded-full border border-slate-300/70 bg-white/80 px-4 py-2 text-sm tracking-wide text-neutral-100 transition-transform duration-300 hover:-translate-y-0.5 hover:border-slate-400/70 dark:border-white/12 dark:bg-white/6 dark:hover:border-white/20"
                 >
                     <ArrowLeft className="h-4 w-4" />
                     <span>{t("experience_section.experience_journey")}</span>
