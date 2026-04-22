@@ -42,14 +42,21 @@ type GitHubGraphQLResponse = {
 };
 
 type CounterApiResponse = {
+  code?: string;
   data?: {
-    count?: number;
+    id?: number;
     name?: string;
-    value?: number;
+    description?: string;
+    slug?: string;
+    up_count?: number;    // <-- This is the actual visitor count
+    down_count?: number;
+    team_id?: number;
+    user_id?: number;
+    workspace_id?: number;
+    workspace_slug?: string;
+    created_at?: string;
+    updated_at?: string;
   };
-  count?: number;
-  value?: number;
-  name?: string;
 };
 
 class CounterApiHttpError extends Error {
@@ -96,7 +103,7 @@ function getCounterApiConfig() {
 }
 
 function parseCounterApiCount(payload: CounterApiResponse | null) {
-  const rawCount = payload?.data?.count ?? payload?.data?.value ?? payload?.count ?? payload?.value;
+  const rawCount = payload?.data?.up_count;
 
   return typeof rawCount === "number" && Number.isFinite(rawCount) ? rawCount : null;
 }
