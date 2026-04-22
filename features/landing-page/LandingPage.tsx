@@ -74,12 +74,14 @@ const LandingPage = () => {
                         </Button>
                     </Link>
 
-                    {/* <Button
-                        variant="outline"
-                        className="px-6 h-10 text-sm sm:text-base hover:text-background font-inter"
-                    >
-                        {t("contact_me")}
-                    </Button> */}
+                    <Link href="/dashboard#contact" scroll={true}>
+                        <Button
+                            variant="outline"
+                            className="px-6 h-10 text-sm sm:text-base border-white/15 bg-white/5 text-foreground hover:bg-white/10 hover:text-foreground font-inter"
+                        >
+                            {t("collaborate_cta")}
+                        </Button>
+                    </Link>
                 </section>
             </div>
         </section>

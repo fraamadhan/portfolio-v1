@@ -31,6 +31,7 @@
   },
   "current_professional_status": "Status Professinal Saat Ini",
   "view_projects": "Lihat Proyek",
+  "collaborate_cta": "Ayo Kolaborasi",
   "contact_me": "Kontak Saya",
   "work_based_in": "Berlokasi di",
   "status": "Status",
@@ -133,6 +134,52 @@
   "under_construction": {
     "title": "Proses Pengembangan",
     "description": "Halaman ini masih dalam proses pengerjaan. Silakan cek lagi nanti."
+  },
+  "dashboard": {
+    "eyebrow": "Dashboard Portofolio",
+    "description": "Ringkasan langsung tentang progres portofolio, pengalaman kerja terbaru, dan aktivitas GitHub dalam satu tampilan.",
+    "location_badge": "Bandung, Indonesia",
+    "live_data_badge": "Data langsung terhubung di seluruh dashboard",
+    "github_button": "GitHub",
+    "linkedin_button": "LinkedIn",
+    "collaborate_button": "Ayo Kolaborasi",
+    "cards": {
+      "live": "Live",
+      "website_visitors": "Pengunjung Website",
+      "website_visitors_description": "Dihitung satu kali per sesi browser dan disinkronkan dengan counter utama.",
+      "projects_worked_on": "Proyek yang Dikerjakan",
+      "projects_worked_on_description": "Proyek unggulan dan keterlibatan produk yang tercatat di portofolio.",
+      "work_experience": "Pengalaman Kerja",
+      "work_experience_description": "Total bulan dari pengalaman magang dan freelance."
+    },
+    "contributions": {
+      "label": "kontribusi dalam setahun terakhir",
+      "description": "Diambil dari aktivitas profil GitHub secara langsung dan disesuaikan dengan palet warna dashboard.",
+      "view_github": "Lihat GitHub",
+      "activity_over_last_year": "Aktivitas GitHub langsung selama setahun terakhir.",
+      "unavailable": "Data kontribusi GitHub sementara tidak tersedia.",
+      "less": "Sedikit",
+      "more": "Banyak"
+    },
+    "contact": {
+      "eyebrow": "Terbuka untuk kolaborasi",
+      "title": "Wujudkan ide berikutnya bersama",
+      "description": "Kalau kamu sedang membangun produk baru, mengembangkan platform yang sudah ada, atau butuh partner yang kuat di backend tapi tetap nyaman bergerak di full stack, mari ngobrol.",
+      "email_label": "Cara terbaik menghubungi saya",
+      "email_action": "Mulai percakapan",
+      "direct_mail": "Kirim email",
+      "github_action": "Lihat GitHub",
+      "linkedin_action": "Terhubung di LinkedIn"
+    },
+    "days": {
+      "sun": "Min",
+      "mon": "Sen",
+      "tue": "Sel",
+      "wed": "Rab",
+      "thu": "Kam",
+      "fri": "Jum",
+      "sat": "Sab"
+    }
   },
   "project_detail": {
     "back": "Kembali",

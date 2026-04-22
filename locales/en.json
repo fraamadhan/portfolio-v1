@@ -31,6 +31,7 @@
   },
   "current_professional_status": "Current Professional Status",
   "view_projects": "View Projects",
+  "collaborate_cta": "Let's Collaborate",
   "contact_me": "Contact Me",
   "work_based_in": "Based in",
   "status": "Status",
@@ -133,6 +134,52 @@
   "under_construction": {
     "title": "Under Construction",
     "description": "This page is still being built. Please check back soon."
+  },
+  "dashboard": {
+    "eyebrow": "Portfolio Dashboard",
+    "description": "A live overview of portfolio progress, recent work, and GitHub activity in one place.",
+    "location_badge": "Bandung, Indonesia",
+    "live_data_badge": "Live data connected across the dashboard",
+    "github_button": "GitHub",
+    "linkedin_button": "LinkedIn",
+    "collaborate_button": "Let's Collaborate",
+    "cards": {
+      "live": "Live",
+      "website_visitors": "Website Visitors",
+      "website_visitors_description": "Tracked once per browser session and synced with the live counter.",
+      "projects_worked_on": "Projects Worked On",
+      "projects_worked_on_description": "Featured builds and product engagements tracked in the portfolio.",
+      "work_experience": "Work Experience",
+      "work_experience_description": "Total months across internship and freelance roles."
+    },
+    "contributions": {
+      "label": "contributions in the last year",
+      "description": "Pulled from your live GitHub profile activity and recolored to fit the dashboard palette.",
+      "view_github": "View GitHub",
+      "activity_over_last_year": "Live GitHub activity over the last year.",
+      "unavailable": "GitHub contribution data is temporarily unavailable.",
+      "less": "Less",
+      "more": "More"
+    },
+    "contact": {
+      "eyebrow": "Open for collaboration",
+      "title": "Bring your next idea to life",
+      "description": "If you are building a product, improving an existing platform, or need a backend-focused collaborator who can also move across the full stack, let's talk.",
+      "email_label": "Best way to reach me",
+      "email_action": "Start a conversation",
+      "direct_mail": "Send email",
+      "github_action": "View GitHub",
+      "linkedin_action": "Connect on LinkedIn"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    }
   },
   "project_detail": {
     "back": "Back",

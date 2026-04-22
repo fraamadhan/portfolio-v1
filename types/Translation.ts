@@ -135,6 +135,52 @@ export type Translation = {
     title: string;
     description: string;
   };
+  dashboard: {
+    eyebrow: string;
+    description: string;
+    location_badge: string;
+    live_data_badge: string;
+    github_button: string;
+    linkedin_button: string;
+    collaborate_button: string;
+    cards: {
+      live: string;
+      website_visitors: string;
+      website_visitors_description: string;
+      projects_worked_on: string;
+      projects_worked_on_description: string;
+      work_experience: string;
+      work_experience_description: string;
+    };
+    contributions: {
+      label: string;
+      description: string;
+      view_github: string;
+      activity_over_last_year: string;
+      unavailable: string;
+      less: string;
+      more: string;
+    };
+    contact: {
+      eyebrow: string;
+      title: string;
+      description: string;
+      email_label: string;
+      email_action: string;
+      direct_mail: string;
+      github_action: string;
+      linkedin_action: string;
+    };
+    days: {
+      sun: string;
+      mon: string;
+      tue: string;
+      wed: string;
+      thu: string;
+      fri: string;
+      sat: string;
+    };
+  };
   project_detail: {
     back: string;
     as_a: string;
@@ -149,4 +195,5 @@ export type Translation = {
       source_code: string;
     };
   };
+  collaborate_cta: string;
 };
