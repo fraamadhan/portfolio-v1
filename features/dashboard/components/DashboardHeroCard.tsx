@@ -12,6 +12,7 @@ import {
 import { useTranslation } from "@/hooks/useTranslation";
 import { currentWorkRoleFormatted } from "@/lib";
 import { scrollToElementWithOffset } from "@/lib/utils";
+import PegasusStage from "./pegasus/PegasusStage";
 
 export default function DashboardHeroCard() {
   const { t } = useTranslation();
@@ -31,8 +32,8 @@ export default function DashboardHeroCard() {
   };
 
   return (
-    <article className="overflow-hidden rounded-[2rem] border border-slate-300/70 bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(234,242,251,0.9))] p-6 shadow-[0_28px_70px_rgba(148,163,184,0.18)] backdrop-blur-md sm:p-8 dark:border-white/12 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,255,255,0.04))] dark:shadow-[0_28px_70px_rgba(4,10,18,0.22)]">
-      <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
+    <article className="relative overflow-hidden rounded-[2rem] border border-slate-300/70 bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(234,242,251,0.9))] p-6 shadow-[0_28px_70px_rgba(148,163,184,0.18)] backdrop-blur-md sm:p-8 pb-36 sm:pb-36 dark:border-white/12 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,255,255,0.04))] dark:shadow-[0_28px_70px_rgba(4,10,18,0.22)]">
+      <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center">
         <div className="relative h-24 w-24 overflow-hidden rounded-full border-2 border-white/20 shadow-[0_14px_32px_rgba(4,10,18,0.24)] sm:h-28 sm:w-28">
           <Image
             src="/img/me.jpeg"
@@ -102,6 +103,9 @@ export default function DashboardHeroCard() {
           </div>
         </div>
       </div>
+
+      {/* Pegasus Stage at the bottom */}
+      <PegasusStage />
     </article>
   );
 }

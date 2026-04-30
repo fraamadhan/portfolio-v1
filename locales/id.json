@@ -191,8 +191,16 @@
     "repo_labels": {
       "frontend": "Repo Frontend",
       "backend": "Repo Backend",
-      "cms": "Repo CMS",
-      "source_code": "Kode Sumber"
+      "cms": "Repo CMS"
     }
+  },
+  "pegasus": {
+    "rest": "Waktunya istirahat...",
+    "sleep": "zzz...",
+    "wake_up": "Selamat pagi!",
+    "hello": "Halo, aku Zephyr!",
+    "eating": "Ssst, aku lagi makan",
+    "sleeping_disturb": "Snoore... lagi tidur nih, tunggu sampai pagi ya",
+    "attack": "Lawan aku!"
   }
 }

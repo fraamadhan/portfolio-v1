@@ -191,8 +191,16 @@
     "repo_labels": {
       "frontend": "Frontend Repo",
       "backend": "Backend Repo",
-      "cms": "CMS Repo",
-      "source_code": "Source Code"
+      "cms": "CMS Repo"
     }
+  },
+  "pegasus": {
+    "rest": "Time to rest...",
+    "sleep": "zzz...",
+    "wake_up": "Good morning!",
+    "hello": "Hello, I'm Zephyr!",
+    "eating": "Don't disturb, I'm eating",
+    "sleeping_disturb": "snoore, im sleeping rn, wait until morning",
+    "attack": "Fight me!"
   }
 }
