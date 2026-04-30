@@ -191,7 +191,8 @@
     "repo_labels": {
       "frontend": "Repo Frontend",
       "backend": "Repo Backend",
-      "cms": "Repo CMS"
+      "cms": "Repo CMS",
+      "source_code": "Kode Sumber"
     }
   },
   "pegasus": {

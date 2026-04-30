@@ -196,4 +196,13 @@ export type Translation = {
     };
   };
   collaborate_cta: string;
+  pegasus: {
+    rest: string;
+    sleep: string;
+    wake_up: string;
+    hello: string;
+    eating: string;
+    sleeping_disturb: string;
+    attack: string;
+  };
 };
