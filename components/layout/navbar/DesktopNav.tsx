@@ -47,14 +47,18 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
     }, [isMoreOpen]);
 
     return (
-        <div className="hidden md:flex items-center gap-5 text-xl lg:gap-15">
-            <ul className="flex items-center gap-5 lg:gap-20">
+        <div className="hidden md:flex items-center gap-5 text-xl lg:gap-8">
+            <ul className="flex items-center gap-5 lg:gap-10">
                 {PRIMARY_ITEMS.map((item) => (
                     <li key={item.labelKey}>
                         <Link
                             href={item.href}
                             onClick={handleNavClick(item.href)}
-                            className={activeSection === item.href ? "font-semibold text-slate-900 dark:text-white" : "text-slate-700/85 dark:text-white/80"}
+                            className={`px-3 py-1.5 rounded-xl transition-all duration-300 hover:bg-slate-100 dark:hover:bg-white/10 ${
+                                activeSection === item.href
+                                    ? "font-semibold text-slate-900 dark:text-white"
+                                    : "text-slate-700/85 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
+                            }`}
                             aria-current={activeSection === item.href ? "page" : undefined}
                         >
                             {t(item.labelKey)}
@@ -66,7 +70,11 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
                     <Link
                         href="/#testimonials"
                         onClick={handleNavClick("/#testimonials")}
-                        className={activeSection === "/#testimonials" ? "font-semibold text-slate-900 dark:text-white" : "text-slate-700/85 dark:text-white/80"}
+                        className={`px-3 py-1.5 rounded-xl transition-all duration-300 hover:bg-slate-100 dark:hover:bg-white/10 ${
+                            activeSection === "/#testimonials"
+                                ? "font-semibold text-slate-900 dark:text-white"
+                                : "text-slate-700/85 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
+                        }`}
                         aria-current={activeSection === "/#testimonials" ? "page" : undefined}
                     >
                         {t("navbar.testimonials")}
@@ -77,7 +85,11 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
                     <Link
                         href="/dashboard"
                         onClick={handleNavClick("/dashboard")}
-                        className={activeSection === "/dashboard" ? "font-semibold text-slate-900 dark:text-white" : "text-slate-700/85 dark:text-white/80"}
+                        className={`px-3 py-1.5 rounded-xl transition-all duration-300 hover:bg-slate-100 dark:hover:bg-white/10 ${
+                            activeSection === "/dashboard"
+                                ? "font-semibold text-slate-900 dark:text-white"
+                                : "text-slate-700/85 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
+                        }`}
                         aria-current={activeSection === "/dashboard" ? "page" : undefined}
                     >
                         {t("navbar.dashboard")}
@@ -87,7 +99,7 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
                 <li className="relative xl:hidden" ref={moreMenuRef}>
                     <button
                         type="button"
-                        className="inline-flex items-center gap-1 text-slate-800 dark:text-white/85"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl transition-all duration-300 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-800 dark:text-white/85"
                         onClick={() => setIsMoreOpen((prev) => !prev)}
                         aria-haspopup="menu"
                         aria-expanded={isMoreOpen}
@@ -116,7 +128,11 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
                                                 handleNavClick(item.href)(event);
                                                 setIsMoreOpen(false);
                                             }}
-                                            className={activeSection === item.href ? "font-semibold text-slate-900 dark:text-white" : "text-slate-700/85 dark:text-white/80"}
+                                            className={`block px-3 py-2 rounded-lg transition-all duration-300 hover:bg-slate-100 dark:hover:bg-white/10 ${
+                                                activeSection === item.href
+                                                    ? "font-semibold text-slate-900 dark:text-white"
+                                                    : "text-slate-700/85 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
+                                            }`}
                                             aria-current={activeSection === item.href ? "page" : undefined}
                                         >
                                             {t(item.labelKey)}

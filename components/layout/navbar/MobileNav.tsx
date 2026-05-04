@@ -94,15 +94,15 @@ export default function MobileNav({ isOpen, closeMenu, activeSection, handleNavC
                                     handleNavClick(item.href)(event);
                                     closeMenu();
                                 }}
-                                className={
+                                className={`px-5 py-2 rounded-xl transition-all duration-300 ${
                                     activeSection === item.href
                                         ? isDark
-                                            ? "font-semibold text-white"
-                                            : "font-semibold text-slate-900"
+                                            ? "font-semibold text-white bg-white/10"
+                                            : "font-semibold text-slate-900 bg-slate-200/50"
                                         : isDark
-                                            ? "text-white/82"
-                                            : "text-slate-700/85"
-                                }
+                                            ? "text-white/82 hover:text-white hover:bg-white/10"
+                                            : "text-slate-700/85 hover:text-slate-900 hover:bg-slate-200/50"
+                                }`}
                                 aria-current={activeSection === item.href ? "page" : undefined}
                             >
                                 {t(item.labelKey)}

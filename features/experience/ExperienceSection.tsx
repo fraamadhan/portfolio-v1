@@ -36,7 +36,7 @@ const ExperienceSection = () => {
 
             <Link
                 href="/experience"
-                className="flex w-fit items-center gap-2 self-center rounded-xl border border-slate-300/70 bg-white/80 px-4 py-3 text-sm tracking-wide text-neutral-100 transition-transform duration-300 hover:-translate-y-1 hover:border-slate-400/70 dark:border-white/12 dark:bg-white/6 dark:hover:border-white/20"
+                className="btn-hover-cool flex w-fit items-center gap-2 self-center rounded-xl border border-slate-300/70 bg-white/80 px-4 py-3 text-sm tracking-wide text-neutral-100 dark:border-white/12 dark:bg-white/6 dark:hover:border-white/20"
             >
                 <span>{t("experience_section.see_more")}</span>
                 <Image src="/logo/ic_arrow_right.svg" alt="" width={16} height={16} className="h-4 w-4 shrink-0" />

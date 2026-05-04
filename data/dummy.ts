@@ -1,7 +1,11 @@
 import type { ExperienceItemProps, TestimonialItemProps } from "@/types";
 
-export const currentWorkRole = ["Full-Stack Developer", "DevOps Engineer"];
-
+export const currentWorkRole = [
+  "Full Stack Developer",
+  "Back End Developer",
+  "Front End Developer",
+  "DevOps Engineer"
+];
 export const backendItems = {
   titleKey: "skills_cards.backend.title",
   descriptionKey: "skills_cards.backend.description",

@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useTranslation } from "@/hooks/useTranslation";
 import Logo from "./components/Logo";
 import { Button } from "@/components/ui/button";
-import { EMAIL, GITHUB_URL, LINKEDIN_URL, RESUME_DOWNLOAD_NAME, RESUME_FILE_PATH } from "./function";
+import { EMAIL_MAILTO_URL, GITHUB_URL, LINKEDIN_URL, RESUME_DOWNLOAD_NAME, RESUME_FILE_PATH } from "./function";
 
 const AboutSection = () => {
     const { t } = useTranslation();
@@ -64,7 +64,7 @@ const AboutSection = () => {
                                 <Logo src="/logo/ic_linkedin.svg" href={LINKEDIN_URL} label="LinkedIn profile" />
                             </li>
                             <li>
-                                <Logo src="/logo/ic_email.svg" href={`${EMAIL}`} label="Send email" />
+                                <Logo src="/logo/ic_email.svg" href={`${EMAIL_MAILTO_URL}`} label="Send email" />
                             </li>
                         </ul>
                         <div className="flex justify-center gap-x-4 md:justify-start">

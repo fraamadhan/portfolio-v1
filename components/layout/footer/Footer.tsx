@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 import {
-  EMAIL,
+  EMAIL_MAILTO_URL,
   GITHUB_URL,
   LINKEDIN_URL,
 } from "@/features/about-me/function";
-import { currentWorkRoleFormatted } from "@/lib/helper";
+import { currentWorkRole } from "@/data/dummy";
+import { TypewriterEffect } from "@/components/ui/TypewriterEffect";
 import { useTranslation } from "@/hooks/useTranslation";
 import { HOME_HREF, NAV_ITEMS } from "../navbar/navConfig";
 const GENERAL_LINKS = [
@@ -27,14 +28,14 @@ const COLLECTION_LINKS = [
 ];
 
 const RESOURCE_LINKS = [
-  { href: EMAIL, labelKey: "footer.resources.gmail" },
+  { href: EMAIL_MAILTO_URL, labelKey: "footer.resources.gmail" },
   { href: GITHUB_URL, labelKey: "footer.resources.github" },
   { href: LINKEDIN_URL, labelKey: "footer.resources.linkedin" },
 ];
 
 const SOCIAL_LINKS = [
   {
-    href: EMAIL,
+    href: EMAIL_MAILTO_URL,
     label: "Email",
     icon: "/svg/email.svg",
   },
@@ -62,8 +63,8 @@ const Footer = () => {
               <h2 className="font-sub-heading text-4xl leading-none tracking-wide text-neutral-100">
                 Fakhri Fajar R.
               </h2>
-              <p className="max-w-sm text-base leading-7 text-primary-100/75">
-                {currentWorkRoleFormatted()}
+              <p className="max-w-sm text-base leading-7 text-primary-100/75 flex items-center justify-start min-h-[28px]">
+                <TypewriterEffect words={currentWorkRole} pauseDuration={3000} />
               </p>
             </div>
 
