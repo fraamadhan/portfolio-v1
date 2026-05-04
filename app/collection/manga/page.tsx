@@ -12,9 +12,9 @@ export default function MangaCollectionPage() {
     <main className="min-h-screen px-4 pb-20 pt-44 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <CollectionHero
-          eyebrow={t("collection.manga.eyebrow")}
-          title={t("collection.manga.title")}
-          description={t("collection.manga.description")}
+          eyebrow={t("collection.manga.eyebrow") || ""}
+          title={t("collection.manga.title") || ""}
+          description={t("collection.manga.description") || ""}
           accentColor="bg-gradient-to-r from-rose-500 to-pink-600"
         />
         <ComicGrid
