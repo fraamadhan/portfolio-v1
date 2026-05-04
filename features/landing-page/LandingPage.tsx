@@ -3,7 +3,8 @@
 import { Button } from "@/components/ui/button";
 import InfoItem from "@/components/ui/InfoItem";
 import { useTranslation } from "@/hooks/useTranslation";
-import { currentWorkRoleFormatted } from "@/lib";
+import { TypewriterEffect } from "@/components/ui/TypewriterEffect";
+import { currentWorkRole } from "@/data/dummy";
 import { scrollToElementWithOffset } from "@/lib/utils";
 import Link from "next/link";
 import { MouseEvent } from "react";
@@ -40,8 +41,8 @@ const LandingPage = () => {
                         Fakhri Fajar Ramadhan
                     </h1>
 
-                    <p className="text-lg sm:text-2xl font-medium text-foreground font-oswald">
-                        {currentWorkRoleFormatted()}
+                    <p className="text-lg sm:text-2xl font-medium text-foreground font-oswald flex items-center justify-center min-h-[36px] sm:min-h-[48px]">
+                        <TypewriterEffect words={currentWorkRole} pauseDuration={3000} />
                     </p>
 
                     <p className="mx-auto max-w-xl leading-relaxed text-muted-foreground md:text-base font-inter">
@@ -72,18 +73,16 @@ const LandingPage = () => {
                         href="/dashboard#contact"
                         scroll={false}
                         onClick={(e) => {
-                            e.preventDefault();
                             // Try to scroll if already on dashboard page
-                            if (window.location.pathname === "/dashboard") {
+                            if (pathname === "/dashboard") {
+                                e.preventDefault();
                                 const contactSection = document.getElementById("contact");
                                 if (contactSection) {
                                     scrollToElementWithOffset(contactSection);
                                     window.history.replaceState(null, "", "/dashboard#contact");
-                                    return;
                                 }
                             }
-                            // Otherwise, navigate normally
-                            window.location.href = "/dashboard#contact";
+                            // If not on dashboard, let the Next.js Link component handle the navigation normally
                         }}
                     >
                         <Button

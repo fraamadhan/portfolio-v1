@@ -63,7 +63,7 @@ const ProjectSection = () => {
                     <button
                         onClick={handlePrev}
                         disabled={page === 1}
-                        className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-white/80 text-lg font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white/10"
+                        className="btn-hover-cool flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-white/80 text-lg font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white/10"
                         aria-label="Previous page"
                     >
                         {'<'}
@@ -77,7 +77,7 @@ const ProjectSection = () => {
                                 <button
                                     key={item}
                                     onClick={() => setPage(Number(item))}
-                                    className={`flex h-9 w-9 items-center justify-center rounded-full border text-lg font-semibold transition ${page === item ? 'border-blue-400 bg-blue-700 text-white dark:bg-blue-800' : 'border-slate-300 bg-white/80 text-slate-700 hover:bg-slate-100 dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white/10'}`}
+                                    className={`btn-hover-cool flex h-9 w-9 items-center justify-center rounded-full border text-lg font-semibold ${page === item ? 'border-blue-400 bg-blue-700 text-white dark:bg-blue-800' : 'border-slate-300 bg-white/80 text-slate-700 dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white/10'}`}
                                     aria-current={page === item ? 'page' : undefined}
                                 >
                                     {item}
@@ -87,7 +87,7 @@ const ProjectSection = () => {
                     <button
                         onClick={handleNext}
                         disabled={page === totalPages}
-                        className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-white/80 text-lg font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white/10"
+                        className="btn-hover-cool flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-white/80 text-lg font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white/10"
                         aria-label="Next page"
                     >
                         {'>'}

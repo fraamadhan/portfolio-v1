@@ -169,7 +169,15 @@
       "email_action": "Start a conversation",
       "direct_mail": "Send email",
       "github_action": "View GitHub",
-      "linkedin_action": "Connect on LinkedIn"
+      "linkedin_action": "Connect on LinkedIn",
+      "or_contact_directly": "OR contact me directly",
+      "form_subject": "Subject",
+      "form_from": "From",
+      "form_content": "Message",
+      "form_submit": "Send Message",
+      "submit_success": "Message sent successfully!",
+      "submit_error": "Failed to send message. Please try again.",
+      "submitting": "Sending..."
     },
     "days": {
       "sun": "Sun",
@@ -203,5 +211,40 @@
     "eating": "Don't disturb, I'm eating",
     "sleeping_disturb": "snoore, im sleeping rn, wait until morning",
     "attack": "Fight me!"
+  },
+  "collection": {
+    "book": {
+      "title": "Reading List",
+      "eyebrow": "Books I've Read",
+      "description": "A curated list of books that have shaped how I think about code, business, and life.",
+      "status_reading": "Reading",
+      "status_completed": "Completed",
+      "status_want": "Want to Read"
+    },
+    "manga": {
+      "title": "Manga Collection",
+      "eyebrow": "Stories I Love",
+      "description": "Japanese comics that blew my mind — from dark fantasy to slice of life.",
+      "status_reading": "Reading",
+      "status_completed": "Completed",
+      "status_hold": "On Hold",
+      "chapters": "chapters"
+    },
+    "manwha": {
+      "title": "Manwha Collection",
+      "eyebrow": "Korean Comics",
+      "description": "Korean webtoons I binge-read at 2am. No regrets.",
+      "status_reading": "Reading",
+      "status_completed": "Completed",
+      "status_hold": "On Hold",
+      "chapters": "chapters"
+    },
+    "music": {
+      "title": "Heavy Rotation",
+      "eyebrow": "What I've Been Playing",
+      "description": "Tracks I keep coming back to. Powered by Spotify.",
+      "coming_soon": "Spotify integration coming soon",
+      "coming_soon_desc": "This section will dynamically show what I've been listening to in real-time via the Spotify API."
+    }
   }
 }

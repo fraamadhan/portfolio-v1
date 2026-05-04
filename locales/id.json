@@ -169,7 +169,15 @@
       "email_action": "Mulai percakapan",
       "direct_mail": "Kirim email",
       "github_action": "Lihat GitHub",
-      "linkedin_action": "Terhubung di LinkedIn"
+      "linkedin_action": "Terhubung di LinkedIn",
+      "or_contact_directly": "ATAU hubungi saya langsung",
+      "form_subject": "Subjek",
+      "form_from": "Dari",
+      "form_content": "Pesan",
+      "form_submit": "Kirim Pesan",
+      "submit_success": "Pesan berhasil dikirim!",
+      "submit_error": "Gagal mengirim pesan. Silakan coba lagi.",
+      "submitting": "Mengirim..."
     },
     "days": {
       "sun": "Min",
@@ -203,5 +211,40 @@
     "eating": "Ssst, aku lagi makan",
     "sleeping_disturb": "Snoore... lagi tidur nih, tunggu sampai pagi ya",
     "attack": "Lawan aku!"
+  },
+  "collection": {
+    "book": {
+      "title": "Daftar Bacaan",
+      "eyebrow": "Buku yang Sudah Kubaca",
+      "description": "Koleksi buku pilihan yang membentuk cara berpikir saya tentang kode, bisnis, dan kehidupan.",
+      "status_reading": "Sedang Dibaca",
+      "status_completed": "Selesai",
+      "status_want": "Ingin Dibaca"
+    },
+    "manga": {
+      "title": "Koleksi Manga",
+      "eyebrow": "Cerita Favorit",
+      "description": "Komik Jepang yang bikin aku takjub \u2014 dari dark fantasy sampai slice of life.",
+      "status_reading": "Sedang Dibaca",
+      "status_completed": "Selesai",
+      "status_hold": "Ditunda",
+      "chapters": "chapter"
+    },
+    "manwha": {
+      "title": "Koleksi Manwha",
+      "eyebrow": "Komik Korea",
+      "description": "Webtoon Korea yang kubaca marathon jam 2 pagi. Tanpa penyesalan.",
+      "status_reading": "Sedang Dibaca",
+      "status_completed": "Selesai",
+      "status_hold": "Ditunda",
+      "chapters": "chapter"
+    },
+    "music": {
+      "title": "Heavy Rotation",
+      "eyebrow": "Yang Lagi Sering Kuputar",
+      "description": "Lagu-lagu yang terus kuputar ulang. Didukung oleh Spotify.",
+      "coming_soon": "Integrasi Spotify segera hadir",
+      "coming_soon_desc": "Bagian ini akan menampilkan apa yang sedang aku dengarkan secara real-time melalui Spotify API."
+    }
   }
 }
