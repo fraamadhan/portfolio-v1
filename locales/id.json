@@ -50,7 +50,7 @@
       "description": "Membangun antarmuka yang responsif, mengelola state aplikasi, dan menghadirkan pengalaman pengguna yang cepat dan nyaman."
     },
     "devops": {
-      "title": "DevOps & Infrastruktur",
+      "title": "DevOps & Infrastruktur (Proses Pembelajaran)",
       "description": "Menyederhanakan deployment, mengotomatiskan pipeline CI/CD, mengelola container, dan memantau sistem produksi."
     }
   },

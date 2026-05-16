@@ -4,7 +4,7 @@ export const currentWorkRole = [
   "Full Stack Developer",
   "Back End Developer",
   "Front End Developer",
-  "DevOps Engineer"
+  "DevOps Engineer (Learning Process)"
 ];
 export const backendItems = {
   titleKey: "skills_cards.backend.title",
