@@ -324,3 +324,30 @@ html.dark body::before {
     filter: saturate(0.9) blur(2px);
   }
 }
+
+/* Custom Scrollbar Styles (Global) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090d16; /* Slate-950/900 mix */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0d9488; /* teal-600 */
+  border-radius: 9999px;
+  border: 1px solid #090d16;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #14b8a6; /* teal-500 */
+}
+
+/* Firefox scrollbar compatibility */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0d9488 #090d16;
+}
+
