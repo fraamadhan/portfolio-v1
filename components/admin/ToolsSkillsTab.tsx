@@ -35,6 +35,28 @@ export default function ToolsSkillsTab({
   handleSaveDocument,
   setDeleteTargetId
 }: ToolsSkillsTabProps) {
+  const [justUploaded, setJustUploaded] = React.useState(false)
+  const prevUploading = React.useRef(uploading)
+
+  React.useEffect(() => {
+    if (prevUploading.current?.startsWith('icon') && !uploading && editingItem?.icon) {
+      setJustUploaded(true)
+      const timer = setTimeout(() => setJustUploaded(false), 3000)
+      return () => clearTimeout(timer)
+    }
+    prevUploading.current = uploading
+  }, [uploading, editingItem])
+
+  React.useEffect(() => {
+    if (showForm && toolsSkillsSubtab === 'tools' && editingItem && !editingItem._id && !editingItem.items) {
+      setEditingItem({
+        ...editingItem,
+        items: [{ name: '', icon: null }]
+      })
+    }
+    setJustUploaded(false)
+  }, [showForm, editingItem?._id, toolsSkillsSubtab])
+
   return (
     <div className="space-y-8">
       {/* Sub-tab navigation */}
@@ -75,53 +97,139 @@ export default function ToolsSkillsTab({
           <div className="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl space-y-4">
             <h3 className="text-lg font-bold">{editingItem._id ? 'Edit Tool' : 'Add Tool / Tech Stack'}</h3>
             <div className="space-y-4">
-              <div className="space-y-1">
-                <label className="text-xs text-slate-400">Tool Name (e.g. React, Docker)</label>
-                <input
-                  type="text"
-                  value={editingItem.name || ''}
-                  onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none"
-                />
-              </div>
+              {editingItem.items && Array.isArray(editingItem.items) ? (
+                <div className="space-y-4">
+                  {editingItem.items.map((item: any, index: number) => {
+                    const isIconUploading = uploading === `items-${index}-icon`
+                    return (
+                      <div key={index} className="flex flex-col md:flex-row gap-4 items-end bg-slate-950/40 p-4 rounded-xl border border-slate-800 relative">
+                        {editingItem.items.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newItems = editingItem.items.filter((_: any, i: number) => i !== index)
+                              setEditingItem({ ...editingItem, items: newItems })
+                            }}
+                            className="absolute top-2 right-2 text-rose-500 hover:text-rose-450 p-1 cursor-pointer transition"
+                            title="Remove tool row"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        )}
+                        
+                        <div className="space-y-1 flex-1 w-full">
+                          <label className="text-xs text-slate-400">Tool Name #{index + 1}</label>
+                          <input
+                            type="text"
+                            value={item.name || ''}
+                            onChange={(e) => {
+                              const newItems = [...editingItem.items]
+                              newItems[index] = { ...newItems[index], name: e.target.value }
+                              setEditingItem({ ...editingItem, items: newItems })
+                            }}
+                            className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-850 text-slate-200 focus:outline-none"
+                            placeholder="e.g. React, Docker"
+                          />
+                        </div>
 
-              {/* File Upload for Tool Icon */}
-              <div className="space-y-2">
-                <label className="text-xs text-slate-400 block">Tool Icon (SVG/WebP)</label>
-                <div className="flex items-center gap-3">
-                  <label className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-850 hover:bg-slate-800 border border-slate-800 cursor-pointer text-sm transition">
-                    <Upload className="w-4 h-4 text-teal-400" />
-                    <span>{uploading === 'icon' ? 'Uploading...' : 'Choose Icon File'}</span>
+                        {/* File Upload for Tool Icon */}
+                        <div className="space-y-1.5 w-full md:max-w-[280px]">
+                          <label className="text-xs text-slate-400 block">Tool Icon</label>
+                          <div className="flex items-center gap-3">
+                            <label className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-850 hover:bg-slate-800 border border-slate-800 cursor-pointer text-xs font-semibold transition w-full justify-center">
+                              <Upload className="w-3.5 h-3.5 text-teal-400" />
+                              <span className="truncate">{isIconUploading ? 'Uploading...' : 'Choose Icon'}</span>
+                              <input
+                                type="file"
+                                accept=".svg,.webp,.png,.jpg"
+                                onChange={(e) => handleFileUpload(e, { fieldName: 'items', index, subFieldName: 'icon' })}
+                                className="hidden"
+                              />
+                            </label>
+                            {item.icon && (
+                              <div className="flex items-center gap-2 shrink-0">
+                                {item.icon.url && (
+                                  <img
+                                    src={item.icon.url}
+                                    alt="icon preview"
+                                    className="w-9 h-9 rounded bg-slate-950 p-1 object-contain border border-slate-800"
+                                  />
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })}
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEditingItem({
+                        ...editingItem,
+                        items: [...editingItem.items, { name: '', icon: null }]
+                      })
+                    }}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-950/60 hover:bg-slate-950 border border-slate-800 border-dashed text-teal-400 hover:text-teal-300 text-sm font-semibold cursor-pointer transition w-full justify-center"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Add Another Tool Row</span>
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="space-y-1">
+                    <label className="text-xs text-slate-400">Tool Name (e.g. React, Docker)</label>
                     <input
-                      type="file"
-                      accept=".svg,.webp,.png,.jpg"
-                      onChange={(e) => handleFileUpload(e, { fieldName: 'icon' })}
-                      className="hidden"
+                      type="text"
+                      value={editingItem.name || ''}
+                      onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })}
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none"
                     />
-                  </label>
-                  {editingItem.icon && (
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-teal-400 flex items-center gap-1 font-semibold">
-                        <CheckCircle className="w-4 h-4" /> Icon Uploaded
-                      </span>
-                      {editingItem.icon.url && (
-                        <img
-                          src={editingItem.icon.url}
-                          alt="icon preview"
-                          className="w-8 h-8 rounded bg-slate-950 p-1 object-contain border border-slate-800"
+                  </div>
+
+                  {/* File Upload for Tool Icon */}
+                  <div className="space-y-2">
+                    <label className="text-xs text-slate-400 block">Tool Icon (SVG/WebP)</label>
+                    <div className="flex items-center gap-3">
+                      <label className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-850 hover:bg-slate-800 border border-slate-800 cursor-pointer text-sm transition">
+                        <Upload className="w-4 h-4 text-teal-400" />
+                        <span>{uploading?.startsWith('icon') ? 'Uploading...' : 'Choose Icon File'}</span>
+                        <input
+                          type="file"
+                          accept=".svg,.webp,.png,.jpg"
+                          onChange={(e) => handleFileUpload(e, { fieldName: 'icon' })}
+                          className="hidden"
                         />
+                      </label>
+                      {editingItem.icon && (
+                        <div className="flex items-center gap-2">
+                          {justUploaded && (
+                            <span className="text-xs text-teal-400 flex items-center gap-1 font-semibold animate-pulse">
+                              <CheckCircle className="w-4 h-4" /> Icon Uploaded
+                            </span>
+                          )}
+                          {editingItem.icon.url && (
+                            <img
+                              src={editingItem.icon.url}
+                              alt="icon preview"
+                              className="w-8 h-8 rounded bg-slate-950 p-1 object-contain border border-slate-800"
+                            />
+                          )}
+                        </div>
                       )}
                     </div>
-                  )}
-                </div>
-              </div>
+                  </div>
+                </>
+              )}
 
               <div className="flex gap-4 pt-2">
                 <button
                   onClick={() => handleSaveDocument('tool')}
                   className="px-4 py-2 rounded-xl bg-teal-500 text-slate-950 font-bold hover:bg-teal-400 cursor-pointer transition"
                 >
-                  Save Tool
+                  Save Tool{editingItem.items ? 's' : ''}
                 </button>
                 <button
                   onClick={() => setShowForm(false)}
@@ -196,6 +304,23 @@ export default function ToolsSkillsTab({
                   />
                 </div>
                 <div className="space-y-1">
+                  <label className="text-xs text-slate-400">Skill Title (ID)</label>
+                  <input
+                    type="text"
+                    value={editingItem.title?.id || ''}
+                    onChange={(e) =>
+                      setEditingItem({
+                        ...editingItem,
+                        title: { ...editingItem.title, id: e.target.value, _type: 'localeString' }
+                      })
+                    }
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
                   <label className="text-xs text-slate-400">Category Reference</label>
                   <select
                     value={editingItem.category?._ref || ''}
@@ -217,19 +342,35 @@ export default function ToolsSkillsTab({
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <label className="text-xs text-slate-400">Short Description (EN)</label>
-                <input
-                  type="text"
-                  value={editingItem.description?.en || ''}
-                  onChange={(e) =>
-                    setEditingItem({
-                      ...editingItem,
-                      description: { ...editingItem.description, en: e.target.value, _type: 'localeString' }
-                    })
-                  }
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none"
-                />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs text-slate-400">Short Description (EN)</label>
+                  <input
+                    type="text"
+                    value={editingItem.description?.en || ''}
+                    onChange={(e) =>
+                      setEditingItem({
+                        ...editingItem,
+                        description: { ...editingItem.description, en: e.target.value, _type: 'localeString' }
+                      })
+                    }
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-xs text-slate-400">Short Description (ID)</label>
+                  <input
+                    type="text"
+                    value={editingItem.description?.id || ''}
+                    onChange={(e) =>
+                      setEditingItem({
+                        ...editingItem,
+                        description: { ...editingItem.description, id: e.target.value, _type: 'localeString' }
+                      })
+                    }
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none"
+                  />
+                </div>
               </div>
 
               {/* Tools Checkboxes list */}

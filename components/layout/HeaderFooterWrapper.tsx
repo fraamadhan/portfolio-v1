@@ -7,9 +7,9 @@ import Footer from './footer/Footer'
 export default function HeaderFooterWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   
-  const isCms = pathname?.startsWith('/cms')
+  const hideHeaderFooter = pathname === '/' || pathname?.startsWith('/cms')
 
-  if (isCms) {
+  if (hideHeaderFooter) {
     return <main className="min-h-screen">{children}</main>
   }
 

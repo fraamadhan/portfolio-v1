@@ -207,7 +207,8 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                     </p>
                 </div>
 
-                <div className="grid w-full gap-8 xl:grid-cols-[minmax(0,1.55fr)_minmax(300px,360px)] xl:items-start">
+                <div className="w-full">
+                    {/* TestimonialComposer is hidden for now
                     <TestimonialComposer
                         form={form}
                         isOpen={isComposerOpen}
@@ -240,8 +241,9 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                         onSubmit={handleSubmit}
                         onFieldChange={handleFieldChange}
                     />
+                    */}
 
-                    <div className="order-2 rounded-[30px] border border-slate-300/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(233,241,249,0.98))] p-5 shadow-[0_28px_65px_rgba(148,163,184,0.16)] sm:p-7 xl:order-1 dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(50,66,87,0.92),rgba(29,38,50,0.96))] dark:shadow-[0_28px_65px_rgba(4,10,18,0.28)]">
+                    <div className="rounded-[30px] border border-slate-300/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(233,241,249,0.98))] p-5 shadow-[0_28px_65px_rgba(148,163,184,0.16)] sm:p-7 dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(50,66,87,0.92),rgba(29,38,50,0.96))] dark:shadow-[0_28px_65px_rgba(4,10,18,0.28)]">
                         <div className="flex flex-col gap-4 border-b border-slate-300/70 pb-5 sm:flex-row sm:items-end sm:justify-between dark:border-white/10">
                             <div>
                                 <p className="text-xs uppercase tracking-[0.35em] text-primary-100/65">
@@ -252,10 +254,11 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                                 </h3>
                             </div>
 
-                            <div className="flex flex-wrap items-center gap-3">
+                             <div className="flex flex-wrap items-center gap-3">
                                 <div className="rounded-full border border-slate-300/70 bg-white/80 px-4 py-2 text-sm text-neutral-200 dark:border-white/12 dark:bg-white/5">
                                     {totalCount} {translate("testimonial_section.notes_archived")}
                                 </div>
+                                {/* Hiding toggle add testimonial button for now
                                 <button
                                     type="button"
                                     onClick={() => setIsComposerOpen((current) => !current)}
@@ -266,6 +269,7 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                                         ? translate("testimonial_section.toggle_close")
                                         : translate("testimonial_section.toggle_open")}
                                 </button>
+                                */}
                             </div>
                         </div>
 

@@ -23,7 +23,24 @@ async function getOrCreateSanityUser(email: string, name: string) {
 
   // Try CDN read client first (fast) — will have the user if they've been created before
   const user = await client.fetch(
-    `*[_type == "user" && email == $email][0]`,
+    `*[_type == "user" && email == $email][0]{
+      ...,
+      "resume": resume{
+        ...,
+        "url": asset->url
+      },
+      "profileImage": profileImage{
+        ...,
+        "url": asset->url
+      },
+      socialMedias[]{
+        ...,
+        customIcon{
+          ...,
+          "url": asset->url
+        }
+      }
+    }`,
     { email }
   )
 
@@ -78,7 +95,13 @@ export async function GET(req: Request) {
     if (fetchType === 'projects') {
       const data = await readClient.fetch(`{
         "projects": *[_type == "project" && user._ref == $userId] | order(_createdAt desc),
-        "tools": *[_type == "tool" && user._ref == $userId],
+        "tools": *[_type == "tool" && user._ref == $userId]{
+          ...,
+          "icon": icon {
+            ...,
+            "url": asset->url
+          }
+        },
         "categories": *[_type == "category" && user._ref == $userId]
       }`, params)
       return NextResponse.json(data)
@@ -87,7 +110,13 @@ export async function GET(req: Request) {
     if (fetchType === 'experiences') {
       const data = await readClient.fetch(`{
         "experiences": *[_type == "experience" && user._ref == $userId] | order(dateFrom desc),
-        "tools": *[_type == "tool" && user._ref == $userId]
+        "tools": *[_type == "tool" && user._ref == $userId]{
+          ...,
+          "icon": icon {
+            ...,
+            "url": asset->url
+          }
+        }
       }`, params)
       return NextResponse.json(data)
     }
@@ -104,7 +133,13 @@ export async function GET(req: Request) {
 
     if (fetchType === 'tools-skills') {
       const data = await readClient.fetch(`{
-        "tools": *[_type == "tool" && user._ref == $userId],
+        "tools": *[_type == "tool" && user._ref == $userId]{
+          ...,
+          "icon": icon {
+            ...,
+            "url": asset->url
+          }
+        },
         "skills": *[_type == "skill" && user._ref == $userId],
         "categories": *[_type == "category" && user._ref == $userId]
       }`, params)
@@ -138,6 +173,21 @@ export async function GET(req: Request) {
   }
 }
 
+const cleanSanityData = (obj: any): any => {
+  if (!obj || typeof obj !== 'object') return obj
+  if (Array.isArray(obj)) return obj.map(cleanSanityData)
+
+  const newObj = { ...obj }
+  if ((newObj._type === 'image' || newObj._type === 'file') && 'url' in newObj) {
+    delete newObj.url
+  }
+
+  for (const key in newObj) {
+    newObj[key] = cleanSanityData(newObj[key])
+  }
+  return newObj
+}
+
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions)
   if (!session || !session.user || !session.user.email) {
@@ -169,7 +219,10 @@ export async function POST(req: Request) {
       const generatedFilename = `${customPrefix}/${user._id}_${Date.now()}/${customName}.${fileExt}`
 
       const buffer = Buffer.from(await file.arrayBuffer())
-      const asset = await writeClient.assets.upload('image', buffer, {
+      const isImage = file.type.startsWith('image/')
+      const uploadType = isImage ? 'image' : 'file'
+
+      const asset = await writeClient.assets.upload(uploadType, buffer, {
         filename: generatedFilename,
         contentType: file.type
       })
@@ -181,17 +234,58 @@ export async function POST(req: Request) {
 
     // Handle profile update
     if (action === 'profile') {
-      const { _id, _type, _createdAt, _updatedAt, _rev, email, slug, ...updateData } = body
+      const { _id, _type, _createdAt, _updatedAt, _rev, email, ...updateData } = body
+      const cleanedData = cleanSanityData(updateData)
+
+      // Verify slug uniqueness
+      const newSlug = cleanedData.slug?.current
+      if (newSlug) {
+        const existingUserWithSlug = await readClient.fetch(
+          `*[_type == "user" && slug.current == $newSlug && _id != $currentUserId][0]`,
+          { newSlug, currentUserId: user._id }
+        )
+        if (existingUserWithSlug) {
+          return NextResponse.json(
+            { error: `The slug "${newSlug}" is already taken by another user. Please choose a different unique slug.` },
+            { status: 400 }
+          )
+        }
+      }
+      
       const updatedUser = await writeClient
         .patch(user._id)
-        .set(updateData)
+        .set(cleanedData)
         .commit()
-      return NextResponse.json({ user: updatedUser })
+
+      userCache.delete(session.user.email)
+
+      const projectedUser = await readClient.fetch(
+        `*[_type == "user" && _id == $id][0]{
+          ...,
+          "resume": resume{
+            ...,
+            "url": asset->url
+          },
+          "profileImage": profileImage{
+            ...,
+            "url": asset->url
+          },
+          socialMedias[]{
+            ...,
+            customIcon{
+              ...,
+              "url": asset->url
+            }
+          }
+        }`,
+        { id: user._id }
+      )
+      return NextResponse.json({ user: projectedUser })
     }
 
     // Handle generic document creation or modification (projects, experiences, tools, etc.)
     if (action === 'save-document') {
-      const doc = body
+      const doc = cleanSanityData(body)
       // Ensure the document is tied to the correct logged-in user
       doc.user = {
         _type: 'reference',

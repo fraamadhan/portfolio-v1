@@ -23,12 +23,18 @@ const getRepoLabel = (
   return `${labels.sourceCode} ${index + 1}`;
 };
 
+import { useParams } from "next/navigation";
+
 export const ProjectDetailPage = ({
   project,
 }: {
   project: ProjectDetailItemProps;
 }) => {
   const { t } = useTranslation();
+  const params = useParams();
+  const slug = params?.slug as string || "";
+  const backHref = slug ? `/${slug}/#projects` : "/#projects";
+
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const activeImage = project.images[activeImageIndex] ?? project.images[0];
   const repoLabels = {
@@ -45,7 +51,7 @@ export const ProjectDetailPage = ({
 
       <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-8">
         <Link
-          href="/#projects"
+          href={backHref}
           className="inline-flex w-fit items-center gap-2 rounded-xl border border-white/15 bg-white/6 px-4 py-2.5 text-sm tracking-wide text-neutral-100 transition-transform duration-300 hover:-translate-y-0.5 hover:border-white/25"
         >
           <ArrowLeft className="h-4 w-4" />

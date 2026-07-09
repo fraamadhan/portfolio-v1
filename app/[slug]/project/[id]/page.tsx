@@ -1,23 +1,20 @@
-import { notFound } from "next/navigation";
+import NotFound from "@/app/not-found";
 import { project as projectDetails } from "@/data/dummy";
 import { ProjectDetailPage } from "@/features/project/ProjectDetailPage";
 
-export function generateStaticParams() {
-  return projectDetails.map((item) => ({
-    id: String(item.id),
-  }));
+interface PageProps {
+  params: Promise<{
+    slug: string;
+    id: string;
+  }>;
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function Page({ params }: PageProps) {
   const { id } = await params;
   const project = projectDetails.find((item) => String(item.id) === id);
 
   if (!project) {
-    notFound();
+    return <NotFound />;
   }
 
   return <ProjectDetailPage project={project} />;

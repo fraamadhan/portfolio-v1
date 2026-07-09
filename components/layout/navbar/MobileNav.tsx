@@ -8,6 +8,7 @@ import ThemeSwitch from "./ThemeSwitch";
 import { useTheme } from "@/context/ThemeContext";
 import { useTranslation } from "@/hooks/useTranslation";
 import { NAV_ITEMS } from "./navConfig";
+import { usePathname } from "next/navigation";
 
 type Props = {
     isOpen: boolean;
@@ -20,6 +21,24 @@ export default function MobileNav({ isOpen, closeMenu, activeSection, handleNavC
     const { t } = useTranslation();
     const { theme } = useTheme();
     const isDark = theme === "dark";
+    const pathname = usePathname();
+
+    const segments = pathname.split("/").filter(Boolean);
+    const slug = segments[0] && !["cms", "dashboard", "gateway", "api"].includes(segments[0]) ? segments[0] : "";
+
+    const getDynamicHref = (href: string) => {
+        if (href === "/dashboard") {
+            return slug ? `/${slug}/dashboard` : href;
+        }
+        if (href.startsWith("/#")) {
+            return slug ? `/${slug}${href.slice(1)}` : href;
+        }
+        return href;
+    };
+
+    const displayNavItems = NAV_ITEMS.filter(
+        (item) => item.href !== "/dashboard" || slug === "fakhri-fajar-ramadhan"
+    );
 
     useEffect(() => {
         if (!isOpen) return;
@@ -86,16 +105,16 @@ export default function MobileNav({ isOpen, closeMenu, activeSection, handleNavC
 
             <nav aria-label="Mobile primary" className="relative z-10">
                 <ul className="flex flex-col items-center gap-8">
-                    {NAV_ITEMS.map((item) => (
+                    {displayNavItems.map((item) => (
                         <li key={item.labelKey}>
                             <Link
-                                href={item.href}
+                                href={getDynamicHref(item.href)}
                                 onClick={(event) => {
-                                    handleNavClick(item.href)(event);
+                                    handleNavClick(getDynamicHref(item.href))(event);
                                     closeMenu();
                                 }}
                                 className={`px-5 py-2 rounded-xl transition-all duration-300 ${
-                                    activeSection === item.href
+                                    activeSection === getDynamicHref(item.href)
                                         ? isDark
                                             ? "font-semibold text-white bg-white/10"
                                             : "font-semibold text-slate-900 bg-slate-200/50"
@@ -103,7 +122,7 @@ export default function MobileNav({ isOpen, closeMenu, activeSection, handleNavC
                                             ? "text-white/82 hover:text-white hover:bg-white/10"
                                             : "text-slate-700/85 hover:text-slate-900 hover:bg-slate-200/50"
                                 }`}
-                                aria-current={activeSection === item.href ? "page" : undefined}
+                                aria-current={activeSection === getDynamicHref(item.href) ? "page" : undefined}
                             >
                                 {t(item.labelKey)}
                             </Link>

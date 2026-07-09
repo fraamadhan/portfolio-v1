@@ -2,6 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { useParams } from "next/navigation";
 
 interface CollectionHeroProps {
   eyebrow: string;
@@ -20,6 +23,9 @@ export default function CollectionHero({
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
+  const params = useParams();
+  const slug = params?.slug as string || "";
+  const backHref = slug ? `/${slug}` : "/";
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -54,7 +60,14 @@ export default function CollectionHero({
   }, []);
 
   return (
-    <div className="mb-16 pt-6 text-center">
+    <div className="mb-16 pt-6 text-center flex flex-col items-center">
+      <Link
+        href={backHref}
+        className="mb-8 inline-flex w-fit items-center gap-2 rounded-full border border-slate-300/70 bg-white/80 px-4 py-2 text-sm tracking-wide text-slate-800 transition-transform duration-300 hover:-translate-y-0.5 hover:border-slate-400/70 dark:border-white/12 dark:bg-white/6 dark:text-neutral-100 dark:hover:border-white/20"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        <span>Back to Home</span>
+      </Link>
       <div
         ref={lineRef}
         className={`mx-auto mb-6 h-[2px] w-16 rounded-full ${accentColor}`}

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 
 import {
   createSupabaseAdminClient,
@@ -15,9 +16,9 @@ import { TestimonialFormState } from "@/features/testimonial/types";
 import { TESTIMONIALS_PER_PAGE } from "@/features/testimonial/constants";
 import { getTestimonialsPage } from "@/features/testimonial/queries";
 
-const getInvalidResponse = () =>
+const getInvalidResponse = (message = "Invalid testimonial payload.") =>
   NextResponse.json(
-    { message: "Invalid testimonial payload." },
+    { message },
     { status: 400 }
   );
 
@@ -35,6 +36,20 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  // Rate limit: Max 2 testimonials per 5 minutes per IP
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+    request.headers.get("x-real-ip") ||
+    "127.0.0.1";
+
+  const limitResult = rateLimit(ip, 2, 5 * 60 * 1000);
+  if (!limitResult.success) {
+    return NextResponse.json(
+      { message: "Too many submissions. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   let body: Partial<TestimonialFormState> | null = null;
 
   try {
@@ -58,7 +73,18 @@ export async function POST(request: Request) {
     !payload.tag.trim() ||
     !payload.quote.trim()
   ) {
-    return getInvalidResponse();
+    return getInvalidResponse("All fields are required.");
+  }
+
+  // Length limits validation
+  if (
+    payload.author.trim().length > 100 ||
+    payload.role.trim().length > 100 ||
+    payload.institution.trim().length > 100 ||
+    payload.tag.trim().length > 50 ||
+    payload.quote.trim().length > 1000
+  ) {
+    return getInvalidResponse("Input values exceed length limits.");
   }
 
   const supabase =

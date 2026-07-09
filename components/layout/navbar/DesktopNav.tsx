@@ -7,6 +7,7 @@ import LanguageSwitch from "./LanguageSwitch";
 import ThemeSwitch from "./ThemeSwitch";
 import { useTranslation } from "@/hooks/useTranslation";
 import { NAV_ITEMS, PRIMARY_ITEMS } from "./navConfig";
+import { usePathname } from "next/navigation";
 
 type Props = {
     activeSection: string;
@@ -15,11 +16,27 @@ type Props = {
 
 export default function DesktopNav({ activeSection, handleNavClick }: Props) {
     const { t } = useTranslation();
+    const pathname = usePathname();
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const moreMenuRef = useRef<HTMLLIElement | null>(null);
 
+    const segments = pathname.split("/").filter(Boolean);
+    const slug = segments[0] && !["cms", "dashboard", "gateway", "api"].includes(segments[0]) ? segments[0] : "";
+
+    const getDynamicHref = (href: string) => {
+        if (href === "/dashboard") {
+            return slug ? `/${slug}/dashboard` : href;
+        }
+        if (href.startsWith("/#")) {
+            return slug ? `/${slug}${href.slice(1)}` : href;
+        }
+        return href;
+    };
+
     const dropdownItems = NAV_ITEMS.filter(
         (item) => !PRIMARY_ITEMS.some((primary) => primary.labelKey === item.labelKey)
+    ).filter(
+        (item) => item.href !== "/dashboard" || slug === "fakhri-fajar-ramadhan"
     );
 
     useEffect(() => {
@@ -52,14 +69,14 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
                 {PRIMARY_ITEMS.map((item) => (
                     <li key={item.labelKey}>
                         <Link
-                            href={item.href}
-                            onClick={handleNavClick(item.href)}
+                            href={getDynamicHref(item.href)}
+                            onClick={handleNavClick(getDynamicHref(item.href))}
                             className={`px-3 py-1.5 rounded-xl transition-all duration-300 hover:bg-slate-100 dark:hover:bg-white/10 ${
-                                activeSection === item.href
+                                activeSection === getDynamicHref(item.href)
                                     ? "font-semibold text-slate-900 dark:text-white"
                                     : "text-slate-700/85 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
                             }`}
-                            aria-current={activeSection === item.href ? "page" : undefined}
+                            aria-current={activeSection === getDynamicHref(item.href) ? "page" : undefined}
                         >
                             {t(item.labelKey)}
                         </Link>
@@ -68,33 +85,35 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
 
                 <li className="hidden xl:block">
                     <Link
-                        href="/#testimonials"
-                        onClick={handleNavClick("/#testimonials")}
+                        href={getDynamicHref("/#testimonials")}
+                        onClick={handleNavClick(getDynamicHref("/#testimonials"))}
                         className={`px-3 py-1.5 rounded-xl transition-all duration-300 hover:bg-slate-100 dark:hover:bg-white/10 ${
-                            activeSection === "/#testimonials"
+                            activeSection === getDynamicHref("/#testimonials")
                                 ? "font-semibold text-slate-900 dark:text-white"
                                 : "text-slate-700/85 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
                         }`}
-                        aria-current={activeSection === "/#testimonials" ? "page" : undefined}
+                        aria-current={activeSection === getDynamicHref("/#testimonials") ? "page" : undefined}
                     >
                         {t("navbar.testimonials")}
                     </Link>
                 </li>
 
-                <li className="hidden xl:block">
-                    <Link
-                        href="/dashboard"
-                        onClick={handleNavClick("/dashboard")}
-                        className={`px-3 py-1.5 rounded-xl transition-all duration-300 hover:bg-slate-100 dark:hover:bg-white/10 ${
-                            activeSection === "/dashboard"
-                                ? "font-semibold text-slate-900 dark:text-white"
-                                : "text-slate-700/85 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
-                        }`}
-                        aria-current={activeSection === "/dashboard" ? "page" : undefined}
-                    >
-                        {t("navbar.dashboard")}
-                    </Link>
-                </li>
+                {slug === "fakhri-fajar-ramadhan" && (
+                    <li className="hidden xl:block">
+                        <Link
+                            href={getDynamicHref("/dashboard")}
+                            onClick={handleNavClick(getDynamicHref("/dashboard"))}
+                            className={`px-3 py-1.5 rounded-xl transition-all duration-300 hover:bg-slate-100 dark:hover:bg-white/10 ${
+                                activeSection === getDynamicHref("/dashboard")
+                                    ? "font-semibold text-slate-900 dark:text-white"
+                                    : "text-slate-700/85 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
+                            }`}
+                            aria-current={activeSection === getDynamicHref("/dashboard") ? "page" : undefined}
+                        >
+                            {t("navbar.dashboard")}
+                        </Link>
+                    </li>
+                )}
 
                 <li className="relative xl:hidden" ref={moreMenuRef}>
                     <button
@@ -122,18 +141,18 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
                                 {dropdownItems.map((item) => (
                                     <li key={item.labelKey}>
                                         <Link
-                                            href={item.href}
+                                            href={getDynamicHref(item.href)}
                                             role="menuitem"
                                             onClick={(event) => {
-                                                handleNavClick(item.href)(event);
+                                                handleNavClick(getDynamicHref(item.href))(event);
                                                 setIsMoreOpen(false);
                                             }}
                                             className={`block px-3 py-2 rounded-lg transition-all duration-300 hover:bg-slate-100 dark:hover:bg-white/10 ${
-                                                activeSection === item.href
+                                                activeSection === getDynamicHref(item.href)
                                                     ? "font-semibold text-slate-900 dark:text-white"
                                                     : "text-slate-700/85 dark:text-white/80 hover:text-slate-900 dark:hover:text-white"
                                             }`}
-                                            aria-current={activeSection === item.href ? "page" : undefined}
+                                            aria-current={activeSection === getDynamicHref(item.href) ? "page" : undefined}
                                         >
                                             {t(item.labelKey)}
                                         </Link>

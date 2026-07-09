@@ -12,8 +12,14 @@ import { cn } from "@/lib/utils"
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value))
 
+import { useParams } from "next/navigation"
+
 export default function ExperienceTimelinePage() {
     const { t } = useTranslation()
+    const params = useParams()
+    const slug = params?.slug as string || ""
+    const backHref = slug ? `/${slug}/#experience` : "/#experience"
+
     const timelineRef = useRef<HTMLDivElement | null>(null)
     const [scrollProgress, setScrollProgress] = useState(0)
 
@@ -56,7 +62,7 @@ export default function ExperienceTimelinePage() {
 
             <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-10">
                 <Link
-                    href="/#experience"
+                    href={backHref}
                     className="flex w-fit items-center gap-2 rounded-full border border-slate-300/70 bg-white/80 px-4 py-2 text-sm tracking-wide text-neutral-100 transition-transform duration-300 hover:-translate-y-0.5 hover:border-slate-400/70 dark:border-white/12 dark:bg-white/6 dark:hover:border-white/20"
                 >
                     <ArrowLeft className="h-4 w-4" />

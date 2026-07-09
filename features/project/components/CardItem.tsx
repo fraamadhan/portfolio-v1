@@ -3,9 +3,13 @@ import { ExternalLink } from "lucide-react"
 import { useTranslation } from "@/hooks/useTranslation"
 import { ProjectItemProps } from "@/types"
 import Link from "next/link"
+import { useParams } from "next/navigation"
 
 const CardItem = ({ project }: { project: ProjectItemProps }) => {
     const { t } = useTranslation()
+    const params = useParams()
+    const slug = params?.slug as string || ""
+    const projectHref = slug ? `/${slug}/project/${project.id}` : `/project/${project.id}`
 
     return (
         <div className="flex h-full flex-col">
@@ -55,7 +59,7 @@ const CardItem = ({ project }: { project: ProjectItemProps }) => {
                 </div>
 
                 <Link
-                    href={`/project/${project.id}`}
+                    href={projectHref}
                     className="mt-auto inline-flex w-fit items-center gap-1.5 pt-1 text-sm font-medium text-neutral-200 transition-colors hover:text-neutral-100 dark:text-neutral-100/90 dark:hover:text-neutral-100"
                 >
                     <span>{t("view_projects")}</span>

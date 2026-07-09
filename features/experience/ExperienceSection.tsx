@@ -5,9 +5,12 @@ import { useTranslation } from "@/hooks/useTranslation"
 import { experiences } from "@/data/dummy"
 import { Card } from "./components/Card"
 import Link from "next/link"
+import { useParams } from "next/navigation"
 
 const ExperienceSection = () => {
     const { t } = useTranslation()
+    const params = useParams()
+    const slug = params?.slug as string || ""
 
     return (
         <section
@@ -35,7 +38,7 @@ const ExperienceSection = () => {
             </div>
 
             <Link
-                href="/experience"
+                href={slug ? `/${slug}/experience` : "/experience"}
                 className="btn-hover-cool flex w-fit items-center gap-2 self-center rounded-xl border border-slate-300/70 bg-white/80 px-4 py-3 text-sm tracking-wide text-neutral-100 dark:border-white/12 dark:bg-white/6 dark:hover:border-white/20"
             >
                 <span>{t("experience_section.see_more")}</span>

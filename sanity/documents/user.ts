@@ -89,6 +89,15 @@ export default {
       }
     },
     {
+      name: 'profileImage',
+      type: 'image',
+      title: 'Profile Photo',
+      group: 'profile',
+      options: {
+        hotspot: true
+      }
+    },
+    {
       name: 'pastRoles',
       type: 'array',
       title: 'Past Roles',
@@ -119,7 +128,13 @@ export default {
                 ]
               }
             },
-            { name: 'url', type: 'string', title: 'URL or Username' },
+            { name: 'url', type: 'string', title: 'URL' },
+            {
+              name: 'customName',
+              type: 'string',
+              title: 'Custom Platform Name',
+              hidden: ({parent}: any) => parent?.platform !== 'custom'
+            },
             { 
               name: 'customIcon', 
               type: 'image', 
