@@ -55,8 +55,8 @@ export const KeypointList = ({
             {showContent ? (
                 <div id={contentId}>
                     <ul className="list-disc px-6 text-sm leading-6 text-neutral-100 sm:text-base">
-                        {keypoints.map((keypoint) => (
-                            <li key={keypoint}>{keypoint}</li>
+                        {keypoints.filter(k => k && k.trim() !== "").map((keypoint, idx) => (
+                            <li key={idx}>{keypoint}</li>
                         ))}
                     </ul>
                     <ExperienceTechStack items={techStack} />

@@ -124,13 +124,69 @@ export default async function UserProfilePage({ params }: PageProps) {
     console.error("Failed to fetch Sanity skills:", err);
   }
 
+  let experiences = [];
+  try {
+    experiences = await client.fetch(`
+      *[_type == "experience" && user._ref == $userId && !(_id in path('drafts.**'))] | order(dateFrom desc){
+        _id,
+        role,
+        company,
+        location,
+        dateFrom,
+        dateTo,
+        isCurrent,
+        programType,
+        keypoints,
+        toolsUsed[]->{
+          _id,
+          name,
+          "iconUrl": icon.asset->url
+        }
+      }
+    `, { userId: profile._id });
+  } catch (err) {
+    console.error("Failed to fetch Sanity experiences:", err);
+  }
+
+  let projects = [];
+  try {
+    projects = await client.fetch(`
+      *[_type == "project" && user._ref == $userId && !(_id in path('drafts.**'))] | order(order asc, _createdAt desc){
+        _id,
+        title,
+        description,
+        roleInProject,
+        images[]{
+          ...,
+          "url": asset->url
+        },
+        keyHighlights,
+        toolsUsed[]->{
+          _id,
+          name,
+          "iconUrl": icon.asset->url
+        },
+        links[]{
+          label,
+          url,
+          icon{
+            ...,
+            "url": asset->url
+          }
+        }
+      }
+    `, { userId: profile._id });
+  } catch (err) {
+    console.error("Failed to fetch Sanity projects:", err);
+  }
+
   return (
     <div className="flex flex-col bg-[linear-gradient(180deg,rgba(250,252,255,1),rgba(236,242,249,1))] pt-28 dark:bg-[linear-gradient(180deg,#2f3f50_0%,#263544_100%)]">
       <LandingPage profile={profile} />
       <AboutSection profile={profile} />
       <SkillSection initialSkills={skills} skillsSlogan={profile.skillsSlogan} />
-      <ExperienceSection />
-      <ProjectSection />
+      <ExperienceSection experiences={experiences} />
+      <ProjectSection initialProjects={projects} />
       <TestimonialSection initialData={testimonialPage} />
     </div>
   );

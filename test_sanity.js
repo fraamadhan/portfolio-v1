@@ -15,8 +15,8 @@ const client = createClient({
 
 async function test() {
   try {
-    const user = await client.fetch(`*[_type == "user" && !(_id in path('drafts.**'))][0]{ _id, name, email }`);
-    console.log("PUBLISHED USER WITH PATH FILTER:", JSON.stringify(user, null, 2));
+    const experiences = await client.fetch(`*[_type == "experience" && !(_id in path('drafts.**'))]{ _id, role, company, keypoints }`);
+    console.log("EXPERIENCES:", JSON.stringify(experiences, null, 2));
   } catch (err) {
     console.error("ERROR FETCHING:", err);
   }

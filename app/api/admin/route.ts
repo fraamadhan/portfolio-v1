@@ -94,7 +94,20 @@ export async function GET(req: Request) {
 
     if (fetchType === 'projects') {
       const data = await readClient.fetch(`{
-        "projects": *[_type == "project" && user._ref == $userId] | order(_createdAt desc),
+        "projects": *[_type == "project" && user._ref == $userId] | order(_createdAt desc){
+          ...,
+          images[]{
+            ...,
+            "url": asset->url
+          },
+          links[]{
+            ...,
+            icon{
+              ...,
+              "url": asset->url
+            }
+          }
+        },
         "tools": *[_type == "tool" && user._ref == $userId]{
           ...,
           "icon": icon {

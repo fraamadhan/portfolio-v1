@@ -235,7 +235,7 @@ export default function ExperiencesTab({
                         setEditingItem({
                           ...editingItem,
                           keypoints: [
-                            ...current.filter((k: any) => k.en !== undefined),
+                            ...current,
                             { _type: 'localeString', en: '' }
                           ]
                         })
@@ -248,39 +248,36 @@ export default function ExperiencesTab({
 
                   <div className="space-y-2 max-h-40 overflow-y-auto bg-slate-950 p-4 rounded-xl border border-slate-850">
                     {(!editingItem.keypoints ||
-                      editingItem.keypoints.filter((k: any) => k.en !== undefined).length === 0) && (
+                      editingItem.keypoints.length === 0) && (
                       <p className="text-xs text-slate-500 italic text-center py-2">No English keypoints added yet.</p>
                     )}
-                    {editingItem.keypoints
-                      ?.filter((k: any) => k.en !== undefined)
-                      .map((kp: any, idx: number) => {
-                        const realIdx = editingItem.keypoints.findIndex((k: any) => k === kp)
-                        return (
-                          <div key={idx} className="flex gap-2 items-center">
-                            <input
-                              type="text"
-                              value={kp.en || ''}
-                              onChange={(e) => {
-                                const arr = [...editingItem.keypoints]
-                                arr[realIdx] = { ...arr[realIdx], en: e.target.value }
-                                setEditingItem({ ...editingItem, keypoints: arr })
-                              }}
-                              placeholder="e.g. Led a team of 4 frontend engineers to rebuild the dashboard"
-                              className="flex-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-200 focus:outline-none"
-                            />
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const arr = editingItem.keypoints.filter((_: any, i: number) => i !== realIdx)
-                                setEditingItem({ ...editingItem, keypoints: arr })
-                              }}
-                              className="p-1.5 text-rose-500 hover:bg-rose-500/5 rounded-lg cursor-pointer"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
-                          </div>
-                        )
-                      })}
+                    {editingItem.keypoints?.map((kp: any, idx: number) => {
+                      return (
+                        <div key={idx} className="flex gap-2 items-center">
+                          <input
+                            type="text"
+                            value={kp.en || ''}
+                            onChange={(e) => {
+                              const arr = [...editingItem.keypoints]
+                              arr[idx] = { ...arr[idx], en: e.target.value }
+                              setEditingItem({ ...editingItem, keypoints: arr })
+                            }}
+                            placeholder="e.g. Led a team of 4 frontend engineers to rebuild the dashboard"
+                            className="flex-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-200 focus:outline-none"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const arr = editingItem.keypoints.filter((_: any, i: number) => i !== idx)
+                              setEditingItem({ ...editingItem, keypoints: arr })
+                            }}
+                            className="p-1.5 text-rose-500 hover:bg-rose-500/5 rounded-lg cursor-pointer"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
               ) : (
@@ -294,7 +291,7 @@ export default function ExperiencesTab({
                         setEditingItem({
                           ...editingItem,
                           keypoints: [
-                            ...current.filter((k: any) => k.id !== undefined),
+                            ...current,
                             { _type: 'localeString', id: '' }
                           ]
                         })
@@ -307,41 +304,38 @@ export default function ExperiencesTab({
 
                   <div className="space-y-2 max-h-40 overflow-y-auto bg-slate-950 p-4 rounded-xl border border-slate-850">
                     {(!editingItem.keypoints ||
-                      editingItem.keypoints.filter((k: any) => k.id !== undefined).length === 0) && (
+                      editingItem.keypoints.length === 0) && (
                       <p className="text-xs text-slate-500 italic text-center py-2">
                         No Indonesian keypoints added yet.
                       </p>
                     )}
-                    {editingItem.keypoints
-                      ?.filter((k: any) => k.id !== undefined)
-                      .map((kp: any, idx: number) => {
-                        const realIdx = editingItem.keypoints.findIndex((k: any) => k === kp)
-                        return (
-                          <div key={idx} className="flex gap-2 items-center">
-                            <input
-                              type="text"
-                              value={kp.id || ''}
-                              onChange={(e) => {
-                                const arr = [...editingItem.keypoints]
-                                arr[realIdx] = { ...arr[realIdx], id: e.target.value }
-                                setEditingItem({ ...editingItem, keypoints: arr })
-                              }}
-                              placeholder="Contoh: Memimpin tim berisi 4 insinyur frontend"
-                              className="flex-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-200 focus:outline-none"
-                            />
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const arr = editingItem.keypoints.filter((_: any, i: number) => i !== realIdx)
-                                setEditingItem({ ...editingItem, keypoints: arr })
-                              }}
-                              className="p-1.5 text-rose-500 hover:bg-rose-500/5 rounded-lg cursor-pointer"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
-                          </div>
-                        )
-                      })}
+                    {editingItem.keypoints?.map((kp: any, idx: number) => {
+                      return (
+                        <div key={idx} className="flex gap-2 items-center">
+                          <input
+                            type="text"
+                            value={kp.id || ''}
+                            onChange={(e) => {
+                              const arr = [...editingItem.keypoints]
+                              arr[idx] = { ...arr[idx], id: e.target.value }
+                              setEditingItem({ ...editingItem, keypoints: arr })
+                            }}
+                            placeholder="Contoh: Memimpin tim berisi 4 insinyur frontend"
+                            className="flex-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-200 focus:outline-none"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const arr = editingItem.keypoints.filter((_: any, i: number) => i !== idx)
+                              setEditingItem({ ...editingItem, keypoints: arr })
+                            }}
+                            className="p-1.5 text-rose-500 hover:bg-rose-500/5 rounded-lg cursor-pointer"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
               )}
