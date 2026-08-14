@@ -31,7 +31,7 @@ export default async function GatewayPage() {
             Portfolio Hub Gateway
           </h1>
           <p className="text-xs text-slate-400 font-inter">
-            Welcome to the gateway. Select a portfolio to view or log into the CMS Admin dashboard below.
+            Welcome to the gateway. Select a portfolio to view.
           </p>
         </div>
 
@@ -51,14 +51,6 @@ export default async function GatewayPage() {
               No active profiles found in the database.
             </div>
           )}
-
-          <Link
-            href="/cms"
-            className="flex items-center justify-between w-full px-5 py-4 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 font-semibold rounded-xl transition duration-300 group cursor-pointer text-sm font-inter"
-          >
-            <span>Access CMS Admin Portal</span>
-            <LayoutDashboard className="w-4 h-4 text-slate-400 group-hover:text-slate-300 transition-colors" />
-          </Link>
         </div>
       </div>
     </main>

@@ -6,7 +6,7 @@ import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import LanguageSwitch from "./LanguageSwitch";
 import ThemeSwitch from "./ThemeSwitch";
 import { useTranslation } from "@/hooks/useTranslation";
-import { NAV_ITEMS, PRIMARY_ITEMS } from "./navConfig";
+import { NAV_ITEMS, PRIMARY_ITEMS, useActiveSlug } from "./navConfig";
 import { usePathname } from "next/navigation";
 
 type Props = {
@@ -20,8 +20,7 @@ export default function DesktopNav({ activeSection, handleNavClick }: Props) {
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const moreMenuRef = useRef<HTMLLIElement | null>(null);
 
-    const segments = pathname.split("/").filter(Boolean);
-    const slug = segments[0] && !["cms", "dashboard", "gateway", "api"].includes(segments[0]) ? segments[0] : "";
+    const slug = useActiveSlug();
 
     const getDynamicHref = (href: string) => {
         if (href === "/dashboard") {

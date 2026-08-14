@@ -8,7 +8,7 @@ import { TypewriterEffect } from "@/components/ui/TypewriterEffect";
 import { currentWorkRole } from "@/data/dummy";
 import { scrollToElementWithOffset } from "@/lib/utils";
 import Link from "next/link";
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 interface LandingPageProps {
@@ -30,6 +30,14 @@ const LandingPage = ({ profile }: LandingPageProps) => {
     const { t } = useTranslation();
     const { lang } = useLanguage();
     const pathname = usePathname();
+
+    useEffect(() => {
+        const segments = pathname.split("/").filter(Boolean);
+        const slug = segments[0] && !["cms", "dashboard", "gateway", "api"].includes(segments[0]) ? segments[0] : "";
+        if (slug) {
+            localStorage.setItem("last_valid_slug", slug);
+        }
+    }, [pathname]);
 
     const handleProjectsClick = (event: MouseEvent<HTMLAnchorElement>) => {
         if (pathname !== "/") return;

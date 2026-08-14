@@ -1,10 +1,62 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Radio, RotateCcw } from "lucide-react";
 
 export default function NotFound() {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const vinylRef = useRef<HTMLDivElement | null>(null);
+
+  if (typeof window !== "undefined") {
+    (window as any).__is404 = true;
+    window.dispatchEvent(new CustomEvent("app_404_active"));
+  }
+
+  useEffect(() => {
+    const audio = new Audio("/audio/one-summers-day.mp3");
+    audio.preload = "auto";
+    audio.loop = true;
+    audio.volume = 0.45;
+    audioRef.current = audio;
+
+    const playAudio = () => {
+      audio.play().then(() => {
+        document.removeEventListener("click", playAudio);
+        document.removeEventListener("keydown", playAudio);
+        if (vinylRef.current) {
+          vinylRef.current.removeEventListener("mouseenter", playAudio);
+        }
+      }).catch((err) => {
+        console.log("Autoplay blocked, waiting for user interaction.", err);
+      });
+    };
+
+    // Try to play immediately
+    playAudio();
+
+    // Listen for interactions to bypass autoplay policy
+    document.addEventListener("click", playAudio);
+    document.addEventListener("keydown", playAudio);
+    if (vinylRef.current) {
+      vinylRef.current.addEventListener("mouseenter", playAudio);
+    }
+
+    return () => {
+      if (typeof window !== "undefined") {
+        (window as any).__is404 = false;
+        window.dispatchEvent(new CustomEvent("app_404_inactive"));
+      }
+      audio.pause();
+      document.removeEventListener("click", playAudio);
+      document.removeEventListener("keydown", playAudio);
+      if (vinylRef.current) {
+        vinylRef.current.removeEventListener("mouseenter", playAudio);
+      }
+    };
+  }, []);
+
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_40%),linear-gradient(180deg,#f8fafc_0%,#e2e8f0_100%)] px-4 text-slate-800 transition-colors duration-300 dark:bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.15),transparent_40%),linear-gradient(180deg,#090d16_0%,#04060b_100%)] dark:text-white">
       {/* Background Music Waves pattern */}
@@ -21,7 +73,10 @@ export default function NotFound() {
         </div>
 
         {/* Anime Image Container - styled like a spinning vinyl record */}
-        <div className="group relative mt-2 aspect-square w-48 overflow-hidden rounded-full border-4 border-blue-400/20 bg-neutral-200 shadow-[0_0_40px_rgba(59,130,246,0.1)] transition-transform duration-500 hover:scale-105 hover:border-blue-500/40 dark:border-blue-500/20 dark:bg-neutral-900 dark:shadow-[0_0_40px_rgba(59,130,246,0.15)] sm:w-56">
+        <div
+          ref={vinylRef}
+          className="group relative mt-2 aspect-square w-48 overflow-hidden rounded-full border-4 border-blue-400/20 bg-neutral-200 shadow-[0_0_40px_rgba(59,130,246,0.1)] transition-transform duration-500 hover:scale-105 hover:border-blue-500/40 dark:border-blue-500/20 dark:bg-neutral-900 dark:shadow-[0_0_40px_rgba(59,130,246,0.15)] sm:w-56 cursor-pointer"
+        >
           {/* Animated vinyl grooves overlay */}
           <div className="absolute inset-0 rounded-full border border-black/5 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.45)_75%)] z-10" />
           
