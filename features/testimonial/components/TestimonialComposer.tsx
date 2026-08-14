@@ -89,6 +89,18 @@ const TestimonialComposer = ({
 
           {isOpen && (
             <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-4">
+              {/* Honeypot field to catch spam bots */}
+              <div style={{ display: 'none' }} aria-hidden="true">
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.honeypot}
+                  onChange={(event) => onFieldChange("honeypot", event.target.value)}
+                />
+              </div>
+
               <div>
                 <label
                   htmlFor={authorId}

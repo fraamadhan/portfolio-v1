@@ -12,6 +12,8 @@ import { currentWorkRole } from "@/data/dummy";
 import { TypewriterEffect } from "@/components/ui/TypewriterEffect";
 import { useTranslation } from "@/hooks/useTranslation";
 import { HOME_HREF, NAV_ITEMS } from "../navbar/navConfig";
+import { usePathname } from "next/navigation";
+
 const GENERAL_LINKS = [
   { href: HOME_HREF, labelKey: "footer.general.home" },
   ...NAV_ITEMS.map((item) => ({
@@ -53,6 +55,22 @@ const SOCIAL_LINKS = [
 
 const Footer = () => {
   const { t } = useTranslation();
+  const pathname = usePathname();
+  const segments = pathname.split("/").filter(Boolean);
+  const slug = segments[0] && !["cms", "dashboard", "gateway", "api"].includes(segments[0]) ? segments[0] : "";
+
+  const getDynamicHref = (href: string) => {
+    if (href === "/dashboard") {
+      return slug ? `/${slug}/dashboard` : href;
+    }
+    if (href.startsWith("/#")) {
+      return slug ? `/${slug}${href.slice(1)}` : href;
+    }
+    if (href.startsWith("/collection/")) {
+      return slug ? `/${slug}${href}` : href;
+    }
+    return href;
+  };
 
   return (
     <footer className="border-t border-primary-200/20 bg-[linear-gradient(to_right,#edf4fb_22%,#dde8f3_100%)] px-6 py-16 text-white md:px-10 dark:bg-[linear-gradient(to_right,#3A4E63_22%,#1E2A38_100%)]">
@@ -98,7 +116,7 @@ const Footer = () => {
               {GENERAL_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
-                    href={item.href}
+                    href={getDynamicHref(item.href)}
                     className="text-lg text-neutral-100/88 transition hover:text-primary-100"
                   >
                     {t(item.labelKey)}
@@ -116,7 +134,7 @@ const Footer = () => {
               {COLLECTION_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
-                    href={item.href}
+                    href={getDynamicHref(item.href)}
                     className="text-lg text-neutral-100/88 transition hover:text-primary-100"
                   >
                     {t(item.labelKey)}

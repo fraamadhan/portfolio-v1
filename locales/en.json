@@ -100,7 +100,7 @@
       "close_button": "Fold note away",
       "submit_button": "Pin to wall",
       "submitting_button": "Saving...",
-      "submit_success": "Testimonial saved.",
+      "submit_success": "Testimonial submitted and is awaiting admin approval.",
       "submit_error": "Could not save testimonial. Please try again.",
       "footer_note": "New notes land on page one"
     },

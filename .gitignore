@@ -42,3 +42,5 @@ yarn-error.log*
 next-env.d.ts
 
 portfolio.txt
+cms_spec.md
+enchancement_spec.md

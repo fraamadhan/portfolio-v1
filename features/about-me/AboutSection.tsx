@@ -5,9 +5,66 @@ import { useTranslation } from "@/hooks/useTranslation";
 import Logo from "./components/Logo";
 import { Button } from "@/components/ui/button";
 import { EMAIL_MAILTO_URL, GITHUB_URL, LINKEDIN_URL, RESUME_DOWNLOAD_NAME, RESUME_FILE_PATH } from "./function";
+import { useLanguage } from "@/context/LanguageContext";
+import { blocksToMarkdown, renderMarkdown } from "@/components/admin/utils";
 
-const AboutSection = () => {
+interface AboutSectionProps {
+    profile?: any;
+}
+
+const AboutSection = ({ profile }: AboutSectionProps) => {
     const { t } = useTranslation();
+    const { lang } = useLanguage();
+
+    const imageUrl = profile?.profileImage?.url || '/img/me.jpeg';
+    
+    // Convert Portable Text blocks to markdown and render as HTML
+    const blocks = profile?.fullDescription?.[lang] || [];
+    const markdownText = blocksToMarkdown(blocks);
+    const htmlContent = renderMarkdown(markdownText);
+
+    // Social Media config
+    const platformIcons: Record<string, string> = {
+        github: '/svg/github.svg',
+        linkedin: '/svg/linkedin.svg',
+        email: '/svg/email.svg',
+        instagram: '/svg/instagram.svg',
+        facebook: '/svg/facebook.svg',
+        tiktok: '/svg/tiktok.svg',
+    };
+
+    const getIconSrc = (social: any) => {
+        if (social.platform === 'custom') {
+            return social.customIcon?.url || '/svg/link.svg';
+        }
+        return platformIcons[social.platform] || '/svg/link.svg';
+    };
+
+    const getLabel = (social: any) => {
+        if (social.platform === 'custom') {
+            return social.customName || 'Custom Link';
+        }
+        return social.platform.charAt(0).toUpperCase() + social.platform.slice(1);
+    };
+
+    const getHref = (social: any) => {
+        if (social.platform === 'email') {
+            return social.url?.startsWith('mailto:') ? social.url : `mailto:${social.url}`;
+        }
+        return social.url || '';
+    };
+
+    const socialMedias = profile?.socialMedias || [];
+    const defaultSocials = [
+        { platform: 'github', url: GITHUB_URL },
+        { platform: 'linkedin', url: LINKEDIN_URL },
+        { platform: 'email', url: EMAIL_MAILTO_URL }
+    ];
+    const displaySocials = socialMedias.length > 0 ? socialMedias : defaultSocials;
+    const activeResumePath = profile?.resume?.url || RESUME_FILE_PATH;
+    const downloadResumePath = activeResumePath.includes('cdn.sanity.io')
+        ? `${activeResumePath}?dl=${profile?.name ? `${profile.name.toLowerCase().replace(/\s+/g, '_')}_resume.pdf` : 'resume.pdf'}`
+        : activeResumePath;
 
     return (
         <section
@@ -30,47 +87,55 @@ const AboutSection = () => {
 
                     <div className="relative mx-auto h-[400px] md:h-[480px] w-[300px] shrink-0 md:mx-0">
                         <Image
-                            src='/img/me.jpeg'
+                            src={imageUrl}
                             fill
-                            alt="Photo of Fakhri"
+                            alt={`Photo of ${profile?.name || 'Fakhri'}`}
                             className="rounded-lg border-4 border-white object-cover shadow-[0_18px_40px_rgba(212,226,245,0.24)]"
                         />
                     </div>
 
                     <div className="flex w-full flex-col items-center gap-y-10 text-center text-base leading-relaxed text-slate-700 md:items-start md:text-left dark:text-gray-100">
                         <div className="flex w-full flex-col gap-y-5">
-                            <p>
-                                {t("about_section.intro.before_highlight")}
-                                <span className="text-rose-500 dark:text-rose-300">{t("about_section.intro.highlight_one")}</span>
-                                {t("about_section.intro.middle")}
-                                <span className="text-rose-500 dark:text-rose-300">{t("about_section.intro.highlight_two")}</span>
-                                {t("about_section.intro.after_highlight")}
-                            </p>
-                            <p>
-                                {t("about_section.stack")}
-                            </p>
-                            <p>
-                                {t("about_section.hobbies")}
-                            </p>
-                            <p>
-                                {t("about_section.closing")}
-                            </p>
+                            {htmlContent ? (
+                                <div dangerouslySetInnerHTML={{ __html: htmlContent }} className="space-y-4" />
+                            ) : (
+                                <>
+                                    <p>
+                                        {t("about_section.intro.before_highlight")}
+                                        <span className="text-rose-500 dark:text-rose-300">{t("about_section.intro.highlight_one")}</span>
+                                        {t("about_section.intro.middle")}
+                                        <span className="text-rose-500 dark:text-rose-300">{t("about_section.intro.highlight_two")}</span>
+                                        {t("about_section.intro.after_highlight")}
+                                    </p>
+                                    <p>
+                                        {t("about_section.stack")}
+                                    </p>
+                                    <p>
+                                        {t("about_section.hobbies")}
+                                    </p>
+                                    <p>
+                                        {t("about_section.closing")}
+                                    </p>
+                                </>
+                            )}
                         </div>
                         <ul className="flex items-center justify-center gap-x-4 md:justify-start">
-                            <li>
-                                <Logo src="/logo/ic_github.svg" href={GITHUB_URL} label="GitHub profile" />
-                            </li>
-                            <li>
-                                <Logo src="/logo/ic_linkedin.svg" href={LINKEDIN_URL} label="LinkedIn profile" />
-                            </li>
-                            <li>
-                                <Logo src="/logo/ic_email.svg" href={`${EMAIL_MAILTO_URL}`} label="Send email" />
-                            </li>
+                            {displaySocials.map((social: any, index: number) => {
+                                const iconSrc = getIconSrc(social);
+                                const label = getLabel(social);
+                                const href = getHref(social);
+                                if (!href) return null;
+                                return (
+                                    <li key={index}>
+                                        <Logo src={iconSrc} href={href} label={label} />
+                                    </li>
+                                );
+                            })}
                         </ul>
                         <div className="flex justify-center gap-x-4 md:justify-start">
                             <Button className="px-6 h-10 text-sm sm:text-base bg-gradient-to-r from-[#4B657F] to-[#678EBC] font-inter">
                                 <a
-                                    href={RESUME_FILE_PATH}
+                                    href={activeResumePath}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -83,7 +148,7 @@ const AboutSection = () => {
                                 className="h-10 border-slate-300/80 bg-white/80 px-6 text-sm text-slate-800 hover:text-background sm:text-base font-inter dark:border-input dark:bg-input/30 dark:text-foreground"
                             >
                                 <a
-                                    href={RESUME_FILE_PATH}
+                                    href={downloadResumePath}
                                     download={RESUME_DOWNLOAD_NAME}
                                 >
                                     {t("about_section.buttons.download_resume")}

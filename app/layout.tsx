@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css"
 import { bebasNeue, inter, oswald, rubikDirt, texasCrust } from "@/lib/fonts/font";
-import Navbar from "@/components/layout/navbar/Navbar";
-import Footer from "@/components/layout/footer/Footer";
+import HeaderFooterWrapper from "@/components/layout/HeaderFooterWrapper";
 import { Providers } from "./providers";
 import { Analytics } from "@vercel/analytics/next"
 import VisitorTracker from "@/components/analytics/VisitorTracker";
@@ -30,9 +29,9 @@ export default function RootLayout({
       >
         <Providers>
           <VisitorTracker />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          <HeaderFooterWrapper>
+            {children}
+          </HeaderFooterWrapper>
         </Providers>
         <Analytics />
       </body>

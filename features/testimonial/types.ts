@@ -4,6 +4,7 @@ export type TestimonialFormState = {
   institution: string;
   tag: string;
   quote: string;
+  honeypot: string;
 };
 
 export type TestimonialPageData = {
@@ -24,6 +25,7 @@ export const createEmptyTestimonialForm = (): TestimonialFormState => ({
   institution: "",
   tag: "",
   quote: "",
+  honeypot: "",
 });
 
 export const createIdleSubmitState = (): TestimonialSubmitState => ({
