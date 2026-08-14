@@ -7,7 +7,7 @@ import LanguageSwitch from "./LanguageSwitch";
 import ThemeSwitch from "./ThemeSwitch";
 import { useTheme } from "@/context/ThemeContext";
 import { useTranslation } from "@/hooks/useTranslation";
-import { NAV_ITEMS } from "./navConfig";
+import { NAV_ITEMS, useActiveSlug } from "./navConfig";
 import { usePathname } from "next/navigation";
 
 type Props = {
@@ -23,8 +23,7 @@ export default function MobileNav({ isOpen, closeMenu, activeSection, handleNavC
     const isDark = theme === "dark";
     const pathname = usePathname();
 
-    const segments = pathname.split("/").filter(Boolean);
-    const slug = segments[0] && !["cms", "dashboard", "gateway", "api"].includes(segments[0]) ? segments[0] : "";
+    const slug = useActiveSlug();
 
     const getDynamicHref = (href: string) => {
         if (href === "/dashboard") {

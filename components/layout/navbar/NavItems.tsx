@@ -5,7 +5,7 @@ import { useState } from "react";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 import { useSectionNavigation } from "@/hooks/useSectionNavigation";
-import { HOME_HREF } from "./navConfig";
+import { HOME_HREF, useActiveSlug } from "./navConfig";
 
 import { usePathname } from "next/navigation";
 
@@ -14,8 +14,7 @@ export default function NavItems() {
     const { activeSection, handleNavClick } = useSectionNavigation();
     const pathname = usePathname();
 
-    const segments = pathname.split("/").filter(Boolean);
-    const slug = segments[0] && !["cms", "dashboard", "gateway", "api"].includes(segments[0]) ? segments[0] : "";
+    const slug = useActiveSlug();
 
     const dynamicHomeHref = slug ? `/${slug}#home` : HOME_HREF;
     const displayName = "FAKHRI";

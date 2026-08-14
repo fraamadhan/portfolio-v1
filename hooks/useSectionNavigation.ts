@@ -29,11 +29,27 @@ const scrollToSection = (sectionId: string) => {
 export const useSectionNavigation = () => {
     const pathname = usePathname();
     const segments = useMemo(() => pathname.split("/").filter(Boolean), [pathname]);
-    const isPortfolioPage = useMemo(() => segments.length === 1 && !["cms", "dashboard", "gateway", "api"].includes(segments[0]), [segments]);
-    const slug = isPortfolioPage ? segments[0] : "";
+    
+    const isPortfolioPage = useMemo(() => {
+        const is404 = typeof window !== "undefined" && (window as any).__is404;
+        if (is404) return false;
+        return segments.length === 1 && !["cms", "dashboard", "gateway", "api"].includes(segments[0]);
+    }, [segments, pathname]);
+
+    const slug = useMemo(() => {
+        const is404 = typeof window !== "undefined" && (window as any).__is404;
+        if (is404) {
+            return typeof window !== "undefined" ? localStorage.getItem("last_valid_slug") || "" : "";
+        }
+        return isPortfolioPage ? segments[0] : "";
+    }, [isPortfolioPage, segments, pathname]);
 
     const navItems = useMemo(() => getHomeNavItems(), []);
     const [activeSection, setActiveSection] = useState(slug ? `/${slug}#home` : HOME_HREF);
+
+    useEffect(() => {
+        setActiveSection(slug ? `/${slug}#home` : HOME_HREF);
+    }, [slug]);
 
     useEffect(() => {
         if (!isPortfolioPage) return;
