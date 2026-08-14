@@ -1,20 +1,9 @@
 import { NextResponse } from "next/server";
 import { rateLimit } from "@/lib/rate-limit";
-
-import {
-  createSupabaseAdminClient,
-  createSupabaseServerClient,
-} from "@/lib/supabase/server";
-
-import {
-  createTestimonialInsertPayload,
-  mapTestimonialRow,
-  TESTIMONIAL_SELECT_FIELDS,
-  TestimonialRow,
-} from "@/features/testimonial/lib";
-import { TestimonialFormState } from "@/features/testimonial/types";
+import { client, writeClient } from "@/lib/sanity.client";
 import { TESTIMONIALS_PER_PAGE } from "@/features/testimonial/constants";
 import { getTestimonialsPage } from "@/features/testimonial/queries";
+import { validateTestimonialInput } from "@/features/testimonial/validation";
 
 const getInvalidResponse = (message = "Invalid testimonial payload.") =>
   NextResponse.json(
@@ -26,10 +15,12 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const page = Number(searchParams.get("page") ?? "1");
   const limit = Number(searchParams.get("limit") ?? String(TESTIMONIALS_PER_PAGE));
+  const userId = searchParams.get("userId") ?? "";
 
   const testimonialPage = await getTestimonialsPage({
     page: Number.isFinite(page) ? page : 1,
     limit: Number.isFinite(limit) ? limit : TESTIMONIALS_PER_PAGE,
+    userId: userId || undefined,
   });
 
   return NextResponse.json(testimonialPage);
@@ -50,15 +41,32 @@ export async function POST(request: Request) {
     );
   }
 
-  let body: Partial<TestimonialFormState> | null = null;
+  let body: {
+    author?: string;
+    role?: string;
+    institution?: string;
+    tag?: string;
+    quote?: string;
+    userId?: string;
+    honeypot?: string;
+  } | null = null;
 
   try {
-    body = (await request.json()) as Partial<TestimonialFormState>;
+    body = await request.json();
   } catch {
     return getInvalidResponse();
   }
 
-  const payload: TestimonialFormState = {
+  // Honeypot check
+  if (body?.honeypot) {
+    // Treat as bot, fail silently or reject
+    return NextResponse.json(
+      { message: "Spam detected." },
+      { status: 400 }
+    );
+  }
+
+  const payload = {
     author: body?.author ?? "",
     role: body?.role ?? "",
     institution: body?.institution ?? "",
@@ -66,12 +74,15 @@ export async function POST(request: Request) {
     quote: body?.quote ?? "",
   };
 
+  const userId = body?.userId ?? "";
+
   if (
     !payload.author.trim() ||
     !payload.role.trim() ||
     !payload.institution.trim() ||
     !payload.tag.trim() ||
-    !payload.quote.trim()
+    !payload.quote.trim() ||
+    !userId.trim()
   ) {
     return getInvalidResponse("All fields are required.");
   }
@@ -87,27 +98,34 @@ export async function POST(request: Request) {
     return getInvalidResponse("Input values exceed length limits.");
   }
 
-  const supabase =
-    createSupabaseAdminClient() ?? createSupabaseServerClient();
-  const { data, error } = await supabase
-    .from("testimonials")
-    .insert(createTestimonialInsertPayload(payload))
-    .select(TESTIMONIAL_SELECT_FIELDS)
-    .single();
+  // Content validation (restricted links and bad words detection)
+  const validationResult = validateTestimonialInput(payload);
+  if (!validationResult.isValid) {
+    return getInvalidResponse(validationResult.error);
+  }
 
-  if (error) {
-    console.error("Failed to insert testimonial into Supabase:", error.message);
+  try {
+    const doc = {
+      _type: "testimonial",
+      approved: false,
+      user: {
+        _type: "reference",
+        _ref: userId,
+      },
+      giverName: payload.author.trim(),
+      giverRole: payload.role.trim(),
+      giverInstitution: payload.institution.trim(),
+      tags: [payload.tag.trim()],
+      content: {
+        _type: "localeString",
+        id: payload.quote.trim(),
+        en: payload.quote.trim(),
+      },
+    };
 
-    if (error.message.toLowerCase().includes("row-level security policy")) {
-      return NextResponse.json(
-        {
-          message:
-            "Supabase blocked this insert because the testimonials table RLS policy does not allow it. Add an INSERT policy for anon users, or set SUPABASE_SERVICE_ROLE_KEY for the server route.",
-        },
-        { status: 403 }
-      );
-    }
-
+    await writeClient.create(doc);
+  } catch (error: any) {
+    console.error("Failed to insert testimonial into Sanity:", error.message);
     return NextResponse.json(
       { message: "Failed to save testimonial." },
       { status: 500 }
@@ -115,6 +133,6 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({
-    testimonial: mapTestimonialRow(data as TestimonialRow),
+    message: "Testimonial submitted successfully.",
   });
 }

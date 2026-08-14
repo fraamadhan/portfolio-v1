@@ -62,7 +62,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function UserProfilePage({ params }: PageProps) {
   const { slug } = await params;
-  const testimonialPage = await getTestimonialsPage();
   
   let profile = null;
   try {
@@ -101,6 +100,8 @@ export default async function UserProfilePage({ params }: PageProps) {
   if (!profile) {
     return <NotFound />;
   }
+
+  const testimonialPage = await getTestimonialsPage({ userId: profile._id });
 
   let skills = [];
   try {
@@ -187,7 +188,7 @@ export default async function UserProfilePage({ params }: PageProps) {
       <SkillSection initialSkills={skills} skillsSlogan={profile.skillsSlogan} />
       <ExperienceSection experiences={experiences} />
       <ProjectSection initialProjects={projects} />
-      <TestimonialSection initialData={testimonialPage} />
+      <TestimonialSection initialData={testimonialPage} userId={profile._id} />
     </div>
   );
 }

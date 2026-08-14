@@ -100,7 +100,7 @@
       "close_button": "Simpan dulu",
       "submit_button": "Tempel ke dinding",
       "submitting_button": "Menyimpan...",
-      "submit_success": "Testimoni berhasil disimpan.",
+      "submit_success": "Testimonial berhasil dikirim dan sedang menunggu persetujuan admin.",
       "submit_error": "Testimoni gagal disimpan. Coba lagi.",
       "footer_note": "Catatan baru muncul di halaman pertama"
     },

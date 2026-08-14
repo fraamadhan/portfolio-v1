@@ -756,7 +756,7 @@ export default function CustomDashboard() {
             </button>
           )}
 
-          {['categories', 'tools-skills', 'projects', 'experiences', 'certifications', 'testimonials', 'hobbies', 'blogs'].includes(activeTab) && !showForm && (
+          {['categories', 'tools-skills', 'projects', 'experiences', 'certifications', 'hobbies', 'blogs'].includes(activeTab) && !showForm && (
             <button
               onClick={() => handleStartForm(null)}
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-teal-500 text-slate-950 font-bold hover:bg-teal-400 transition-all duration-200 cursor-pointer shadow-lg"
@@ -913,6 +913,7 @@ export default function CustomDashboard() {
             {activeTab === 'testimonials' && (
               <TestimonialsTab
                 testimonials={testimonials}
+                setTestimonials={setTestimonials}
                 showForm={showForm}
                 setShowForm={setShowForm}
                 editingItem={editingItem}

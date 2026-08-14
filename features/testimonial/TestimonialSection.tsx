@@ -21,7 +21,7 @@ import {
     TestimonialPageData,
 } from "./types"
 
-const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData }) => {
+const TestimonialSection = ({ initialData, userId }: { initialData: TestimonialPageData; userId?: string }) => {
     const { t } = useTranslation()
     const translate = (path: string) => t(path) ?? ""
     const [testimonials, setTestimonials] = useState(initialData.testimonials)
@@ -70,7 +70,7 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
 
         try {
             const response = await fetch(
-                `/api/testimonials?page=${safePage}&limit=${TESTIMONIALS_PER_PAGE}`,
+                `/api/testimonials?page=${safePage}&limit=${TESTIMONIALS_PER_PAGE}&userId=${userId ?? ""}`,
                 { method: "GET" }
             )
 
@@ -111,6 +111,7 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
         const institution = form.institution.trim()
         const tag = form.tag.trim()
         const quote = form.quote.trim()
+        const honeypot = form.honeypot
 
         if (!author || !role || !institution || !tag || !quote) {
             return
@@ -131,49 +132,30 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                     institution,
                     tag,
                     quote,
+                    userId,
+                    honeypot,
                 }),
             })
 
             const payload = (await response.json()) as {
                 message?: string
-                testimonial?: TestimonialItemProps
             }
 
-            if (!response.ok || !payload.testimonial) {
+            if (!response.ok) {
                 throw new Error(payload.message ?? "Failed to save testimonial.")
             }
 
-            const nextTotalCount = totalCount + 1
-            const nextTotalPages = Math.max(1, Math.ceil(nextTotalCount / TESTIMONIALS_PER_PAGE))
-
-            setTotalCount(nextTotalCount)
-            setTotalPages(nextTotalPages)
-
-            if (page === 1) {
-                setTestimonials((current) => [payload.testimonial as TestimonialItemProps, ...current].slice(0, TESTIMONIALS_PER_PAGE))
-            } else {
-                setTestimonials([payload.testimonial as TestimonialItemProps])
-            }
-
-            setPage(1)
             setForm(createEmptyTestimonialForm())
             setIsComposerOpen(false)
             setSubmitState({
                 type: "success",
                 message: translate("testimonial_section.composer.submit_success"),
             })
-
-            if (page !== 1) {
-                await loadPage(1, {
-                    force: true,
-                    maxPages: nextTotalPages,
-                })
-            }
-        } catch (error) {
+        } catch (error: any) {
             console.error(error)
             setSubmitState({
                 type: "error",
-                message: translate("testimonial_section.composer.submit_error"),
+                message: error.message || translate("testimonial_section.composer.submit_error"),
             })
         } finally {
             setIsSubmitting(false)
@@ -207,8 +189,7 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                     </p>
                 </div>
 
-                <div className="w-full">
-                    {/* TestimonialComposer is hidden for now
+                <div className="flex w-full flex-col gap-8 xl:flex-row xl:items-start">
                     <TestimonialComposer
                         form={form}
                         isOpen={isComposerOpen}
@@ -241,9 +222,8 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                         onSubmit={handleSubmit}
                         onFieldChange={handleFieldChange}
                     />
-                    */}
 
-                    <div className="rounded-[30px] border border-slate-300/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(233,241,249,0.98))] p-5 shadow-[0_28px_65px_rgba(148,163,184,0.16)] sm:p-7 dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(50,66,87,0.92),rgba(29,38,50,0.96))] dark:shadow-[0_28px_65px_rgba(4,10,18,0.28)]">
+                    <div className="order-2 flex-1 w-full xl:order-1 rounded-[30px] border border-slate-300/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(233,241,249,0.98))] p-5 shadow-[0_28px_65px_rgba(148,163,184,0.16)] sm:p-7 dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(50,66,87,0.92),rgba(29,38,50,0.96))] dark:shadow-[0_28px_65px_rgba(4,10,18,0.28)]">
                         <div className="flex flex-col gap-4 border-b border-slate-300/70 pb-5 sm:flex-row sm:items-end sm:justify-between dark:border-white/10">
                             <div>
                                 <p className="text-xs uppercase tracking-[0.35em] text-primary-100/65">
@@ -258,7 +238,6 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                                 <div className="rounded-full border border-slate-300/70 bg-white/80 px-4 py-2 text-sm text-neutral-200 dark:border-white/12 dark:bg-white/5">
                                     {totalCount} {translate("testimonial_section.notes_archived")}
                                 </div>
-                                {/* Hiding toggle add testimonial button for now
                                 <button
                                     type="button"
                                     onClick={() => setIsComposerOpen((current) => !current)}
@@ -269,7 +248,6 @@ const TestimonialSection = ({ initialData }: { initialData: TestimonialPageData 
                                         ? translate("testimonial_section.toggle_close")
                                         : translate("testimonial_section.toggle_open")}
                                 </button>
-                                */}
                             </div>
                         </div>
 
