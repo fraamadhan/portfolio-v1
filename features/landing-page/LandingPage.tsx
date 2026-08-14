@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import InfoItem from "@/components/ui/InfoItem";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/context/LanguageContext";
 import { TypewriterEffect } from "@/components/ui/TypewriterEffect";
 import { currentWorkRole } from "@/data/dummy";
 import { scrollToElementWithOffset } from "@/lib/utils";
@@ -10,8 +11,24 @@ import Link from "next/link";
 import { MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 
-const LandingPage = () => {
+interface LandingPageProps {
+    profile?: {
+        name?: string;
+        landingSlogan?: { en?: string; id?: string };
+        pastRoles?: string[];
+        shortDescription?: { en?: string; id?: string };
+        professionalStatus?: {
+            isActive?: boolean;
+            role?: string;
+            location?: string;
+            status?: string;
+        };
+    } | null;
+}
+
+const LandingPage = ({ profile }: LandingPageProps) => {
     const { t } = useTranslation();
+    const { lang } = useLanguage();
     const pathname = usePathname();
 
     const handleProjectsClick = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -25,6 +42,17 @@ const LandingPage = () => {
         scrollToElementWithOffset(target);
     };
 
+    // Mappings and Fallbacks
+    const heroSlogan = profile?.landingSlogan?.[lang] || t("landing_page_motto");
+    const profileName = profile?.name || "Fakhri Fajar Ramadhan";
+    const roles = profile?.pastRoles && profile.pastRoles.length > 0 ? profile.pastRoles : currentWorkRole;
+    const description = profile?.shortDescription?.[lang] || t("landing_page_description");
+
+    const showStatus = profile?.professionalStatus ? (profile.professionalStatus.isActive ?? true) : true;
+    const currentRole = profile?.professionalStatus?.role || "Back-End Developer";
+    const workLocation = profile?.professionalStatus?.location || "Indonesia";
+    const workStatus = profile?.professionalStatus?.status || "Internship";
+
     return (
         <section
             id="home"
@@ -34,33 +62,35 @@ const LandingPage = () => {
             <div className="flex w-full max-w-3xl flex-col items-center gap-12 sm:px-8">
                 <header className="flex flex-col gap-4 text-center">
                     <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground font-texas-crust">
-                        {t("landing_page_motto")}
+                        {heroSlogan}
                     </p>
 
                     <h1 id="home-heading" className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
-                        Fakhri Fajar Ramadhan
+                        {profileName}
                     </h1>
 
-                    <p className="text-lg sm:text-2xl font-medium text-foreground font-oswald flex items-center justify-center min-h-[36px] sm:min-h-[48px]">
-                        <TypewriterEffect words={currentWorkRole} pauseDuration={3000} />
-                    </p>
+                    <div className="text-lg sm:text-2xl font-medium text-foreground font-oswald flex items-center justify-center min-h-[36px] sm:min-h-[48px]">
+                        <TypewriterEffect words={roles} pauseDuration={3000} />
+                    </div>
 
                     <p className="mx-auto max-w-xl leading-relaxed text-muted-foreground md:text-base font-inter">
-                        {t("landing_page_description")}
+                        {description}
                     </p>
                 </header>
 
-                <section aria-labelledby="professional-status-heading" className="flex flex-col items-center gap-4 text-center">
-                    <h2 id="professional-status-heading" className="text-sm sm:text-lg font-oswald text-foreground">
-                        {t("current_professional_status")}
-                    </h2>
+                {showStatus && (
+                    <section aria-labelledby="professional-status-heading" className="flex flex-col items-center gap-4 text-center">
+                        <h2 id="professional-status-heading" className="text-sm sm:text-lg font-oswald text-foreground">
+                            {t("current_professional_status")}
+                        </h2>
 
-                    <dl className="flex flex-col gap-4 md:flex-row">
-                        <InfoItem label={t("current_role")} value="Back-End Developer" />
-                        <InfoItem label={t("work_based_in")} value="Indonesia" />
-                        <InfoItem label={t("status")} value="Internship" />
-                    </dl>
-                </section>
+                        <dl className="flex flex-col gap-4 md:flex-row">
+                            <InfoItem label={t("current_role")} value={currentRole} />
+                            <InfoItem label={t("work_based_in")} value={workLocation} />
+                            <InfoItem label={t("status")} value={workStatus} />
+                        </dl>
+                    </section>
+                )}
 
                 <section className="flex flex-col md:flex-row gap-4">
                     <Link href="/#projects" scroll={true} onClick={handleProjectsClick}>

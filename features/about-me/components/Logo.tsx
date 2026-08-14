@@ -9,7 +9,7 @@ const Logo = (
         "/logo/ic_github.svg": "/svg/github.svg",
         "/logo/ic_linkedin.svg": "/svg/linkedin.svg",
     };
-    const iconSrc = iconMap[src];
+    const iconSrc = iconMap[src] || src;
 
     return (
         <Link
@@ -25,6 +25,7 @@ const Logo = (
                     alt=""
                     width={20}
                     height={20}
+                    unoptimized
                     className="h-5 w-5 object-contain dark:invert sm:h-4 sm:w-4"
                 />
             ) : null}

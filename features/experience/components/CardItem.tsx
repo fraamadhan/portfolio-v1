@@ -28,10 +28,17 @@ export const CardItem = ({
         timeZone: "UTC",
     })
     const formatDate = (value: string) => {
-        const [year, month] = value.split("-").map(Number)
+        if (!value) return ""
+        const parts = value.split("-").map(Number)
+        if (parts.some(isNaN) || parts.length < 2) return value
+        const [year, month] = parts
         return formatter.format(new Date(Date.UTC(year, month - 1, 1)))
     }
-    const dateRange = `${formatDate(experience.startDate)} - ${formatDate(experience.endDate)}`
+    const startStr = formatDate(experience.startDate)
+    const endStr = experience.isCurrent 
+        ? (t("experience_section.current") || "Current") 
+        : formatDate(experience.endDate)
+    const dateRange = startStr && endStr ? `${startStr} - ${endStr}` : (startStr || endStr || "")
 
     return (
         <div className="flex max-w-xl flex-col gap-4">

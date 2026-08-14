@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
-import { experiences } from "@/data/dummy"
+import { useLanguage } from "@/context/LanguageContext"
+import { experiences as dummyExperiences } from "@/data/dummy"
 import { useTranslation } from "@/hooks/useTranslation"
 import { Card } from "./components/Card"
 import { TimelineConnector } from "./components/TimelineConnector"
@@ -12,10 +13,39 @@ import { cn } from "@/lib/utils"
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value))
 
-export default function ExperienceTimelinePage() {
+import { useParams } from "next/navigation"
+
+interface ExperienceTimelinePageProps {
+    initialExperiences?: any[]
+}
+
+export default function ExperienceTimelinePage({ initialExperiences }: ExperienceTimelinePageProps) {
     const { t } = useTranslation()
+    const { lang } = useLanguage()
+    const params = useParams()
+    const slug = params?.slug as string || ""
+    const backHref = slug ? `/${slug}/#experience` : "/#experience"
+
     const timelineRef = useRef<HTMLDivElement | null>(null)
     const [scrollProgress, setScrollProgress] = useState(0)
+
+    const displayExperiences = initialExperiences && initialExperiences.length > 0
+        ? initialExperiences.map((exp: any) => ({
+            id: exp._id,
+            role: exp.role?.[lang] || exp.role?.en || "",
+            category: exp.programType || "Full-time",
+            company: exp.company || "",
+            location: exp.location || "",
+            startDate: exp.dateFrom || "",
+            endDate: exp.dateTo || "",
+            keypoints: exp.keypoints?.map((kp: any) => kp[lang] || "").filter((kp: string) => kp && kp.trim() !== "") || [],
+            techStack: exp.toolsUsed?.map((t: any) => ({
+                name: t.name || "",
+                src: t.iconUrl || ""
+            })) || [],
+            isCurrent: exp.isCurrent ?? false
+        }))
+        : dummyExperiences
 
     useEffect(() => {
         let frameId = 0
@@ -56,11 +86,11 @@ export default function ExperienceTimelinePage() {
 
             <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-10">
                 <Link
-                    href="/#experience"
-                    className="flex w-fit items-center gap-2 rounded-full border border-slate-300/70 bg-white/80 px-4 py-2 text-sm tracking-wide text-neutral-100 transition-transform duration-300 hover:-translate-y-0.5 hover:border-slate-400/70 dark:border-white/12 dark:bg-white/6 dark:hover:border-white/20"
+                    href={backHref}
+                    className="group inline-flex w-fit items-center gap-2.5 rounded-full border border-slate-200 bg-white/80 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-800 shadow-sm transition-all duration-300 hover:bg-slate-50 hover:border-slate-300 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:border-white/20 hover:-translate-x-1"
                 >
-                    <ArrowLeft className="h-4 w-4" />
-                    <span>{t("experience_section.experience_journey")}</span>
+                    <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+                    <span>{t("project_detail.back") || "Back"}</span>
                 </Link>
 
                 <div className="max-w-3xl space-y-4">
@@ -79,7 +109,7 @@ export default function ExperienceTimelinePage() {
                     <TimelinePlane progress={scrollProgress} />
 
                     <div className="flex flex-col gap-14 sm:gap-[4.5rem] md:gap-24">
-                        {experiences.map((experience, index) => {
+                        {displayExperiences.map((experience, index) => {
                             const side = index % 2 === 0 ? "left" : "right"
 
                             return (

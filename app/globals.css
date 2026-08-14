@@ -217,6 +217,8 @@
     display: inline-block;
     color: transparent;
     -webkit-text-fill-color: transparent;
+    padding-top: 0.05em;
+    padding-bottom: 0.2em;
   }
 
   .text-gradient-skills {
@@ -226,6 +228,8 @@
     display: inline-block;
     color: transparent;
     -webkit-text-fill-color: transparent;
+    padding-top: 0.05em;
+    padding-bottom: 0.2em;
   }
 
   .btn-hover-cool {

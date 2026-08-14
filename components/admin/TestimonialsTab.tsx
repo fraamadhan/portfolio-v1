@@ -1,9 +1,10 @@
 import React from 'react'
-import { Plus, Trash2, Edit2, Save, Loader2, MessageSquare } from 'lucide-react'
+import { Trash2, Edit2, Save, Loader2, MessageSquare, Check, X } from 'lucide-react'
 import { textToArray, arrayToText } from './utils'
 
 interface TestimonialsTabProps {
   testimonials: any[]
+  setTestimonials: React.Dispatch<React.SetStateAction<any[]>>
   showForm: boolean
   setShowForm: (show: boolean) => void
   editingItem: any
@@ -19,6 +20,7 @@ interface TestimonialsTabProps {
 
 export default function TestimonialsTab({
   testimonials,
+  setTestimonials,
   showForm,
   setShowForm,
   editingItem,
@@ -31,6 +33,28 @@ export default function TestimonialsTab({
   setDeleteTargetId,
   saving
 }: TestimonialsTabProps) {
+
+  const handleToggleApproval = async (testi: any) => {
+    const nextApprovedState = !testi.approved;
+    // Optimistically update local UI state
+    setTestimonials(prev => prev.map(t => t._id === testi._id ? { ...t, approved: nextApprovedState } : t));
+    try {
+      const res = await fetch('/api/admin?action=save-document', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...testi, approved: nextApprovedState }),
+      });
+      if (!res.ok) {
+        // Rollback on failure
+        setTestimonials(prev => prev.map(t => t._id === testi._id ? { ...t, approved: testi.approved } : t));
+      }
+    } catch (err) {
+      console.error(err);
+      // Rollback on error
+      setTestimonials(prev => prev.map(t => t._id === testi._id ? { ...t, approved: testi.approved } : t));
+    }
+  };
+
   return (
     <div className="space-y-8">
       {showForm ? (
@@ -76,6 +100,18 @@ export default function TestimonialsTab({
                 placeholder="e.g. Backend, Teamwork, Leadership"
                 className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none"
               />
+            </div>
+            {/* Approval Status Toggle in Form */}
+            <div className="space-y-1 col-span-1 sm:col-span-2">
+              <label className="flex items-center gap-2.5 cursor-pointer py-2 text-sm text-slate-300">
+                <input
+                  type="checkbox"
+                  checked={editingItem.approved || false}
+                  onChange={(e) => setEditingItem({ ...editingItem, approved: e.target.checked })}
+                  className="w-4.5 h-4.5 rounded border-slate-800 text-teal-500 cursor-pointer focus:ring-0 focus:ring-offset-0"
+                />
+                <span className="font-semibold select-none">Approved (Visible on portfolio page)</span>
+              </label>
             </div>
             {/* Bilingual Testimonial Content */}
             <div className="space-y-1 col-span-1 sm:col-span-2">
@@ -181,12 +217,23 @@ export default function TestimonialsTab({
                         className="w-4 h-4 rounded border-slate-800 text-teal-500 cursor-pointer"
                       />
                       <div>
-                        <h4 className="font-bold text-sm">{testi.giverName}</h4>
-                        <p className="text-xs text-teal-400 mt-0.5">
+                        <div className="flex items-center gap-3">
+                          <h4 className="font-bold text-sm">{testi.giverName}</h4>
+                          <span
+                            className={`px-2 py-0.5 text-[10px] font-bold rounded-full uppercase tracking-wider ${
+                              testi.approved
+                                ? 'bg-teal-500/10 text-teal-400 border border-teal-500/20'
+                                : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                            }`}
+                          >
+                            {testi.approved ? 'Approved' : 'Pending'}
+                          </span>
+                        </div>
+                        <p className="text-xs text-teal-400 mt-1">
                           {testi.giverRole} at {testi.giverInstitution}
                         </p>
                         {testi.tags && testi.tags.length > 0 && (
-                          <div className="flex gap-1 mt-2">
+                          <div className="flex gap-1 mt-2.5">
                             {testi.tags.map((t: string) => (
                               <span
                                 key={t}
@@ -199,16 +246,27 @@ export default function TestimonialsTab({
                         )}
                       </div>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => handleToggleApproval(testi)}
+                        title={testi.approved ? 'Reject / Hide Testimonial' : 'Approve Testimonial'}
+                        className={`p-2 rounded-lg cursor-pointer transition ${
+                          testi.approved
+                            ? 'bg-amber-500/10 text-amber-500 hover:bg-amber-500/20'
+                            : 'bg-teal-500/10 text-teal-400 hover:bg-teal-500/20'
+                        }`}
+                      >
+                        {testi.approved ? <X className="w-4 h-4" /> : <Check className="w-4 h-4" />}
+                      </button>
                       <button
                         onClick={() => handleStartForm(testi)}
-                        className="p-2 bg-slate-855 rounded-lg text-slate-300 hover:text-white cursor-pointer transition"
+                        className="p-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 rounded-lg cursor-pointer transition"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => setDeleteTargetId(testi._id)}
-                        className="p-2 bg-rose-500/10 text-rose-500 rounded-lg cursor-pointer transition"
+                        className="p-2 bg-rose-500/10 text-rose-500 hover:bg-rose-500/20 rounded-lg cursor-pointer transition"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>

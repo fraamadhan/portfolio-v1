@@ -1,19 +1,5 @@
-import DashboardPageClient from "@/features/dashboard/DashboardPageClient";
-import {
-  getGitHubContributionCalendar,
-  getVisitorCount,
-} from "@/lib/dashboard";
+import { redirect } from "next/navigation";
 
-export default async function DashboardPage() {
-  const [contributionCalendar, visitorCount] = await Promise.all([
-    getGitHubContributionCalendar(),
-    getVisitorCount(),
-  ]);
-
-  return (
-    <DashboardPageClient
-      contributionCalendar={contributionCalendar}
-      visitorCount={visitorCount}
-    />
-  );
+export default function OldDashboardRedirect() {
+  redirect("/fakhri-fajar-ramadhan/dashboard");
 }

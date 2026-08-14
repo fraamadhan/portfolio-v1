@@ -95,7 +95,7 @@ export const blocksToMarkdown = (blocks: any[]) => {
       }
     }
     return ''
-  }).filter(t => t !== '').join('\n')
+  }).filter(t => t !== '').join('\n\n')
 }
 
 // Lightweight Markdown to HTML Preview Renderer
@@ -166,4 +166,27 @@ export const compressImage = (file: File): Promise<Blob | File> => {
     }
     reader.readAsDataURL(file)
   })
+}
+
+export const getFileUrl = (resumeObj: any) => {
+  if (!resumeObj) return ''
+  if (resumeObj.url) return resumeObj.url
+  if (resumeObj.asset?._ref) {
+    const ref = resumeObj.asset._ref
+    const match = ref.match(/^file-(.*?)-(.*?)$/)
+    if (match) {
+      const [_, id, ext] = match
+      const projectId = 'tspoltvg'
+      const dataset = 'development'
+      return `https://cdn.sanity.io/files/${projectId}/${dataset}/${id}.${ext}`
+    }
+    const imgMatch = ref.match(/^image-(.*?)-(.*?)-(.*?)$/)
+    if (imgMatch) {
+      const [_, id, dimensions, ext] = imgMatch
+      const projectId = 'tspoltvg'
+      const dataset = 'development'
+      return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${ext}`
+    }
+  }
+  return ''
 }

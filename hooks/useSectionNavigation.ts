@@ -28,17 +28,21 @@ const scrollToSection = (sectionId: string) => {
 
 export const useSectionNavigation = () => {
     const pathname = usePathname();
+    const segments = useMemo(() => pathname.split("/").filter(Boolean), [pathname]);
+    const isPortfolioPage = useMemo(() => segments.length === 1 && !["cms", "dashboard", "gateway", "api"].includes(segments[0]), [segments]);
+    const slug = isPortfolioPage ? segments[0] : "";
+
     const navItems = useMemo(() => getHomeNavItems(), []);
-    const [activeSection, setActiveSection] = useState(HOME_HREF);
+    const [activeSection, setActiveSection] = useState(slug ? `/${slug}#home` : HOME_HREF);
 
     useEffect(() => {
-        if (pathname !== "/") return;
+        if (!isPortfolioPage) return;
 
         const visibleSections = new Map<string, number>();
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    const href = `/#${entry.target.id}`;
+                    const href = slug ? `/${slug}#${entry.target.id}` : `/#${entry.target.id}`;
 
                     if (entry.isIntersecting) {
                         visibleSections.set(href, entry.intersectionRatio);
@@ -54,7 +58,7 @@ export const useSectionNavigation = () => {
                 }
 
                 if (window.scrollY < 120) {
-                    setActiveSection(HOME_HREF);
+                    setActiveSection(slug ? `/${slug}#home` : HOME_HREF);
                 }
             },
             {
@@ -74,12 +78,14 @@ export const useSectionNavigation = () => {
         const syncFromHash = () => {
             const currentHash = window.location.hash;
             if (!currentHash) {
-                setActiveSection(HOME_HREF);
+                setActiveSection(slug ? `/${slug}#home` : HOME_HREF);
                 return;
             }
 
-            const href = `/${currentHash}`;
-            if (navItems.includes(href)) {
+            const href = slug ? `/${slug}${currentHash}` : `/${currentHash}`;
+            // check against expected dynamic pattern
+            const lookupHref = `/${currentHash}`;
+            if (navItems.includes(lookupHref)) {
                 setActiveSection(href);
             }
         };
@@ -91,10 +97,10 @@ export const useSectionNavigation = () => {
             observer.disconnect();
             window.removeEventListener("hashchange", syncFromHash);
         };
-    }, [navItems, pathname]);
+    }, [navItems, pathname, isPortfolioPage, slug]);
 
     const handleNavClick = (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
-        if (pathname !== "/") return;
+        if (!isPortfolioPage) return;
 
         const sectionId = getSectionIdFromHref(href);
         if (!sectionId) return;
@@ -108,7 +114,7 @@ export const useSectionNavigation = () => {
     };
 
     return {
-        activeSection: pathname === "/" ? activeSection : "",
+        activeSection: isPortfolioPage ? activeSection : "",
         handleNavClick,
     };
 };

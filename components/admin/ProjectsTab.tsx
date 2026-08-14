@@ -272,7 +272,7 @@ export default function ProjectsTab({
                       const current = editingItem.keyHighlights || []
                       setEditingItem({
                         ...editingItem,
-                        keyHighlights: [...current.filter((h: any) => h.en !== undefined), { _type: 'localeString', en: '' }]
+                        keyHighlights: [...current, { _type: 'localeString', en: '' }]
                       })
                     }}
                     className="flex items-center gap-1.5 px-3 py-1 text-xs bg-teal-500/15 text-teal-400 font-semibold rounded-lg hover:bg-teal-500/25 transition cursor-pointer"
@@ -283,39 +283,36 @@ export default function ProjectsTab({
 
                 <div className="space-y-2 max-h-40 overflow-y-auto bg-slate-950 p-4 rounded-xl border border-slate-850">
                   {(!editingItem.keyHighlights ||
-                    editingItem.keyHighlights.filter((h: any) => h.en !== undefined).length === 0) && (
+                    editingItem.keyHighlights.length === 0) && (
                     <p className="text-xs text-slate-500 italic text-center py-2">No English highlights added yet.</p>
                   )}
-                  {editingItem.keyHighlights
-                    ?.filter((h: any) => h.en !== undefined)
-                    .map((hl: any, idx: number) => {
-                      const realIdx = editingItem.keyHighlights.findIndex((h: any) => h === hl)
-                      return (
-                        <div key={idx} className="flex gap-2 items-center">
-                          <input
-                            type="text"
-                            value={hl.en || ''}
-                            onChange={(e) => {
-                              const arr = [...editingItem.keyHighlights]
-                              arr[realIdx] = { ...arr[realIdx], en: e.target.value }
-                              setEditingItem({ ...editingItem, keyHighlights: arr })
-                            }}
-                            placeholder="e.g. Optimized database queries by 40% with Redis caching"
-                            className="flex-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-200 focus:outline-none"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const arr = editingItem.keyHighlights.filter((_: any, i: number) => i !== realIdx)
-                              setEditingItem({ ...editingItem, keyHighlights: arr })
-                            }}
-                            className="p-1.5 text-rose-500 hover:bg-rose-500/5 rounded-lg cursor-pointer"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      )
-                    })}
+                  {editingItem.keyHighlights?.map((hl: any, idx: number) => {
+                    return (
+                      <div key={idx} className="flex gap-2 items-center">
+                        <input
+                          type="text"
+                          value={hl.en || ''}
+                          onChange={(e) => {
+                            const arr = [...editingItem.keyHighlights]
+                            arr[idx] = { ...arr[idx], en: e.target.value }
+                            setEditingItem({ ...editingItem, keyHighlights: arr })
+                          }}
+                          placeholder="e.g. Optimized database queries by 40% with Redis caching"
+                          className="flex-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-200 focus:outline-none"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const arr = editingItem.keyHighlights.filter((_: any, i: number) => i !== idx)
+                            setEditingItem({ ...editingItem, keyHighlights: arr })
+                          }}
+                          className="p-1.5 text-rose-500 hover:bg-rose-500/5 rounded-lg cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             ) : (
@@ -328,7 +325,7 @@ export default function ProjectsTab({
                       const current = editingItem.keyHighlights || []
                       setEditingItem({
                         ...editingItem,
-                        keyHighlights: [...current.filter((h: any) => h.id !== undefined), { _type: 'localeString', id: '' }]
+                        keyHighlights: [...current, { _type: 'localeString', id: '' }]
                       })
                     }}
                     className="flex items-center gap-1.5 px-3 py-1 text-xs bg-teal-500/15 text-teal-400 font-semibold rounded-lg hover:bg-teal-500/25 transition cursor-pointer"
@@ -339,41 +336,38 @@ export default function ProjectsTab({
 
                 <div className="space-y-2 max-h-40 overflow-y-auto bg-slate-950 p-4 rounded-xl border border-slate-850">
                   {(!editingItem.keyHighlights ||
-                    editingItem.keyHighlights.filter((h: any) => h.id !== undefined).length === 0) && (
+                    editingItem.keyHighlights.length === 0) && (
                     <p className="text-xs text-slate-500 italic text-center py-2">
                       No Indonesian highlights added yet.
                     </p>
                   )}
-                  {editingItem.keyHighlights
-                    ?.filter((h: any) => h.id !== undefined)
-                    .map((hl: any, idx: number) => {
-                      const realIdx = editingItem.keyHighlights.findIndex((h: any) => h === hl)
-                      return (
-                        <div key={idx} className="flex gap-2 items-center">
-                          <input
-                            type="text"
-                            value={hl.id || ''}
-                            onChange={(e) => {
-                              const arr = [...editingItem.keyHighlights]
-                              arr[realIdx] = { ...arr[realIdx], id: e.target.value }
-                              setEditingItem({ ...editingItem, keyHighlights: arr })
-                            }}
-                            placeholder="Contoh: Mengoptimalkan kueri basis data sebesar 40% dengan Redis"
-                            className="flex-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-200 focus:outline-none"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const arr = editingItem.keyHighlights.filter((_: any, i: number) => i !== realIdx)
-                              setEditingItem({ ...editingItem, keyHighlights: arr })
-                            }}
-                            className="p-1.5 text-rose-500 hover:bg-rose-500/5 rounded-lg cursor-pointer"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      )
-                    })}
+                  {editingItem.keyHighlights?.map((hl: any, idx: number) => {
+                    return (
+                      <div key={idx} className="flex gap-2 items-center">
+                        <input
+                          type="text"
+                          value={hl.id || ''}
+                          onChange={(e) => {
+                            const arr = [...editingItem.keyHighlights]
+                            arr[idx] = { ...arr[idx], id: e.target.value }
+                            setEditingItem({ ...editingItem, keyHighlights: arr })
+                          }}
+                          placeholder="Contoh: Mengoptimalkan kueri basis data sebesar 40% dengan Redis"
+                          className="flex-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-200 focus:outline-none"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const arr = editingItem.keyHighlights.filter((_: any, i: number) => i !== idx)
+                            setEditingItem({ ...editingItem, keyHighlights: arr })
+                          }}
+                          className="p-1.5 text-rose-500 hover:bg-rose-500/5 rounded-lg cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             )}

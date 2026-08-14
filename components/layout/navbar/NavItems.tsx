@@ -7,19 +7,28 @@ import MobileNav from "./MobileNav";
 import { useSectionNavigation } from "@/hooks/useSectionNavigation";
 import { HOME_HREF } from "./navConfig";
 
+import { usePathname } from "next/navigation";
+
 export default function NavItems() {
     const [isOpen, setIsOpen] = useState(false);
     const { activeSection, handleNavClick } = useSectionNavigation();
+    const pathname = usePathname();
+
+    const segments = pathname.split("/").filter(Boolean);
+    const slug = segments[0] && !["cms", "dashboard", "gateway", "api"].includes(segments[0]) ? segments[0] : "";
+
+    const dynamicHomeHref = slug ? `/${slug}#home` : HOME_HREF;
+    const displayName = "FAKHRI";
 
     return (
         <>
             <Link
-                href={HOME_HREF}
-                onClick={handleNavClick(HOME_HREF)}
-                className={`text-3xl font-bold tracking-wide ${activeSection === HOME_HREF ? "text-slate-900 dark:text-white" : "text-slate-800/90 dark:text-white/90"}`}
-                aria-current={activeSection === HOME_HREF ? "page" : undefined}
+                href={dynamicHomeHref}
+                onClick={handleNavClick(dynamicHomeHref)}
+                className={`text-3xl font-bold tracking-wide ${activeSection === dynamicHomeHref ? "text-slate-900 dark:text-white" : "text-slate-800/90 dark:text-white/90"}`}
+                aria-current={activeSection === dynamicHomeHref ? "page" : undefined}
             >
-                FAKHRI
+                {displayName}
             </Link>
 
             <DesktopNav

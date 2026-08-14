@@ -10,6 +10,12 @@ export default {
       title: 'For User'
     },
     {
+      name: 'approved',
+      type: 'boolean',
+      title: 'Approved',
+      initialValue: false
+    },
+    {
       name: 'giverName',
       type: 'string',
       title: 'Giver Name'

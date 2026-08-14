@@ -2,12 +2,39 @@
 
 import Image from "next/image"
 import { useTranslation } from "@/hooks/useTranslation"
-import { experiences } from "@/data/dummy"
+import { useLanguage } from "@/context/LanguageContext"
+import { experiences as dummyExperiences } from "@/data/dummy"
 import { Card } from "./components/Card"
 import Link from "next/link"
+import { useParams } from "next/navigation"
 
-const ExperienceSection = () => {
+interface ExperienceSectionProps {
+    experiences?: any[]
+}
+
+const ExperienceSection = ({ experiences: rawExperiences }: ExperienceSectionProps) => {
     const { t } = useTranslation()
+    const { lang } = useLanguage()
+    const params = useParams()
+    const slug = params?.slug as string || ""
+
+    const displayExperiences = rawExperiences && rawExperiences.length > 0
+        ? rawExperiences.map((exp: any) => ({
+            id: exp._id,
+            role: exp.role?.[lang] || exp.role?.en || "",
+            category: exp.programType || "Full-time",
+            company: exp.company || "",
+            location: exp.location || "",
+            startDate: exp.dateFrom || "",
+            endDate: exp.dateTo || "",
+            keypoints: exp.keypoints?.map((kp: any) => kp[lang] || "").filter((kp: string) => kp && kp.trim() !== "") || [],
+            techStack: exp.toolsUsed?.map((t: any) => ({
+                name: t.name || "",
+                src: t.iconUrl || ""
+            })) || [],
+            isCurrent: exp.isCurrent ?? false
+        }))
+        : dummyExperiences
 
     return (
         <section
@@ -29,13 +56,13 @@ const ExperienceSection = () => {
             </p>
 
             <div className="grid w-full max-w-6xl grid-cols-1 items-start gap-4 md:grid-cols-2">
-                {experiences.slice(0, 4).map((experience) => (
+                {displayExperiences.slice(0, 4).map((experience) => (
                     <Card key={experience.id} experience={experience} />
                 ))}
             </div>
 
             <Link
-                href="/experience"
+                href={slug ? `/${slug}/experience` : "/experience"}
                 className="btn-hover-cool flex w-fit items-center gap-2 self-center rounded-xl border border-slate-300/70 bg-white/80 px-4 py-3 text-sm tracking-wide text-neutral-100 dark:border-white/12 dark:bg-white/6 dark:hover:border-white/20"
             >
                 <span>{t("experience_section.see_more")}</span>

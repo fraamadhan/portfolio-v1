@@ -241,7 +241,7 @@ export default function CustomDashboard() {
     const uploadKey = `${options.fieldName}-${options.index !== undefined ? options.index : ''}-${options.subFieldName || ''}`
     setUploading(uploadKey)
     try {
-      const file = await compressImage(rawFile)
+      const file = (rawFile.type === 'application/pdf' || rawFile.type === 'image/svg+xml') ? rawFile : await compressImage(rawFile)
       const uploadPrefix = options.fieldName === 'resume' ? 'resumes' : activeTab
       const uploadName = options.isUser ? 'profile_asset' : (editingItem.name || editingItem.title?.en || 'asset').toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
@@ -255,8 +255,9 @@ export default function CustomDashboard() {
 
       if (res.ok) {
         const data = await res.json()
+        const isFileField = options.fieldName === 'resume'
         const assetRef = {
-          _type: 'image',
+          _type: isFileField ? 'file' : 'image',
           asset: { _type: 'reference', _ref: data.asset._id },
           url: data.asset.url
         }
@@ -308,7 +309,7 @@ export default function CustomDashboard() {
     }
 
     try {
-      const { _id, _type, _createdAt, _updatedAt, _rev, email, slug, ...updateData } = userData
+      const { _id, _type, _createdAt, _updatedAt, _rev, email, ...updateData } = userData
       
       if (updateData.fullDescription && typeof updateData.fullDescription.en === 'string') {
         updateData.fullDescription.en = markdownToBlocks(updateData.fullDescription.en)
@@ -344,6 +345,48 @@ export default function CustomDashboard() {
     setSaveError(null)
     try {
       const dataToSave = { ...editingItem, _type: docType }
+
+      // Bulk tool saving handler
+      if (docType === 'tool' && dataToSave.items && Array.isArray(dataToSave.items)) {
+        const itemsToSave = dataToSave.items.filter((item: any) => item.name?.trim())
+        
+        if (itemsToSave.length === 0) {
+          setSaveError('Please enter at least one tool name.')
+          setSaving(false)
+          return
+        }
+
+        const savedDocs: any[] = []
+        await Promise.all(
+          itemsToSave.map(async (item: any, index: number) => {
+            const toolDoc = {
+              _type: 'tool',
+              _id: `tool-${Date.now()}-${index}`,
+              name: item.name.trim(),
+              icon: item.icon
+            }
+            const res = await fetch('/api/admin?action=save-document', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(toolDoc),
+            })
+            if (res.ok) {
+              savedDocs.push(toolDoc)
+            }
+          })
+        )
+
+        clearDraft(dataToSave._id)
+        setSaveSuccess(true)
+        setShowForm(false)
+        setEditingItem(null)
+
+        setTools(prev => [...savedDocs, ...prev])
+        setTimeout(() => loadTabData(activeTab, true), 2000)
+        setTimeout(() => setSaveSuccess(false), 3000)
+        return
+      }
+
       if (!dataToSave._id) dataToSave._id = `${docType}-${Date.now()}`
 
       delete dataToSave.user
@@ -713,7 +756,7 @@ export default function CustomDashboard() {
             </button>
           )}
 
-          {['categories', 'tools-skills', 'projects', 'experiences', 'certifications', 'testimonials', 'hobbies', 'blogs'].includes(activeTab) && !showForm && (
+          {['categories', 'tools-skills', 'projects', 'experiences', 'certifications', 'hobbies', 'blogs'].includes(activeTab) && !showForm && (
             <button
               onClick={() => handleStartForm(null)}
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-teal-500 text-slate-950 font-bold hover:bg-teal-400 transition-all duration-200 cursor-pointer shadow-lg"
@@ -870,6 +913,7 @@ export default function CustomDashboard() {
             {activeTab === 'testimonials' && (
               <TestimonialsTab
                 testimonials={testimonials}
+                setTestimonials={setTestimonials}
                 showForm={showForm}
                 setShowForm={setShowForm}
                 editingItem={editingItem}
